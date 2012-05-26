@@ -1,0 +1,463 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CE398C2B156CABC900E58DEC /* SinaWeiBoOauth.m in Sources */ = {isa = PBXBuildFile; fileRef = CE398C2A156CABC800E58DEC /* SinaWeiBoOauth.m */; };
+		CE71C39D155D26810047F25C /* ImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE71C39C155D26810047F25C /* ImageManager.m */; };
+		CE71C3A1155D28A10047F25C /* WebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE71C3A0155D28A10047F25C /* WebRequest.m */; };
+		CE7408971559569C007B3905 /* TuDouSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7408961559569C007B3905 /* TuDouSDK.m */; };
+		CE781389155514B20042F79F /* Oauth.m in Sources */ = {isa = PBXBuildFile; fileRef = CE781386155514B20042F79F /* Oauth.m */; };
+		CE78138A155514B20042F79F /* TuDouOauth.m in Sources */ = {isa = PBXBuildFile; fileRef = CE781388155514B20042F79F /* TuDouOauth.m */; };
+		CE97D0AD154CF1BD004F6C9A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE97D0AC154CF1BD004F6C9A /* UIKit.framework */; };
+		CE97D0B7154CF1BD004F6C9A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE97D0B5154CF1BD004F6C9A /* InfoPlist.strings */; };
+		CE97D0B9154CF1BD004F6C9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE97D0B8154CF1BD004F6C9A /* main.m */; };
+		CE97D0BD154CF1BD004F6C9A /* VmeDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE97D0BC154CF1BD004F6C9A /* VmeDemoAppDelegate.m */; };
+		CE97D0C0154CF1BD004F6C9A /* VmeDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE97D0BF154CF1BD004F6C9A /* VmeDemoViewController.m */; };
+		CE97D0C3154CF1BD004F6C9A /* VmeDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE97D0C1154CF1BD004F6C9A /* VmeDemoViewController.xib */; };
+		CEB86BC8155CE16C002E2F66 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB86BC6155CE16C002E2F66 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CEB86BD7155CE173002E2F66 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB86BCC155CE173002E2F66 /* NSObject+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CEB86BD8155CE173002E2F66 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB86BCE155CE173002E2F66 /* NSString+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CEB86BD9155CE173002E2F66 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB86BD0155CE173002E2F66 /* SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CEB86BDA155CE173002E2F66 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB86BD2155CE173002E2F66 /* SBJsonBase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CEB86BDB155CE173002E2F66 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB86BD4155CE173002E2F66 /* SBJsonParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CEB86BDC155CE173002E2F66 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB86BD6155CE173002E2F66 /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CEB86BDD155CE2B3002E2F66 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE97D0AE154CF1BD004F6C9A /* Foundation.framework */; };
+		CEB86BDE155CE2CF002E2F66 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE97D0B0154CF1BD004F6C9A /* CoreGraphics.framework */; };
+		CEB86BDF155CE2D9002E2F66 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE08CC84154D5A43004CD2EE /* QuartzCore.framework */; };
+		CEB86BE3155CE313002E2F66 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB86BE2155CE313002E2F66 /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CEB97D60154EE8060062B62D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB97D5F154EE8060062B62D /* Security.framework */; };
+		CEBFB65C155619B300D929B4 /* VmeStartUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEBFB65B155619B300D929B4 /* VmeStartUpView.xib */; };
+		CEBFB65F15561C4300D929B4 /* VmOauthWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBFB65E15561C4300D929B4 /* VmOauthWebViewController.m */; };
+		CECC2DB3156DF60D00DEBFC1 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = CECC2DB2156DF60D00DEBFC1 /* Utility.m */; };
+		CECC2DB7156E0ECA00DEBFC1 /* SinaWeiBoSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = CECC2DB6156E0ECA00DEBFC1 /* SinaWeiBoSDK.m */; };
+		CED252471567927B00851FC3 /* VideoPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED252461567927B00851FC3 /* VideoPageViewController.m */; };
+		CED4C9C5155576FC00A97207 /* VmeStartUp.m in Sources */ = {isa = PBXBuildFile; fileRef = CED4C9C4155576FC00A97207 /* VmeStartUp.m */; };
+		CED8F4731561D3E200E9032B /* UIImageTouchableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CED8F4721561D3E200E9032B /* UIImageTouchableView.m */; };
+		CEF6EF7D156003BC00859ADC /* VideoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF6EF7B156003BC00859ADC /* VideoDetailViewController.m */; };
+		CEF6EF7E156003BC00859ADC /* VideoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF6EF7C156003BC00859ADC /* VideoDetailViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		CE08CC84154D5A43004CD2EE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CE398C29156CABC800E58DEC /* SinaWeiBoOauth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiBoOauth.h; sourceTree = "<group>"; };
+		CE398C2A156CABC800E58DEC /* SinaWeiBoOauth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeiBoOauth.m; sourceTree = "<group>"; };
+		CE71C39B155D26810047F25C /* ImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageManager.h; sourceTree = "<group>"; };
+		CE71C39C155D26810047F25C /* ImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageManager.m; sourceTree = "<group>"; };
+		CE71C39F155D28A10047F25C /* WebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRequest.h; sourceTree = "<group>"; };
+		CE71C3A0155D28A10047F25C /* WebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRequest.m; sourceTree = "<group>"; };
+		CE7408951559569C007B3905 /* TuDouSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuDouSDK.h; sourceTree = "<group>"; };
+		CE7408961559569C007B3905 /* TuDouSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuDouSDK.m; sourceTree = "<group>"; };
+		CE781385155514B20042F79F /* Oauth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Oauth.h; sourceTree = "<group>"; };
+		CE781386155514B20042F79F /* Oauth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Oauth.m; sourceTree = "<group>"; };
+		CE781387155514B20042F79F /* TuDouOauth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuDouOauth.h; sourceTree = "<group>"; };
+		CE781388155514B20042F79F /* TuDouOauth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuDouOauth.m; sourceTree = "<group>"; };
+		CE97D0A8154CF1BD004F6C9A /* Vme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vme.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE97D0AC154CF1BD004F6C9A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CE97D0AE154CF1BD004F6C9A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CE97D0B0154CF1BD004F6C9A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CE97D0B4154CF1BD004F6C9A /* VmeDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VmeDemo-Info.plist"; sourceTree = "<group>"; };
+		CE97D0B6154CF1BD004F6C9A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CE97D0B8154CF1BD004F6C9A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CE97D0BA154CF1BD004F6C9A /* VmeDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VmeDemo-Prefix.pch"; sourceTree = "<group>"; };
+		CE97D0BB154CF1BD004F6C9A /* VmeDemoAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VmeDemoAppDelegate.h; sourceTree = "<group>"; };
+		CE97D0BC154CF1BD004F6C9A /* VmeDemoAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VmeDemoAppDelegate.m; sourceTree = "<group>"; };
+		CE97D0BE154CF1BD004F6C9A /* VmeDemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VmeDemoViewController.h; sourceTree = "<group>"; };
+		CE97D0BF154CF1BD004F6C9A /* VmeDemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VmeDemoViewController.m; sourceTree = "<group>"; };
+		CE97D0C2154CF1BD004F6C9A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/VmeDemoViewController.xib; sourceTree = "<group>"; };
+		CEB86BC5155CE16C002E2F66 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
+		CEB86BC6155CE16C002E2F66 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
+		CEB86BC7155CE16C002E2F66 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		CEB86BCA155CE173002E2F66 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		CEB86BCB155CE173002E2F66 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		CEB86BCC155CE173002E2F66 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
+		CEB86BCD155CE173002E2F66 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		CEB86BCE155CE173002E2F66 /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
+		CEB86BCF155CE173002E2F66 /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
+		CEB86BD0155CE173002E2F66 /* SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJSON.m; sourceTree = "<group>"; };
+		CEB86BD1155CE173002E2F66 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		CEB86BD2155CE173002E2F66 /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
+		CEB86BD3155CE173002E2F66 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		CEB86BD4155CE173002E2F66 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		CEB86BD5155CE173002E2F66 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		CEB86BD6155CE173002E2F66 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		CEB86BE1155CE313002E2F66 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
+		CEB86BE2155CE313002E2F66 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
+		CEB97D5F154EE8060062B62D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		CEBFB65B155619B300D929B4 /* VmeStartUpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VmeStartUpView.xib; sourceTree = "<group>"; };
+		CEBFB65D15561C4300D929B4 /* VmOauthWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VmOauthWebViewController.h; sourceTree = "<group>"; };
+		CEBFB65E15561C4300D929B4 /* VmOauthWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VmOauthWebViewController.m; sourceTree = "<group>"; };
+		CECC2DB1156DF60D00DEBFC1 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
+		CECC2DB2156DF60D00DEBFC1 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
+		CECC2DB5156E0ECA00DEBFC1 /* SinaWeiBoSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiBoSDK.h; sourceTree = "<group>"; };
+		CECC2DB6156E0ECA00DEBFC1 /* SinaWeiBoSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeiBoSDK.m; sourceTree = "<group>"; };
+		CED252451567927A00851FC3 /* VideoPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPageViewController.h; sourceTree = "<group>"; };
+		CED252461567927B00851FC3 /* VideoPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPageViewController.m; sourceTree = "<group>"; };
+		CED4C9C3155576FC00A97207 /* VmeStartUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VmeStartUp.h; sourceTree = "<group>"; };
+		CED4C9C4155576FC00A97207 /* VmeStartUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VmeStartUp.m; sourceTree = "<group>"; };
+		CED8F4711561D3E200E9032B /* UIImageTouchableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageTouchableView.h; sourceTree = "<group>"; };
+		CED8F4721561D3E200E9032B /* UIImageTouchableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageTouchableView.m; sourceTree = "<group>"; };
+		CEF6EF7A156003BC00859ADC /* VideoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDetailViewController.h; sourceTree = "<group>"; };
+		CEF6EF7B156003BC00859ADC /* VideoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDetailViewController.m; sourceTree = "<group>"; };
+		CEF6EF7C156003BC00859ADC /* VideoDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoDetailViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CE97D0A5154CF1BD004F6C9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEB86BDF155CE2D9002E2F66 /* QuartzCore.framework in Frameworks */,
+				CEB86BDE155CE2CF002E2F66 /* CoreGraphics.framework in Frameworks */,
+				CEB86BDD155CE2B3002E2F66 /* Foundation.framework in Frameworks */,
+				CEB97D60154EE8060062B62D /* Security.framework in Frameworks */,
+				CE97D0AD154CF1BD004F6C9A /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CE97D09D154CF1BC004F6C9A = {
+			isa = PBXGroup;
+			children = (
+				CE97D0B2154CF1BD004F6C9A /* VmeDemo */,
+				CE97D0AB154CF1BD004F6C9A /* Frameworks */,
+				CE97D0A9154CF1BD004F6C9A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CE97D0A9154CF1BD004F6C9A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE97D0A8154CF1BD004F6C9A /* Vme.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE97D0AB154CF1BD004F6C9A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CEB97D5F154EE8060062B62D /* Security.framework */,
+				CE08CC84154D5A43004CD2EE /* QuartzCore.framework */,
+				CE97D0AC154CF1BD004F6C9A /* UIKit.framework */,
+				CE97D0AE154CF1BD004F6C9A /* Foundation.framework */,
+				CE97D0B0154CF1BD004F6C9A /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE97D0B2154CF1BD004F6C9A /* VmeDemo */ = {
+			isa = PBXGroup;
+			children = (
+				CEB86BE0155CE313002E2F66 /* SFHFKeychainUtils */,
+				CEB86BC9155CE173002E2F66 /* SBJSON */,
+				CEB86BC4155CE16C002E2F66 /* CTMBase64 */,
+				CE97D0B3154CF1BD004F6C9A /* Supporting Files */,
+				CE781385155514B20042F79F /* Oauth.h */,
+				CE781386155514B20042F79F /* Oauth.m */,
+				CE781387155514B20042F79F /* TuDouOauth.h */,
+				CE781388155514B20042F79F /* TuDouOauth.m */,
+				CE398C29156CABC800E58DEC /* SinaWeiBoOauth.h */,
+				CE398C2A156CABC800E58DEC /* SinaWeiBoOauth.m */,
+				CE97D0BB154CF1BD004F6C9A /* VmeDemoAppDelegate.h */,
+				CE97D0BC154CF1BD004F6C9A /* VmeDemoAppDelegate.m */,
+				CE97D0BE154CF1BD004F6C9A /* VmeDemoViewController.h */,
+				CE97D0BF154CF1BD004F6C9A /* VmeDemoViewController.m */,
+				CE97D0C1154CF1BD004F6C9A /* VmeDemoViewController.xib */,
+				CED4C9C3155576FC00A97207 /* VmeStartUp.h */,
+				CED4C9C4155576FC00A97207 /* VmeStartUp.m */,
+				CEBFB65B155619B300D929B4 /* VmeStartUpView.xib */,
+				CEBFB65D15561C4300D929B4 /* VmOauthWebViewController.h */,
+				CEBFB65E15561C4300D929B4 /* VmOauthWebViewController.m */,
+				CE7408951559569C007B3905 /* TuDouSDK.h */,
+				CE7408961559569C007B3905 /* TuDouSDK.m */,
+				CECC2DB5156E0ECA00DEBFC1 /* SinaWeiBoSDK.h */,
+				CECC2DB6156E0ECA00DEBFC1 /* SinaWeiBoSDK.m */,
+				CE71C39B155D26810047F25C /* ImageManager.h */,
+				CE71C39C155D26810047F25C /* ImageManager.m */,
+				CE71C39F155D28A10047F25C /* WebRequest.h */,
+				CE71C3A0155D28A10047F25C /* WebRequest.m */,
+				CEF6EF7A156003BC00859ADC /* VideoDetailViewController.h */,
+				CEF6EF7B156003BC00859ADC /* VideoDetailViewController.m */,
+				CEF6EF7C156003BC00859ADC /* VideoDetailViewController.xib */,
+				CED8F4711561D3E200E9032B /* UIImageTouchableView.h */,
+				CED8F4721561D3E200E9032B /* UIImageTouchableView.m */,
+				CED252451567927A00851FC3 /* VideoPageViewController.h */,
+				CED252461567927B00851FC3 /* VideoPageViewController.m */,
+				CECC2DB1156DF60D00DEBFC1 /* Utility.h */,
+				CECC2DB2156DF60D00DEBFC1 /* Utility.m */,
+			);
+			path = VmeDemo;
+			sourceTree = "<group>";
+		};
+		CE97D0B3154CF1BD004F6C9A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CE97D0B4154CF1BD004F6C9A /* VmeDemo-Info.plist */,
+				CE97D0B5154CF1BD004F6C9A /* InfoPlist.strings */,
+				CE97D0B8154CF1BD004F6C9A /* main.m */,
+				CE97D0BA154CF1BD004F6C9A /* VmeDemo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CEB86BC4155CE16C002E2F66 /* CTMBase64 */ = {
+			isa = PBXGroup;
+			children = (
+				CEB86BC5155CE16C002E2F66 /* GTMBase64.h */,
+				CEB86BC6155CE16C002E2F66 /* GTMBase64.m */,
+				CEB86BC7155CE16C002E2F66 /* GTMDefines.h */,
+			);
+			path = CTMBase64;
+			sourceTree = "<group>";
+		};
+		CEB86BC9155CE173002E2F66 /* SBJSON */ = {
+			isa = PBXGroup;
+			children = (
+				CEB86BCA155CE173002E2F66 /* JSON.h */,
+				CEB86BCB155CE173002E2F66 /* NSObject+SBJSON.h */,
+				CEB86BCC155CE173002E2F66 /* NSObject+SBJSON.m */,
+				CEB86BCD155CE173002E2F66 /* NSString+SBJSON.h */,
+				CEB86BCE155CE173002E2F66 /* NSString+SBJSON.m */,
+				CEB86BCF155CE173002E2F66 /* SBJSON.h */,
+				CEB86BD0155CE173002E2F66 /* SBJSON.m */,
+				CEB86BD1155CE173002E2F66 /* SBJsonBase.h */,
+				CEB86BD2155CE173002E2F66 /* SBJsonBase.m */,
+				CEB86BD3155CE173002E2F66 /* SBJsonParser.h */,
+				CEB86BD4155CE173002E2F66 /* SBJsonParser.m */,
+				CEB86BD5155CE173002E2F66 /* SBJsonWriter.h */,
+				CEB86BD6155CE173002E2F66 /* SBJsonWriter.m */,
+			);
+			path = SBJSON;
+			sourceTree = "<group>";
+		};
+		CEB86BE0155CE313002E2F66 /* SFHFKeychainUtils */ = {
+			isa = PBXGroup;
+			children = (
+				CEB86BE1155CE313002E2F66 /* SFHFKeychainUtils.h */,
+				CEB86BE2155CE313002E2F66 /* SFHFKeychainUtils.m */,
+			);
+			path = SFHFKeychainUtils;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CE97D0A7154CF1BD004F6C9A /* VmeDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE97D0C6154CF1BD004F6C9A /* Build configuration list for PBXNativeTarget "VmeDemo" */;
+			buildPhases = (
+				CE97D0A4154CF1BD004F6C9A /* Sources */,
+				CE97D0A5154CF1BD004F6C9A /* Frameworks */,
+				CE97D0A6154CF1BD004F6C9A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VmeDemo;
+			productName = VmeDemo;
+			productReference = CE97D0A8154CF1BD004F6C9A /* Vme.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CE97D09F154CF1BC004F6C9A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = VmeDemo;
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = CE97D0A2154CF1BC004F6C9A /* Build configuration list for PBXProject "VmeDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				"zh-Hans",
+				"zh-Hant",
+			);
+			mainGroup = CE97D09D154CF1BC004F6C9A;
+			productRefGroup = CE97D0A9154CF1BD004F6C9A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CE97D0A7154CF1BD004F6C9A /* VmeDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CE97D0A6154CF1BD004F6C9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE97D0B7154CF1BD004F6C9A /* InfoPlist.strings in Resources */,
+				CE97D0C3154CF1BD004F6C9A /* VmeDemoViewController.xib in Resources */,
+				CEBFB65C155619B300D929B4 /* VmeStartUpView.xib in Resources */,
+				CEF6EF7E156003BC00859ADC /* VideoDetailViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CE97D0A4154CF1BD004F6C9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE97D0B9154CF1BD004F6C9A /* main.m in Sources */,
+				CE97D0BD154CF1BD004F6C9A /* VmeDemoAppDelegate.m in Sources */,
+				CE97D0C0154CF1BD004F6C9A /* VmeDemoViewController.m in Sources */,
+				CE781389155514B20042F79F /* Oauth.m in Sources */,
+				CE78138A155514B20042F79F /* TuDouOauth.m in Sources */,
+				CED4C9C5155576FC00A97207 /* VmeStartUp.m in Sources */,
+				CEBFB65F15561C4300D929B4 /* VmOauthWebViewController.m in Sources */,
+				CE7408971559569C007B3905 /* TuDouSDK.m in Sources */,
+				CEB86BC8155CE16C002E2F66 /* GTMBase64.m in Sources */,
+				CEB86BD7155CE173002E2F66 /* NSObject+SBJSON.m in Sources */,
+				CEB86BD8155CE173002E2F66 /* NSString+SBJSON.m in Sources */,
+				CEB86BD9155CE173002E2F66 /* SBJSON.m in Sources */,
+				CEB86BDA155CE173002E2F66 /* SBJsonBase.m in Sources */,
+				CEB86BDB155CE173002E2F66 /* SBJsonParser.m in Sources */,
+				CEB86BDC155CE173002E2F66 /* SBJsonWriter.m in Sources */,
+				CEB86BE3155CE313002E2F66 /* SFHFKeychainUtils.m in Sources */,
+				CE71C39D155D26810047F25C /* ImageManager.m in Sources */,
+				CE71C3A1155D28A10047F25C /* WebRequest.m in Sources */,
+				CEF6EF7D156003BC00859ADC /* VideoDetailViewController.m in Sources */,
+				CED8F4731561D3E200E9032B /* UIImageTouchableView.m in Sources */,
+				CED252471567927B00851FC3 /* VideoPageViewController.m in Sources */,
+				CE398C2B156CABC900E58DEC /* SinaWeiBoOauth.m in Sources */,
+				CECC2DB3156DF60D00DEBFC1 /* Utility.m in Sources */,
+				CECC2DB7156E0ECA00DEBFC1 /* SinaWeiBoSDK.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		CE97D0B5154CF1BD004F6C9A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE97D0B6154CF1BD004F6C9A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CE97D0C1154CF1BD004F6C9A /* VmeDemoViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE97D0C2154CF1BD004F6C9A /* en */,
+			);
+			name = VmeDemoViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CE97D0C4154CF1BD004F6C9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CE97D0C5154CF1BD004F6C9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CE97D0C7154CF1BD004F6C9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VmeDemo/VmeDemo-Prefix.pch";
+				INFOPLIST_FILE = "VmeDemo/VmeDemo-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/lib/system\"",
+				);
+				PRODUCT_NAME = Vme;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CE97D0C8154CF1BD004F6C9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VmeDemo/VmeDemo-Prefix.pch";
+				INFOPLIST_FILE = "VmeDemo/VmeDemo-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)/usr/lib/system\"",
+				);
+				PRODUCT_NAME = Vme;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CE97D0A2154CF1BC004F6C9A /* Build configuration list for PBXProject "VmeDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE97D0C4154CF1BD004F6C9A /* Debug */,
+				CE97D0C5154CF1BD004F6C9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE97D0C6154CF1BD004F6C9A /* Build configuration list for PBXNativeTarget "VmeDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE97D0C7154CF1BD004F6C9A /* Debug */,
+				CE97D0C8154CF1BD004F6C9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CE97D09F154CF1BC004F6C9A /* Project object */;
+}
