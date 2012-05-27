@@ -124,6 +124,12 @@ static float yPosition[imageCountForRow] = {imageDis, imageDis, imageDis};
 	
 }
 
+#pragma mark - sina weibo sdk delegate
+- (void) OnRecevieWeiBoUserPersonalInfo:(SinaWeiBoUserPersonalInfo*) userInfo
+{
+	
+}
+
 #pragma mark - ui event handler
 - (void) onUIImageClicked:(id)sender
 {

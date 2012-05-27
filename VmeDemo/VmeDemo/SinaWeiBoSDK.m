@@ -10,6 +10,7 @@
 #import "WebRequest.h"
 #import "SinaWeiBoOauth.h"
 #import "SBJSON.h"
+#import "ImageManager.h"
 
 typedef enum  
 {
@@ -23,7 +24,7 @@ typedef enum
 @public
 	SINA_WEIBO_REQUEST_OPERATION_TYPE operation;
 }
-@property (weak, nonatomic) id weiBoSDKDelegate;
+@property (weak, nonatomic) id<SinaWeiBoSDKDelegate> weiBoSDKDelegate;
 - (void) cancelRequest;
 @end
 
@@ -34,6 +35,14 @@ typedef enum
 	_weiBoSDKDelegate = nil;
 	[super cancelRequest];
 }
+@end
+
+@implementation SinaWeiBoUserPersonalInfo
+@synthesize userName = _userName;
+@end
+
+@implementation SinaWeiBOSendWeiBoResult
+@synthesize annotation = _annotation;
 @end
 
 @interface SinaWeiBoSDK()
@@ -114,7 +123,7 @@ typedef enum
 - (void) OnReceiveData:(WebRequest*) request Data:(NSData*)data;
 
 {
-	SinaWeiBoRequest* sinaRequest = (SinaWeiBoRequest*)request;
+	SinaWeiBoRequest* weiBoRequest = (SinaWeiBoRequest*)request;
 	NSString* str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 	SBJSON *jsonParser = [[SBJSON alloc]init];
 	
@@ -126,21 +135,28 @@ typedef enum
 		;
 	}
 	
-	switch (sinaRequest->operation) 
+	switch (weiBoRequest->operation) 
 	{
 		case SINA_WEIBO_REQUEST_USER_PERSONAL_INFO:
 		{
 			NSDictionary* userInfo = [result objectForKey:@"userInfo"];
+			SinaWeiBoUserPersonalInfo* userPersonalInfo = [[SinaWeiBoUserPersonalInfo alloc] init];
+			userPersonalInfo.userName = [userInfo objectForKey:@"screen_name"];
+			[weiBoRequest.weiBoSDKDelegate OnRecevieWeiBoUserPersonalInfo:userPersonalInfo];
 		}
 		break;
 		case SINA_WEIBO_SEND_WEIBO:
 		{
-			NSDictionary* userInfo = [result objectForKey:@"userInfo"];
+			NSDecimalNumber* weiboID = [result objectForKey:@"id"];
+			SinaWeiBOSendWeiBoResult* weiBoResult = [[SinaWeiBOSendWeiBoResult alloc] init];
+			weiBoResult->weiID = [weiboID integerValue];
+			weiBoResult.annotation = [result objectForKey:@"annotations"];
+			[weiBoRequest.weiBoSDKDelegate OnReceiveSendWeiBoResult:weiBoResult];
 		}
 		break;
 	}
 	
-	[self freeRequest:sinaRequest];
+	[self freeRequest:weiBoRequest];
 }
 
 - (void) OnReceiveError:(WebRequest*) request;

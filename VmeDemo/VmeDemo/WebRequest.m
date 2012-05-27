@@ -36,7 +36,7 @@
 	_httpMethod = @"GET";
 	return self;
 }
-
+    
 #pragma mark - process http header and body
 + (NSString *)stringFromDictionary:(NSDictionary *)dict
 {

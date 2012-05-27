@@ -11,6 +11,7 @@
 @class SinaWeiBoUserPersonalInfo;
 @class SinaWeiBOSendWeiBoResult;
 @protocol SinaWeiBoSDKDelegate
+@required
 - (void) OnWeiBoOauthExpired;
 - (void) OnRecevieWeiBoUserPersonalInfo:(SinaWeiBoUserPersonalInfo*) userInfo;
 - (void) OnReceiveSendWeiBoResult:(SinaWeiBOSendWeiBoResult*) sendResult;
@@ -18,7 +19,14 @@
 
 @interface SinaWeiBoUserPersonalInfo : NSObject
 @property (strong, nonatomic) NSString* userName;
+@end
 
+@interface SinaWeiBOSendWeiBoResult : NSObject
+{
+@public
+	NSInteger weiID;
+}
+@property (strong, nonatomic) NSArray* annotation;
 @end
 
 @interface SinaWeiBoSDK : NSObject

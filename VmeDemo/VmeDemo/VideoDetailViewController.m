@@ -110,7 +110,14 @@
 - (IBAction)sendSinaWeiBo:(id)sender 
 {
 	NSString* text = [[NSString alloc] initWithFormat:@"colin chenTest测试\r\n%@", _videoInfo.itemUrl];
-	NSString* annotion = [[NSString alloc] initWithFormat:@"itemid:%@", _videoInfo.itemId];
-	[_sinaWeiBoSDK sendWeiBo:text Annotations:nil Delegate:nil];
+	NSString* annotation = [[NSString alloc] initWithFormat:@"[\"%@\"]", _videoInfo.itemId];
+	[_sinaWeiBoSDK sendWeiBo:text Annotations:annotation Delegate:nil];
+}
+
+#pragma mark - sina weibo sdk delegate
+
+- (void) OnReceiveSendWeiBoResult:(SinaWeiBOSendWeiBoResult*) sendResult
+{
+
 }
 @end
