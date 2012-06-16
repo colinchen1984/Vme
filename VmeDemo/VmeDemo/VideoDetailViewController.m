@@ -151,19 +151,19 @@
 	if(nil == weiboData)
 	{
 		[_weiBoView removeFromSuperview];
-		_scrollView.contentSize = CGSizeMake(_scrollView.contentSize.width, 480.0f);
+		_scrollView.contentSize = CGSizeMake(320.0f, 500.0f);
 		return;
 	}
 	NSRange range = [weiboData.text rangeOfString:@"http://t.cn/"];
 	NSString* text = NSNotFound != range.location ? [weiboData.text substringToIndex:range.location] : weiboData.text;
+	CGRect frame = _weiBoView.frame;
+	_weiBoView.frame = CGRectMake(20.0f, 350.0f, 320.0f, frame.size.height);
 	[_weiBoView settext:text];
 	[_weiBoView setPopDirection:YES];
 	[_weiBoView setAvatarImage:weiboData.userInfo.avatarImage];
-	
-	CGRect frame = _weiBoView.frame;
 	_weiBoView.frame = CGRectMake(20.0f, 350.0f, 320.0f, frame.size.height);
 	_weiBoView.userData = (id)weiboData;
-	CGSize size = CGSizeMake(320, _scrollView.contentSize.height > 350.0f + frame.size.height ? _scrollView.contentSize.height : 350.0f + frame.size.height);
+	CGSize size = CGSizeMake(320, MAX(500.0f, 350.0f + frame.size.height));
 	_scrollView.contentSize = size;	
 	[_scrollView addSubview:_weiBoView];
 }
@@ -177,7 +177,7 @@
 	
 	if (nil == comments) 
 	{
-		_scrollView.contentSize = CGSizeMake(320.0f, 480.0f);
+		_scrollView.contentSize = CGSizeMake(320.0f, MAX(_scrollView.contentSize.height, 500.0f));
 		return;
 	}
 	
