@@ -1,0 +1,232 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"_",
+				"_consumerKey"
+			],
+			[
+				"oauth",
+				"oauthOnceString"
+			],
+			[
+				"en",
+				"engine"
+			],
+			[
+				"init",
+				"initWithString"
+			],
+			[
+				"_con",
+				"_consumerSecrectKey"
+			],
+			[
+				"cancel",
+				"cancelConnection"
+			],
+			[
+				"NS",
+				"NSMutableURLRequest"
+			],
+			[
+				"pr",
+				"pragma"
+			],
+			[
+				"Oau",
+				"OauthDelegate"
+			],
+			[
+				"Oa",
+				"OauthDelegate"
+			],
+			[
+				"spin",
+				"spinDisplay"
+			],
+			[
+				"GL",
+				"GLsizei"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 267.0,
+		"selected_items":
+		[
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 181.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/user/Project/Vme/VmeDemo/VmeDemo/Oauth.m",
+		"/Users/user/Project/Vme/VmeDemo/VmeDemo/tags",
+		"/Users/user/Project/Vme/VmeDemo/VmeDemo/.tags",
+		"/Users/user/Project/Vme/VmeDemo/VmeDemo/SendWeiBoView.h",
+		"/Users/user/Project/Vme/VmeDemo/VmeDemo/SendWeiBoView.m",
+		"/Users/user/Project/Vme/VmeDemo/VmeDemo/WebRequest.m",
+		"/Users/user/Project/Vme/VmeDemo/VmeDemo/Oauth.h",
+		"/Users/user/Project/Vme/VmeDemo/VmeDemo/rightPop.png",
+		"/Users/user/Project/Vme/VmeDemo/VmeDemo/Utility.h",
+		"/Users/user/Project/Vme/VmeDemo/VmeDemo/Utility.m",
+		"/Users/user/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/user/Downloads/t.py",
+		"/Users/user/Downloads/SinaWeiBoSDK2/src/SinaWeiBoSDK/SinaWeiBoSDK/SinaWeiBoSDK.h",
+		"/Users/user/Downloads/redbook/light.c",
+		"/Users/user/Downloads/redbook/image.c",
+		"/Users/user/Downloads/redbook/texsub.c",
+		"/Users/user/Downloads/redbook/material.c",
+		"/Users/user/Downloads/tutors/glm.c",
+		"/Users/user/Downloads/redbook/mipmap.c",
+		"/Users/user/Downloads/tutors/texture.c",
+		"/Users/user/Downloads/redbook/feedback.c",
+		"/Users/user/Downloads/redbook/movelight.c",
+		"/Users/user/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/user/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/user/Downloads/redbook/alpha.c",
+		"/Users/user/Downloads/redbook/lines.c",
+		"/Users/user/Downloads/redbook/scene.c",
+		"/Users/user/Downloads/redbook/polyoff.c",
+		"/Users/user/Downloads/redbook/polys.c",
+		"/Users/user/Downloads/redbook/drawf.c",
+		"/Users/user/Downloads/redbook/cube.c"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"",
+			"'",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"OauthDelegate",
+			"100",
+			"glPopMatrix();",
+			"();",
+			"glut",
+			"’",
+			"‘",
+			"replace",
+			"'",
+			"line",
+			");",
+			"‘",
+			"’",
+			"replace",
+			"file",
+			"SDL"
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"OauthServiceProvider",
+			"'"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 232.0,
+	"status_bar_visible": true
+}

@@ -1,0 +1,75 @@
+Copyright	./CommentView.h	/^\/\/  Copyright (c) 2012年 __MyCompanyName__. All/
+OAUTHACCESSTATUS	./Oauth.h	/^} OAUTHACCESSTATUS;$/
+OauthEngine	./Oauth.m	/^@interface OauthEngine ()$/
+OauthServiceProviderGetRequestUrl	./Oauth.h	/^- (NSString*) OauthServiceProviderGetRequestUrl:(O/
+OauthServiceProviderHandleData	./TuDouOauth.m	/^- (int) OauthServiceProviderHandleData:(OauthEngin/
+OnReceiveCommentForWeiBo	./VideoDetailViewController.m	/^- (void) OnReceiveCommentForWeiBo:(SinaWeiBoData*)/
+OnReceiveData	./ImageManager.m	/^- (void) OnReceiveData:(WebRequest*) request Data:/
+OnReceiveError	./ImageManager.m	/^- (void) OnReceiveError:(WebRequest*) request;$/
+OnReceiveImage	./SinaWeiBoSDK.m	/^- (void) OnReceiveImage:(UIImage*)image$/
+OnReceiveSendWeiBoResult	./VideoDetailViewController.m	/^- (void) OnReceiveSendWeiBoResult:(SinaWeiBoData*)/
+OnReceiveUserAllWeiBo	./VmeDemoViewController.m	/^- (void) OnReceiveUserAllWeiBo:(NSArray*) weiBoArr/
+OnReceiveUserPersonalInfo	./TuDouSDK.h	/^- (void) OnReceiveUserPersonalInfo:(TuDouUserPerso/
+OnReceiveUserVideoInfo	./VmeDemoViewController.m	/^- (void) OnReceiveUserVideoInfo:(int)pageNo PageSi/
+OnReceiveVideoInfo	./VmeDemoViewController.m	/^- (void) OnReceiveVideoInfo:(TudouVideoInfo*) vide/
+OnRecevieWeiBoUserPersonalInfo	./VmeDemoViewController.m	/^- (void) OnRecevieWeiBoUserPersonalInfo:(SinaWeiBo/
+Show	./SendWeiBoView.m	/^- (void) Show:(BOOL)animated$/
+URLEncodedStringWithCFStringEncoding	./Utility.m	/^- (NSString *)URLEncodedStringWithCFStringEncoding/
+addVideoWeiBoData	./VideoWeiBoDataManager.m	/^- (void) addVideoWeiBoData:(NSString*)videoID WeiB/
+addWeiBoComentByVideID	./VideoWeiBoDataManager.m	/^- (void) addWeiBoComentByVideID:(NSString*)videoID/
+addWeiBoUserPersonalInfo	./VideoWeiBoDataManager.m	/^- (void) addWeiBoUserPersonalInfo:(NSString*)weibo/
+appendUTF8Body	./WebRequest.m	/^+ (void)appendUTF8Body:(NSMutableData *)body dataS/
+cancelURLDownLoadImage	./ImageManager.m	/^- (void) cancelURLDownLoadImage:(NSString*) urlPat/
+connection	./Oauth.m	/^- (void)connection:(NSURLConnection *)connection d/
+connectionDidFinishLoading	./Oauth.m	/^- (void)connectionDidFinishLoading:(NSURLConnectio/
+drawRect	./UIImageTouchableView.m	/^- (void)drawRect:(CGRect)rect$/
+failToLoadVideoInfo	./TuDouSDK.m	/^- (void) failToLoadVideoInfo:(TudouVideoInfo*) vid/
+finishUserPersonalInfoRequest	./TuDouSDK.m	/^- (void) finishUserPersonalInfoRequest:(TuDouUserP/
+finishVideoInfoRequest	./TuDouSDK.m	/^- (void) finishVideoInfoRequest:(TudouVideoInfo*)v/
+freeRequest	./ImageManager.m	/^- (void) freeRequest:(URLImageRequest*) request UR/
+getBaseStringWithDic	./TuDouOauth.m	/^- (NSString*) getBaseStringWithDic:(NSDictionary*)/
+getFreeRequestByURL	./ImageManager.m	/^- (URLImageRequest*) getFreeRequestByURL:(NSString/
+getImageFromBundle	./ImageManager.m	/^- (UIImage*) getImageFromBundle:(NSString*) fileNa/
+getSignature	./TuDouOauth.m	/^- (NSString*) getSignature:(NSDictionary*) dic  Ke/
+getWeiBoCommentsByVideoID	./VideoWeiBoDataManager.m	/^- (NSArray*) getWeiBoCommentsByVideoID:(NSString*)/
+getWeiBoDataByVideoID	./VideoWeiBoDataManager.m	/^- (SinaWeiBoData*) getWeiBoDataByVideoID:(NSString/
+getWeiBoUserPersonalInfo	./VideoWeiBoDataManager.m	/^- (SinaWeiBoUserPersonalInfo*) getWeiBoUserPersona/
+handleOauthWebViewData	./Oauth.m	/^- (void) handleOauthWebViewData:(NSString*) data$/
+handleRequireTokenData	./TuDouOauth.m	/^- (int) handleRequireTokenData:(NSData*) data$/
+handlerAccesssTokenData	./TuDouOauth.m	/^- (int) handlerAccesssTokenData:(NSData*)data$/
+handlerAthorizeData	./TuDouOauth.m	/^- (int) handlerAthorizeData:(NSData*)data$/
+handlerGetUserAllWeiBoData	./SinaWeiBoSDK+HandleData.m	/^- (void) handlerGetUserAllWeiBoData:(NSDictionary*/
+handlerGetWeiBoCommentsData	./SinaWeiBoSDK+HandleData.m	/^- (void) handlerGetWeiBoCommentsData:(NSDictionary/
+handlerReplyCommentData	./SinaWeiBoSDK+HandleData.m	/^- (void) handlerReplyCommentData:(NSDictionary*) d/
+handlerSendWeiBoData	./SinaWeiBoSDK+HandleData.m	/^- (void) handlerSendWeiBoData:(NSDictionary*) data/
+handlerUserPersonalInfo	./SinaWeiBoSDK+HandleData.m	/^- (void) handlerUserPersonalInfo:(NSDictionary*) d/
+initWithOauthEngine	./TuDouSDK.m	/^- (id) initWithOauthEngine:(OauthEngine*) engine U/
+loadUrl	./VmOauthWebViewController.m	/^- (void) loadUrl:(NSString*) url OauthEngine:(Oaut/
+loginTudou	./VmeStartUp.m	/^- (IBAction)loginTudou:(id)sender $/
+onBigImageClicked	./VideoDetailViewController.m	/^- (void) onBigImageClicked:(id)sender$/
+onUIImageClicked	./VmeDemoViewController.m	/^- (void) onUIImageClicked:(id)sender$/
+postURL2DownLoadImage	./ImageManager.m	/^- (void) postURL2DownLoadImage:(NSString*) urlPath/
+postUrlRequest	./WebRequest.m	/^- (void) postUrlRequest:(NSString *)url$/
+property	./CommentView.m	/^@property (strong, nonatomic) UILabel* textLabel;$/
+replyComment	./SinaWeiBoSDK.m	/^- (void) replyComment:(SinaWeiBoComment*) weiBoCom/
+requestAccessTokenURLString	./TuDouOauth.m	/^- (NSString*) requestAccessTokenURLString:(OauthEn/
+requestTokenURLString	./TuDouOauth.m	/^- (NSString*) requestTokenURLString:(OauthEngine*)/
+requireUserAllWeiBo	./SinaWeiBoSDK.m	/^- (void) requireUserAllWeiBo:(BOOL)sendByThisApp D/
+requireUserPersonalInfo	./SinaWeiBoSDK.m	/^- (void) requireUserPersonalInfo:(id<SinaWeiBoSDKD/
+requireUserVideoInfo	./TuDouSDK.m	/^- (void) requireUserVideoInfo:(id<TuDouSDKDelegate/
+requireWeiBoComment	./SinaWeiBoSDK.m	/^- (void) requireWeiBoComment:(SinaWeiBoData*)weiBo/
+scrollViewDidEndDecelerating	./VmeDemoViewController.m	/^- (void)scrollViewDidEndDecelerating:(UIScrollView/
+sendSinaWeiBo	./VideoDetailViewController.m	/^- (IBAction)sendSinaWeiBo:(id)sender $/
+sendWeiBo	./SinaWeiBoSDK.m	/^- (void) sendWeiBo:(NSString*) text Annotations:(N/
+serializeURL	./WebRequest.m	/^+ (NSString *)serializeURL:(NSString *)baseURL par/
+setAvatarImage	./CommentView.m	/^- (void) setAvatarImage:(UIImage*)avatarImage$/
+setFrame	./UIImageTouchableView.m	/^- (void) setFrame:(CGRect)frame$/
+setImage	./UIImageTouchableView.m	/^- (void) setImage:(UIImage*) image$/
+setPopDirection	./CommentView.m	/^- (void) setPopDirection:(BOOL)isLeft$/
+setVideoInfo	./VideoDetailViewController.m	/^- (void) setVideoInfo:(TudouVideoInfo *)videoInfo$/
+settext	./CommentView.m	/^- (void) settext:(NSString*)text$/
+shouldAutorotateToInterfaceOrientation	./VideoDetailViewController.m	/^- (BOOL)shouldAutorotateToInterfaceOrientation:(UI/
+stringFromDictionary	./WebRequest.m	/^+ (NSString *)stringFromDictionary:(NSDictionary */
+viewWillAppear	./VideoDetailViewController.m	/^-(void) viewWillAppear:(BOOL)animated$/
+viewWillDisappear	./VideoPageViewController.m	/^- (void)viewWillDisappear:(BOOL)animated$/
+webView	./VmOauthWebViewController.m	/^- (BOOL)webView:(UIWebView *)aWebView shouldStartL/

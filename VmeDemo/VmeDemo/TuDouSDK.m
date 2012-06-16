@@ -223,7 +223,10 @@
 			NSDecimalNumber* pageSize = [pageInfo objectForKey:@"pageSize"];
 			NSDecimalNumber* pageCount = [pageInfo objectForKey:@"pageCount"];
 			NSDecimalNumber* videoCount = [pageInfo objectForKey:@"totalCount"];
-			[tudouRequest.tudouSDKDeletage OnReceiveUserVideoInfo:[pageNo doubleValue] PageSize:[pageSize doubleValue] PageCount:[pageCount doubleValue] VideoCount:[videoCount doubleValue]];
+			[tudouRequest.tudouSDKDeletage OnReceiveUserVideoInfo:[pageNo doubleValue] 
+			PageSize:[pageSize doubleValue] 
+			PageCount:[pageCount doubleValue] 
+			VideoCount:[videoCount doubleValue]];
 			
 			NSArray* videoInfos = [[result objectForKey:@"multiPageResult"] objectForKey:@"results"];
 			for (NSDictionary* v in videoInfos) 

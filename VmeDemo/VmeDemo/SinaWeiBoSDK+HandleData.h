@@ -9,5 +9,10 @@
 #import "SinaWeiBoSDK.h"
 
 @interface SinaWeiBoSDK (HandleData)
-
+- (void) handlerUserPersonalInfo:(NSDictionary*) dataDic Delegate:(id<SinaWeiBoSDKDelegate>)delegate;
+- (void) handlerSendWeiBoData:(NSDictionary*) dataDic Delegate:(id<SinaWeiBoSDKDelegate>)delegate;
+- (void) handlerGetWeiBoCommentsData:(NSDictionary*) dataDic Delegate:(id<SinaWeiBoSDKDelegate>)delegate;
+- (void) handlerGetUserAllWeiBoData:(NSDictionary*) dataDic Delegate:(id<SinaWeiBoSDKDelegate>)delegate;
+- (void) handlerCreateWeiBoComent:(NSDictionary*) dataDic Delegate:(id<SinaWeiBoSDKDelegate>)delegate;
+- (void) handlerReplyCommentData:(NSDictionary*) dataDic Delegate:(id<SinaWeiBoSDKDelegate>)delegate;
 @end

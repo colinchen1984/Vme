@@ -192,7 +192,7 @@
 	_userID = [result objectForKey:@"uid"];
 	NSInteger seconds = [[result objectForKey:@"expires_in"] intValue];
 	time_t current = time(NULL);
-	self->expiresAbsoluteTime = current + seconds - 300;
+	self->expiresAbsoluteTime = current + seconds;
 	[self saveAccessToken];
 	[_delegate OnOauthLoginSucessce];
 }

@@ -9,6 +9,7 @@
 #import "VmeDemoViewController.h"
 #import "VideoDetailViewController.h"
 #import "UIImageTouchableView.h"
+#import "VideoWeiBoDataManager.h"
 @interface VmeDemoViewController ()
 
 @property (strong, nonatomic) NSMutableArray* imageViewArray;
@@ -55,6 +56,7 @@ static float yPosition[imageCountForRow] = {imageDis, imageDis, imageDis};
 	_scrollViewForImage.showsVerticalScrollIndicator = NO;
 	_scrollViewForImage.delegate = self;
 	[_indicator startAnimating];
+	[_sinaWeiBoSDK requireUserAllWeiBo:YES Delegate:self];
 }
 
 - (void)viewDidUnload
@@ -124,12 +126,6 @@ static float yPosition[imageCountForRow] = {imageDis, imageDis, imageDis};
 	
 }
 
-#pragma mark - sina weibo sdk delegate
-- (void) OnRecevieWeiBoUserPersonalInfo:(SinaWeiBoUserPersonalInfo*) userInfo
-{
-	
-}
-
 #pragma mark - ui event handler
 - (void) onUIImageClicked:(id)sender
 {
@@ -152,9 +148,20 @@ static float yPosition[imageCountForRow] = {imageDis, imageDis, imageDis};
 	NSLog(@"offset.y = %f\theight = %f\n", leftTop.y, scrollView.contentSize.height);
 	if(leftTop.y + 480 > scrollView.contentSize.height)
 	{
-
-			[_tudouSDK requireUserVideoInfo:self UserName:_tudouUserName PageNo:(self->currentPageNo + 1)];
+		[_tudouSDK requireUserVideoInfo:self UserName:_tudouUserName PageNo:(self->currentPageNo + 1)];
 	}
 }
 
+#pragma mark - sina weibo sdk delegat
+- (void) OnRecevieWeiBoUserPersonalInfo:(SinaWeiBoUserPersonalInfo*) userInfo
+{
+}
+
+- (void) OnReceiveUserAllWeiBo:(NSArray*) weiBoArray
+{
+	for (SinaWeiBoData* weiBo in weiBoArray) 
+	{
+		[[VideoWeiBoDataManager sharedVideoWeiBoDataManager] addVideoWeiBoData:[weiBo.annotation objectAtIndex:0] WeiBoData:weiBo];
+	}
+}
 @end

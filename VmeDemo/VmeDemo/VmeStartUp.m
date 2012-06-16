@@ -47,8 +47,6 @@
 
 - (IBAction)loginTudou:(id)sender 
 {
-	NSString* str = [_sinaOauth class];
-
 	[_sinaOauth oauthStart];
 }
 @end

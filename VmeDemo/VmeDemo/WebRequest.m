@@ -114,6 +114,10 @@
 	[_connection cancel];
 	self.connection = nil;
 	self.delegate = nil;
+	self.httpHeader = nil;
+	self.httpBody = nil;
+	self.httpMethod = @"GET";
+	self.debugStr = nil;
 	[_data setLength:0];
 }
 

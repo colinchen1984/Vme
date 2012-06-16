@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface CommentView : UIView
-
+- (void) setPopDirection:(BOOL)isLeft;
+- (void) setAvatarImage:(UIImage*)avatarImage;
+- (void) settext:(NSString*)text;
+@property (weak, nonatomic) id userData;
 @end

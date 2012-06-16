@@ -8,17 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		CE398C2B156CABC900E58DEC /* SinaWeiBoOauth.m in Sources */ = {isa = PBXBuildFile; fileRef = CE398C2A156CABC800E58DEC /* SinaWeiBoOauth.m */; };
+		CE4758681577365C0067A848 /* CommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4758671577365C0067A848 /* CommentView.m */; };
 		CE71C39D155D26810047F25C /* ImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE71C39C155D26810047F25C /* ImageManager.m */; };
 		CE71C3A1155D28A10047F25C /* WebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE71C3A0155D28A10047F25C /* WebRequest.m */; };
 		CE7408971559569C007B3905 /* TuDouSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7408961559569C007B3905 /* TuDouSDK.m */; };
+		CE742718158327B3007D10F0 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = CE742717158327B3007D10F0 /* cancel.png */; };
 		CE781389155514B20042F79F /* Oauth.m in Sources */ = {isa = PBXBuildFile; fileRef = CE781386155514B20042F79F /* Oauth.m */; };
 		CE78138A155514B20042F79F /* TuDouOauth.m in Sources */ = {isa = PBXBuildFile; fileRef = CE781388155514B20042F79F /* TuDouOauth.m */; };
+		CE7AA3E815727C5E00B51543 /* VideoWeiBoDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7AA3E715727C5E00B51543 /* VideoWeiBoDataManager.m */; };
 		CE97D0AD154CF1BD004F6C9A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE97D0AC154CF1BD004F6C9A /* UIKit.framework */; };
 		CE97D0B7154CF1BD004F6C9A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE97D0B5154CF1BD004F6C9A /* InfoPlist.strings */; };
 		CE97D0B9154CF1BD004F6C9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE97D0B8154CF1BD004F6C9A /* main.m */; };
 		CE97D0BD154CF1BD004F6C9A /* VmeDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE97D0BC154CF1BD004F6C9A /* VmeDemoAppDelegate.m */; };
 		CE97D0C0154CF1BD004F6C9A /* VmeDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE97D0BF154CF1BD004F6C9A /* VmeDemoViewController.m */; };
 		CE97D0C3154CF1BD004F6C9A /* VmeDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE97D0C1154CF1BD004F6C9A /* VmeDemoViewController.xib */; };
+		CEB7C8FD15778F2B00ACA533 /* rightPop.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB7C8FB15778F2B00ACA533 /* rightPop.png */; };
+		CEB7C8FE15778F2B00ACA533 /* leftPop.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB7C8FC15778F2B00ACA533 /* leftPop.png */; };
 		CEB86BC8155CE16C002E2F66 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB86BC6155CE16C002E2F66 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CEB86BD7155CE173002E2F66 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB86BCC155CE173002E2F66 /* NSObject+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CEB86BD8155CE173002E2F66 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB86BCE155CE173002E2F66 /* NSString+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -33,11 +38,14 @@
 		CEB97D60154EE8060062B62D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB97D5F154EE8060062B62D /* Security.framework */; };
 		CEBFB65C155619B300D929B4 /* VmeStartUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEBFB65B155619B300D929B4 /* VmeStartUpView.xib */; };
 		CEBFB65F15561C4300D929B4 /* VmOauthWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBFB65E15561C4300D929B4 /* VmOauthWebViewController.m */; };
+		CEC3A2EF1577C9BF00C6A86D /* SinaWeiBoSDK+HandleData.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC3A2EE1577C9BF00C6A86D /* SinaWeiBoSDK+HandleData.m */; };
 		CECC2DB3156DF60D00DEBFC1 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = CECC2DB2156DF60D00DEBFC1 /* Utility.m */; };
 		CECC2DB7156E0ECA00DEBFC1 /* SinaWeiBoSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = CECC2DB6156E0ECA00DEBFC1 /* SinaWeiBoSDK.m */; };
 		CED252471567927B00851FC3 /* VideoPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED252461567927B00851FC3 /* VideoPageViewController.m */; };
 		CED4C9C5155576FC00A97207 /* VmeStartUp.m in Sources */ = {isa = PBXBuildFile; fileRef = CED4C9C4155576FC00A97207 /* VmeStartUp.m */; };
 		CED8F4731561D3E200E9032B /* UIImageTouchableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CED8F4721561D3E200E9032B /* UIImageTouchableView.m */; };
+		CEDA331C157A0FF4004C9F12 /* share2Sina.gif in Resources */ = {isa = PBXBuildFile; fileRef = CEDA331B157A0FF4004C9F12 /* share2Sina.gif */; };
+		CEE90052157C47660046FC6A /* SendWeiBoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE90051157C47660046FC6A /* SendWeiBoView.m */; };
 		CEF6EF7D156003BC00859ADC /* VideoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF6EF7B156003BC00859ADC /* VideoDetailViewController.m */; };
 		CEF6EF7E156003BC00859ADC /* VideoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF6EF7C156003BC00859ADC /* VideoDetailViewController.xib */; };
 /* End PBXBuildFile section */
@@ -46,16 +54,21 @@
 		CE08CC84154D5A43004CD2EE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CE398C29156CABC800E58DEC /* SinaWeiBoOauth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiBoOauth.h; sourceTree = "<group>"; };
 		CE398C2A156CABC800E58DEC /* SinaWeiBoOauth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeiBoOauth.m; sourceTree = "<group>"; };
+		CE4758661577365C0067A848 /* CommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentView.h; sourceTree = "<group>"; };
+		CE4758671577365C0067A848 /* CommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentView.m; sourceTree = "<group>"; };
 		CE71C39B155D26810047F25C /* ImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageManager.h; sourceTree = "<group>"; };
 		CE71C39C155D26810047F25C /* ImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageManager.m; sourceTree = "<group>"; };
 		CE71C39F155D28A10047F25C /* WebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRequest.h; sourceTree = "<group>"; };
 		CE71C3A0155D28A10047F25C /* WebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRequest.m; sourceTree = "<group>"; };
 		CE7408951559569C007B3905 /* TuDouSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuDouSDK.h; sourceTree = "<group>"; };
 		CE7408961559569C007B3905 /* TuDouSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuDouSDK.m; sourceTree = "<group>"; };
+		CE742717158327B3007D10F0 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
 		CE781385155514B20042F79F /* Oauth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Oauth.h; sourceTree = "<group>"; };
 		CE781386155514B20042F79F /* Oauth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Oauth.m; sourceTree = "<group>"; };
 		CE781387155514B20042F79F /* TuDouOauth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuDouOauth.h; sourceTree = "<group>"; };
 		CE781388155514B20042F79F /* TuDouOauth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuDouOauth.m; sourceTree = "<group>"; };
+		CE7AA3E615727C5E00B51543 /* VideoWeiBoDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoWeiBoDataManager.h; sourceTree = "<group>"; };
+		CE7AA3E715727C5E00B51543 /* VideoWeiBoDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoWeiBoDataManager.m; sourceTree = "<group>"; };
 		CE97D0A8154CF1BD004F6C9A /* Vme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE97D0AC154CF1BD004F6C9A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE97D0AE154CF1BD004F6C9A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -69,6 +82,8 @@
 		CE97D0BE154CF1BD004F6C9A /* VmeDemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VmeDemoViewController.h; sourceTree = "<group>"; };
 		CE97D0BF154CF1BD004F6C9A /* VmeDemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VmeDemoViewController.m; sourceTree = "<group>"; };
 		CE97D0C2154CF1BD004F6C9A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/VmeDemoViewController.xib; sourceTree = "<group>"; };
+		CEB7C8FB15778F2B00ACA533 /* rightPop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightPop.png; sourceTree = "<group>"; };
+		CEB7C8FC15778F2B00ACA533 /* leftPop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftPop.png; sourceTree = "<group>"; };
 		CEB86BC5155CE16C002E2F66 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		CEB86BC6155CE16C002E2F66 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		CEB86BC7155CE16C002E2F66 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
@@ -91,6 +106,8 @@
 		CEBFB65B155619B300D929B4 /* VmeStartUpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VmeStartUpView.xib; sourceTree = "<group>"; };
 		CEBFB65D15561C4300D929B4 /* VmOauthWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VmOauthWebViewController.h; sourceTree = "<group>"; };
 		CEBFB65E15561C4300D929B4 /* VmOauthWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VmOauthWebViewController.m; sourceTree = "<group>"; };
+		CEC3A2ED1577C9BF00C6A86D /* SinaWeiBoSDK+HandleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SinaWeiBoSDK+HandleData.h"; sourceTree = "<group>"; };
+		CEC3A2EE1577C9BF00C6A86D /* SinaWeiBoSDK+HandleData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SinaWeiBoSDK+HandleData.m"; sourceTree = "<group>"; };
 		CECC2DB1156DF60D00DEBFC1 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		CECC2DB2156DF60D00DEBFC1 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		CECC2DB5156E0ECA00DEBFC1 /* SinaWeiBoSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiBoSDK.h; sourceTree = "<group>"; };
@@ -101,6 +118,9 @@
 		CED4C9C4155576FC00A97207 /* VmeStartUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VmeStartUp.m; sourceTree = "<group>"; };
 		CED8F4711561D3E200E9032B /* UIImageTouchableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageTouchableView.h; sourceTree = "<group>"; };
 		CED8F4721561D3E200E9032B /* UIImageTouchableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageTouchableView.m; sourceTree = "<group>"; };
+		CEDA331B157A0FF4004C9F12 /* share2Sina.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = share2Sina.gif; sourceTree = "<group>"; };
+		CEE90050157C47660046FC6A /* SendWeiBoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendWeiBoView.h; sourceTree = "<group>"; };
+		CEE90051157C47660046FC6A /* SendWeiBoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendWeiBoView.m; sourceTree = "<group>"; };
 		CEF6EF7A156003BC00859ADC /* VideoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDetailViewController.h; sourceTree = "<group>"; };
 		CEF6EF7B156003BC00859ADC /* VideoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDetailViewController.m; sourceTree = "<group>"; };
 		CEF6EF7C156003BC00859ADC /* VideoDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoDetailViewController.xib; sourceTree = "<group>"; };
@@ -176,6 +196,8 @@
 				CEBFB65E15561C4300D929B4 /* VmOauthWebViewController.m */,
 				CE7408951559569C007B3905 /* TuDouSDK.h */,
 				CE7408961559569C007B3905 /* TuDouSDK.m */,
+				CEC3A2ED1577C9BF00C6A86D /* SinaWeiBoSDK+HandleData.h */,
+				CEC3A2EE1577C9BF00C6A86D /* SinaWeiBoSDK+HandleData.m */,
 				CECC2DB5156E0ECA00DEBFC1 /* SinaWeiBoSDK.h */,
 				CECC2DB6156E0ECA00DEBFC1 /* SinaWeiBoSDK.m */,
 				CE71C39B155D26810047F25C /* ImageManager.h */,
@@ -191,6 +213,12 @@
 				CED252461567927B00851FC3 /* VideoPageViewController.m */,
 				CECC2DB1156DF60D00DEBFC1 /* Utility.h */,
 				CECC2DB2156DF60D00DEBFC1 /* Utility.m */,
+				CE7AA3E615727C5E00B51543 /* VideoWeiBoDataManager.h */,
+				CE7AA3E715727C5E00B51543 /* VideoWeiBoDataManager.m */,
+				CE4758661577365C0067A848 /* CommentView.h */,
+				CE4758671577365C0067A848 /* CommentView.m */,
+				CEE90050157C47660046FC6A /* SendWeiBoView.h */,
+				CEE90051157C47660046FC6A /* SendWeiBoView.m */,
 			);
 			path = VmeDemo;
 			sourceTree = "<group>";
@@ -198,6 +226,10 @@
 		CE97D0B3154CF1BD004F6C9A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CE742717158327B3007D10F0 /* cancel.png */,
+				CEDA331B157A0FF4004C9F12 /* share2Sina.gif */,
+				CEB7C8FB15778F2B00ACA533 /* rightPop.png */,
+				CEB7C8FC15778F2B00ACA533 /* leftPop.png */,
 				CE97D0B4154CF1BD004F6C9A /* VmeDemo-Info.plist */,
 				CE97D0B5154CF1BD004F6C9A /* InfoPlist.strings */,
 				CE97D0B8154CF1BD004F6C9A /* main.m */,
@@ -302,6 +334,10 @@
 				CE97D0C3154CF1BD004F6C9A /* VmeDemoViewController.xib in Resources */,
 				CEBFB65C155619B300D929B4 /* VmeStartUpView.xib in Resources */,
 				CEF6EF7E156003BC00859ADC /* VideoDetailViewController.xib in Resources */,
+				CEB7C8FD15778F2B00ACA533 /* rightPop.png in Resources */,
+				CEB7C8FE15778F2B00ACA533 /* leftPop.png in Resources */,
+				CEDA331C157A0FF4004C9F12 /* share2Sina.gif in Resources */,
+				CE742718158327B3007D10F0 /* cancel.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +372,10 @@
 				CE398C2B156CABC900E58DEC /* SinaWeiBoOauth.m in Sources */,
 				CECC2DB3156DF60D00DEBFC1 /* Utility.m in Sources */,
 				CECC2DB7156E0ECA00DEBFC1 /* SinaWeiBoSDK.m in Sources */,
+				CE7AA3E815727C5E00B51543 /* VideoWeiBoDataManager.m in Sources */,
+				CE4758681577365C0067A848 /* CommentView.m in Sources */,
+				CEC3A2EF1577C9BF00C6A86D /* SinaWeiBoSDK+HandleData.m in Sources */,
+				CEE90052157C47660046FC6A /* SendWeiBoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

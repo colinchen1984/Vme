@@ -88,9 +88,16 @@ static ImageManager* singleton = nil;
 	}
 }
 
-- (UIImage*) getImageByPath:(NSString*) filePath
+- (UIImage*) getImageFromBundle:(NSString*) fileName
 {
-	return nil;
+	UIImage* image = [_imageDic objectForKey:fileName];
+	if (nil == image) 
+	{
+		image = [UIImage imageNamed:fileName];
+		[_imageDic setObject:image forKey:fileName];
+	}
+
+	return image;
 }
 
 #pragma mark - private interface for manger request
