@@ -154,11 +154,10 @@
 		_scrollView.contentSize = CGSizeMake(320.0f, 500.0f);
 		return;
 	}
-	NSRange range = [weiboData.text rangeOfString:@"http://t.cn/"];
-	NSString* text = NSNotFound != range.location ? [weiboData.text substringToIndex:range.location] : weiboData.text;
+	
 	CGRect frame = _weiBoView.frame;
 	_weiBoView.frame = CGRectMake(20.0f, 350.0f, 320.0f, frame.size.height);
-	[_weiBoView settext:text];
+	[_weiBoView settext:weiboData.text];
 	[_weiBoView setPopDirection:YES];
 	[_weiBoView setAvatarImage:weiboData.userInfo.avatarImage];
 	_weiBoView.frame = CGRectMake(20.0f, 350.0f, 320.0f, frame.size.height);
@@ -208,11 +207,15 @@
 }
 
 #pragma mark - url image request delegate
-- (void) OnReceiveImage:(UIImage*)image
+- (void) OnReceiveImage:(UIImage*)image ImageUrl:(NSString *)imageUrl
 {
-	_videoInfo.bigPic = image;
-	[_bigPicIndicator stopAnimating];
-	_bigPicImageView.image = _videoInfo.bigPic;
+	if ([_videoInfo.bigPicURL isEqualToString:imageUrl]) 
+	{
+		_videoInfo.bigPic = image;
+		[_bigPicIndicator stopAnimating];
+		_bigPicImageView.image = _videoInfo.bigPic;
+	}
+
 }
 
 - (void) OnReceiveError:(NSString*)imageURL

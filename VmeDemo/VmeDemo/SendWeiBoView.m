@@ -8,7 +8,6 @@
 
 #import "SendWeiBoView.h"
 #import "ImageManager.h"
-#import "UIImageTouchableView.h"
 #import "TuDouSDK.h"
 #import "SinaWeiBoSDK.h"
 #import <QuartzCore/QuartzCore.h> 

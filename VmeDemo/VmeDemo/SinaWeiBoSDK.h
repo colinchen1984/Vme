@@ -18,6 +18,7 @@
 - (void) OnReceiveSendWeiBoResult:(SinaWeiBoData*) sendResult;
 - (void) OnReceiveCommentForWeiBo:(SinaWeiBoData*) weiBo Comments:(NSMutableArray*)comments;
 - (void) OnReceiveCommentReplyResult:(SinaWeiBoComment*)result;
+- (void) OnRateLimitate;
 @end
 
 @interface SinaWeiBoUserPersonalInfo : NSObject
@@ -49,6 +50,7 @@
 - (void) requireUserPersonalInfo:(id<SinaWeiBoSDKDelegate>)delegate;
 - (void) sendWeiBo:(NSString*) text Annotations:(NSString*)annotations Delegate:(id<SinaWeiBoSDKDelegate>)delegate;
 - (void) requireWeiBoComment:(SinaWeiBoData*)weiBoData Delegate:(id<SinaWeiBoSDKDelegate>)delegate;
+- (void) requireBatchWeiBoComment:(NSArray*)weiBoData Delegate:(id<SinaWeiBoSDKDelegate>)delegate;
 - (void) createCommentForWeiBo:(SinaWeiBoData*) weibo CommentText:(NSString*)commentText Delegate:(id<SinaWeiBoSDKDelegate>)delegate;
 - (void) replyComment:(SinaWeiBoComment*) weiBoComment CommentText:(NSString*)commentText Delegate:(id<SinaWeiBoSDKDelegate>)delegate;
 @end

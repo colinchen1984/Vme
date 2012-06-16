@@ -10,9 +10,11 @@
 #import "VideoDetailViewController.h"
 #import "UIImageTouchableView.h"
 #import "VideoWeiBoDataManager.h"
+#import "UIVideoView.h"
+
 @interface VmeDemoViewController ()
 
-@property (strong, nonatomic) NSMutableArray* imageViewArray;
+@property (strong, nonatomic) NSMutableDictionary* videoViewDic;
 @property (strong, nonatomic) NSMutableArray* videoInfosArray;
 @property (strong, nonatomic) VideoDetailViewController* videoDetailInfoController;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
@@ -22,7 +24,7 @@
 
 @implementation VmeDemoViewController
 @synthesize tudouSDK = _tudouSDK;
-@synthesize imageViewArray = _imageViewArray;
+@synthesize videoViewDic = _videoViewDic;
 @synthesize videoInfosArray = _videoInfosArray;
 @synthesize tudouUserName = _tudouUserName;
 @synthesize videoDetailInfoController = _videoDetailInfoController;
@@ -32,6 +34,8 @@
 @synthesize sinaWeiBoSDK = _sinaWeiBoSDK;
 
 static const int imageCountForRow = 3;
+static const int rowCountForPage = 5;
+static const int imageCountForPage = rowCountForPage * imageCountForRow;
 static const float imageWidth = 100.0f;
 static const float xPosition[imageCountForRow] = {5.0f, 110.0f, 215.0f};
 static const float imageDis = 5.0f;
@@ -44,14 +48,13 @@ static float yPosition[imageCountForRow] = {imageDis, imageDis, imageDis};
     [super viewDidLoad];
 	
 	// Do any additional setup after loading the view, typically from a nib.
-	_imageViewArray = [[NSMutableArray alloc] init];
+	_videoViewDic = [[NSMutableDictionary alloc] init];
 	_videoInfosArray = [[NSMutableArray alloc] init];
 	self->currentVideoIndex = 0;
 	self->currentPageNo = 1;
 	self->totalPageCount = 0;
 	self->totalVideoCount = 0;
-
-	[[self view] setBackgroundColor:[UIColor whiteColor]];
+	_scrollViewForImage.backgroundColor = [UIColor grayColor];
 	_videoDetailInfoController = [[VideoDetailViewController alloc] initWithNibName:nil bundle:nil];
 	_scrollViewForImage.showsVerticalScrollIndicator = NO;
 	_scrollViewForImage.delegate = self;
@@ -62,7 +65,7 @@ static float yPosition[imageCountForRow] = {imageDis, imageDis, imageDis};
 - (void)viewDidUnload
 {
 	_videoInfosArray = nil;
-	_imageViewArray = nil;
+	_videoViewDic = nil;
 	_videoDetailInfoController = nil;
 	_scrollViewForImage = nil;
 	_tudouPersonalInfo = nil;
@@ -98,20 +101,24 @@ static float yPosition[imageCountForRow] = {imageDis, imageDis, imageDis};
 {
 	[_indicator stopAnimating];
 	[_videoInfosArray addObject:videoInfo];
-	int index = [_videoInfosArray count] % imageCountForRow;
-	index = 0 == index ? imageCountForRow - 1 : index - 1; 
-	CGSize imageSize = videoInfo.pic.size;
-	float imageShowHeight = imageSize.height * imageWidth / imageSize.width;
+	const static float width = 240.0f;
+	const static float height = width * (3.0f / 4.0f) + 80;
+	float h = [_videoViewDic count] * (height + 25.0f)+ 25.0f;
+	UIVideoView* v = [[UIVideoView alloc] initWithFrame:CGRectMake(10.0f, h, width, height)];
+	v.videoInfo = videoInfo;
+	SinaWeiBoData* w = [[VideoWeiBoDataManager sharedVideoWeiBoDataManager] getWeiBoDataByVideoID:videoInfo.itemCode];
+	v.weiBoData = w;
+	v.videoViewDelegate = self;
+	[v UpdateView];
+	[_videoViewDic setObject:v forKey:videoInfo.itemCode];
 	
-	UIImageTouchableView* imageView = [[UIImageTouchableView alloc] initWithFrame:CGRectMake(xPosition[index], yPosition[index], imageWidth, imageShowHeight)];
-	yPosition[index] += (imageShowHeight + imageDis);
-	[_scrollViewForImage addSubview:imageView];
-	[imageView addTarget:self action:@selector(onUIImageClicked:) forControlEvents:UIControlEventTouchDown];
-	imageView.image = videoInfo.pic;
-	imageView.userData = videoInfo;
-	
-	CGSize size = CGSizeMake(320, MAX(_scrollViewForImage.contentSize.height, MAX(MAX(yPosition[0], yPosition[1]), yPosition[2])));
-	_scrollViewForImage.contentSize = size;
+	[_scrollViewForImage addSubview:v];
+	if (_scrollViewForImage.contentSize.height < h) 
+	{
+		CGSize size = _scrollViewForImage.contentSize;
+		size.height = h;
+		_scrollViewForImage.contentSize = size;
+	}
 }
 
 - (void) OnReceiveUserVideoInfo:(int)pageNo PageSize:(int)PageSize PageCount:(int)pageCount VideoCount:(int)videoCount
@@ -126,21 +133,6 @@ static float yPosition[imageCountForRow] = {imageDis, imageDis, imageDis};
 	
 }
 
-#pragma mark - ui event handler
-- (void) onUIImageClicked:(id)sender
-{
-	UIImageTouchableView* imageView = (UIImageTouchableView*)sender;
-	TudouVideoInfo* video = (TudouVideoInfo*)[imageView userData];
-	if (nil == video) 
-	{
-		return;
-	}
-	self.navigationItem.title = nil;
-	_videoDetailInfoController.videoInfo = video;
-	_videoDetailInfoController.sinaWeiBoSDK = _sinaWeiBoSDK;
-	[[self navigationController] pushViewController:_videoDetailInfoController animated:YES];
-}
-
 #pragma mark - scroll view delegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
@@ -153,5 +145,36 @@ static float yPosition[imageCountForRow] = {imageDis, imageDis, imageDis};
 }
 
 #pragma mark - sina weibo sdk delegat
+- (void) OnReceiveUserAllWeiBo:(NSArray*) weiBoArray
+{
+	for (SinaWeiBoData* w in weiBoArray) 
+	{
+		[_sinaWeiBoSDK requireWeiBoComment:w Delegate:self];
+	}
+	
+}
 
+- (void) OnReceiveCommentForWeiBo:(SinaWeiBoData*) weiBo Comments:(NSMutableArray*)comments
+{
+	UIVideoView* v = [_videoViewDic objectForKey:[weiBo.annotation objectAtIndex:0]];
+	if (nil == v) 
+	{
+		return;
+	}
+	[v UpdateView];
+}
+
+#pragma mark - UIVideoView delegate
+- (void) OnVideoImageClick:(UIVideoView*)view
+{
+	self.navigationItem.title = nil;
+	_videoDetailInfoController.videoInfo = view.videoInfo;
+	_videoDetailInfoController.sinaWeiBoSDK = _sinaWeiBoSDK;
+	[[self navigationController] pushViewController:_videoDetailInfoController animated:YES];
+}
+
+- (void) OnWeiBoCommentUserAvatarClick:(SinaWeiBoUserPersonalInfo*) userInfo
+{
+
+}
 @end

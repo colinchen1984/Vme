@@ -20,7 +20,9 @@ typedef enum
 	SINA_WEIBO_GET_USER_ALL_WEIBO = 3,
 	SINA_WEIBO_CREATE_COMMENT = 4,
 	SINA_WEIBO_REPLY_COMMENT = 5,
-	
+	SINA_WEIBO_GET_BATCH_WEIBO_COMMENT = 6,
+
+	SINA_WEIBO_OPERATION_TYPE,
 	
 } SINA_WEIBO_REQUEST_OPERATION_TYPE;
 
@@ -46,7 +48,7 @@ typedef enum
 @synthesize userID = _userID;
 @synthesize userName = _userName;
 @synthesize avatarImage = _avatarImage;
-- (void) OnReceiveImage:(UIImage*)image
+- (void) OnReceiveImage:(UIImage*)image ImageUrl:(NSString*)imageUrl
 {
 	_avatarImage = image;
 }
@@ -69,6 +71,9 @@ typedef enum
 @end
 
 @interface SinaWeiBoSDK()
+{
+	int limatation[SINA_WEIBO_OPERATION_TYPE];
+}
 @property (strong, nonatomic) NSMutableSet* usingConnection;
 @property (strong, nonatomic) NSMutableArray* freeConnection;
 @property (strong, nonatomic) SinaWeiBoOauth* sinaWeiBoOauth;
@@ -91,6 +96,7 @@ typedef enum
 	_sinaWeiBoOauth = oauth;
 	_usingConnection = [[NSMutableSet alloc] init];
 	_freeConnection = [[NSMutableArray alloc] init];
+	memset(self->limatation, 0, sizeof(self->limatation));
 	return self;
 }
 
@@ -105,7 +111,11 @@ typedef enum
 		[delegate OnWeiBoOauthExpired]; 
 		return;
 	}
-	
+	if ([self LimitationCheck:SINA_WEIBO_GET_USER_ALL_WEIBO]) 
+	{
+		[delegate OnRateLimitate];
+		return;
+	}
 	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
 							[_sinaWeiBoOauth accessCode], @"access_token",
 							[_sinaWeiBoOauth userID], @"uid", 
@@ -129,7 +139,11 @@ typedef enum
 		[delegate OnWeiBoOauthExpired]; 
 		return;
 	}
-
+	if ([self LimitationCheck:SINA_WEIBO_REQUEST_USER_PERSONAL_INFO]) 
+	{
+		[delegate OnRateLimitate];
+		return;
+	}
 	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
 							[_sinaWeiBoOauth accessCode], @"access_token",
 							[_sinaWeiBoOauth userID], @"uid", nil];
@@ -152,6 +166,11 @@ typedef enum
 	
 	if (nil == text) 
 	{
+		return;
+	}
+	if ([self LimitationCheck:SINA_WEIBO_SEND_WEIBO]) 
+	{
+		[delegate OnRateLimitate];
 		return;
 	}
 	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
@@ -182,6 +201,11 @@ typedef enum
 	{
 		return;
 	}
+	if ([self LimitationCheck:SINA_WEIBO_GET_WEIBO_COMMENT]) 
+	{
+		[delegate OnRateLimitate];
+		return;
+	}
 	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
 								   [_sinaWeiBoOauth accessCode], @"access_token",
 								   weiBoData.weiBoID, @"id",
@@ -196,6 +220,70 @@ typedef enum
 	[request postUrlRequest:@"https://api.weibo.com/2/comments/show.json"];
 	
 }
+
+- (void) requireBatchWeiBoComment:(NSArray*)weiBoData Delegate:(id<SinaWeiBoSDKDelegate>)delegate
+{
+	if (YES != VALID_OAUTH) 
+	{
+		[delegate OnWeiBoOauthExpired]; 
+		return;
+	}
+	if (nil == weiBoData) 
+	{
+		return;
+	}
+	if ([self LimitationCheck:SINA_WEIBO_GET_BATCH_WEIBO_COMMENT]) 
+	{
+		[delegate OnRateLimitate];
+		return;
+	}
+	int count = 0;
+	const static int maxCount = 50;
+	NSMutableString* str = [[NSMutableString alloc] initWithCapacity:maxCount * (12)];
+	for (SinaWeiBoData* w in weiBoData) 
+	{
+		if ([str length] > 0)
+		{
+			[str appendFormat:@",%@", w.weiBoID];
+		}
+		else 
+		{
+			[str appendFormat:@"%@", w.weiBoID];
+		}
+		
+		if (count == maxCount) 
+		{
+			//[str appendFormat:@","];
+			NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+									[_sinaWeiBoOauth accessCode], @"access_token",
+									str, @"cids",
+									nil];	
+			SinaWeiBoRequest* request = [self getFreeRequest];
+			request.delegate = self;
+			request.weiBoSDKDelegate = delegate;
+			request.httpHeader = params;
+			request->operation = SINA_WEIBO_GET_BATCH_WEIBO_COMMENT;
+			[request postUrlRequest:@"https://api.weibo.com/2/comments/show_batch.json"];
+			count = 0;
+			[str setString:@""];
+		}
+	}
+	if ([str length] > 0)
+	{
+		//[str appendFormat:@","];
+		NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+								[_sinaWeiBoOauth accessCode], @"access_token",
+								str, @"cids",
+								nil];	
+		SinaWeiBoRequest* request = [self getFreeRequest];
+		request.delegate = self;
+		request.weiBoSDKDelegate = delegate;
+		request.httpHeader = params;
+		request->operation = SINA_WEIBO_GET_BATCH_WEIBO_COMMENT;
+		[request postUrlRequest:@"https://api.weibo.com/2/comments/show_batch.json"];
+	}	
+}
+
 - (void) createCommentForWeiBo:(SinaWeiBoData*)weibo CommentText:(NSString*)commentText Delegate:(id<SinaWeiBoSDKDelegate>)delegate
 {
 	if (YES != VALID_OAUTH) 
@@ -205,6 +293,11 @@ typedef enum
 	}
 	if (nil == weibo) 
 	{
+		return;
+	}
+	if ([self LimitationCheck:SINA_WEIBO_CREATE_COMMENT]) 
+	{
+		[delegate OnRateLimitate];
 		return;
 	}
 	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -231,6 +324,11 @@ typedef enum
 	}
 	if (nil == weiBoComment) 
 	{
+		return;
+	}
+	if ([self LimitationCheck:SINA_WEIBO_REPLY_COMMENT]) 
+	{
+		[delegate OnRateLimitate];
 		return;
 	}
 	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -303,6 +401,10 @@ typedef enum
 		{
 			[self handlerReplyCommentData:dataDic Delegate:weiBoRequest.weiBoSDKDelegate];
 		}
+		case SINA_WEIBO_GET_BATCH_WEIBO_COMMENT:
+		{
+			[self handlerBatchWeiBoComments:dataDic Delegate:weiBoRequest.weiBoSDKDelegate];
+		}
 		break;
 	}
 	
@@ -338,5 +440,20 @@ typedef enum
 	}
 	[_usingConnection addObject:request];
 	return request;
+}
+
+- (BOOL) LimitationCheck:(SINA_WEIBO_REQUEST_OPERATION_TYPE)type
+{
+	int sum = 0;
+	for (int i = 0; i < SINA_WEIBO_OPERATION_TYPE; ++i) 
+	{
+		sum += self->limatation[i];
+	}
+	if (sum > 150) 
+	{
+		return YES;
+	}
+	++self->limatation[type];
+	return NO;
 }
 @end

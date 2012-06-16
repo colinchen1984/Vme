@@ -52,7 +52,7 @@
 @synthesize delegate = _delegate;
 @synthesize sdk = _sdk;
 
-- (void) OnReceiveImage:(UIImage*)image
+- (void) OnReceiveImage:(UIImage*)image ImageUrl:(NSString *)imageUrl
 {
 	_userAvatarImage = image;
 	[_delegate OnReceiveUserPersonalInfo:self];
@@ -80,11 +80,19 @@
 @synthesize delegate = _delegate;				
 @synthesize sdk = _sdk;
 
-- (void) OnReceiveImage:(UIImage*)image
+- (void) OnReceiveImage:(UIImage*)image ImageUrl:(NSString *)imageUrl
 {
-	_pic = image;
-	[_delegate OnReceiveVideoInfo:self];
-	[_sdk finishVideoInfoRequest:self];
+	if(NO == [_bigPicURL isEqualToString:imageUrl])
+	{
+		_pic = image;
+		[_delegate OnReceiveVideoInfo:self];
+		[_sdk finishVideoInfoRequest:self];
+	}
+	else 
+	{
+		_bigPic = image;
+	}
+	
 }
 
 - (void) OnReceiveError:(NSString*)imageURL
@@ -243,6 +251,7 @@
 				video.sdk = self;
 				NSString* pictureURL = [v objectForKey:@"picUrl"];
 				[[ImageManager sharedImageManager] postURL2DownLoadImage:pictureURL Delegate:video];
+				[[ImageManager sharedImageManager] postURL2DownLoadImage:video.bigPicURL Delegate:video];
 				[_videoRequest addObject:video];
 			}
 		}

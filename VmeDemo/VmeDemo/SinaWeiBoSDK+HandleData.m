@@ -18,7 +18,9 @@
 	SinaWeiBoData* weiBo = [[SinaWeiBoData alloc] init];
 	weiBo.weiBoID = [dic objectForKey:@"idstr"];
 	weiBo.annotation = [dic objectForKey:@"annotations"];
-	weiBo.text = [dic objectForKey:@"text"];
+	NSString* text = [dic objectForKey:@"text"];
+	NSRange range = [text rangeOfString:@"http://t.cn/"];
+	weiBo.text = NSNotFound != range.location ? [text substringToIndex:range.location] : text;
 	weiBo.userID = [[dic objectForKey:@"user"] objectForKey:@"idstr"];
 	weiBo.userInfo = [[VideoWeiBoDataManager sharedVideoWeiBoDataManager] getWeiBoUserPersonalInfo:weiBo.userID];
 	return weiBo;
@@ -56,6 +58,7 @@
 	
 }
 
+
 - (void) handlerGetWeiBoCommentsData:(NSDictionary*) dataDic Delegate:(id<SinaWeiBoSDKDelegate>)delegate
 {
 	NSArray* commentArray = [dataDic objectForKey:@"comments"];
@@ -82,6 +85,18 @@
     {
         [delegate OnReceiveCommentForWeiBo:weiBoData Comments:resultArray];
     }
+	
+}
+
+- (void) handlerBatchWeiBoComments:(NSDictionary*) dataDic Delegate:(id<SinaWeiBoSDKDelegate>)delegate
+{
+	NSArray* array = (NSArray*)dataDic;
+	for (NSDictionary* dic in array) 
+	{
+		SinaWeiBoComment* weiBoComment = [self getCommentFromDic:dic];
+		SinaWeiBoData* weiBoData = weiBoComment.weiBoData;
+		[[VideoWeiBoDataManager sharedVideoWeiBoDataManager] addWeiBoComentByVideID:[weiBoData.annotation objectAtIndex:0]  Comment:weiBoComment];
+	}
 	
 }
 

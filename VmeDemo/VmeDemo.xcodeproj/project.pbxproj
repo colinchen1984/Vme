@@ -13,6 +13,7 @@
 		CE71C3A1155D28A10047F25C /* WebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE71C3A0155D28A10047F25C /* WebRequest.m */; };
 		CE7408971559569C007B3905 /* TuDouSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7408961559569C007B3905 /* TuDouSDK.m */; };
 		CE742718158327B3007D10F0 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = CE742717158327B3007D10F0 /* cancel.png */; };
+		CE7695FB158C726800B22EAE /* UIVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7695FA158C726700B22EAE /* UIVideoView.m */; };
 		CE781389155514B20042F79F /* Oauth.m in Sources */ = {isa = PBXBuildFile; fileRef = CE781386155514B20042F79F /* Oauth.m */; };
 		CE78138A155514B20042F79F /* TuDouOauth.m in Sources */ = {isa = PBXBuildFile; fileRef = CE781388155514B20042F79F /* TuDouOauth.m */; };
 		CE7AA3E815727C5E00B51543 /* VideoWeiBoDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7AA3E715727C5E00B51543 /* VideoWeiBoDataManager.m */; };
@@ -63,6 +64,8 @@
 		CE7408951559569C007B3905 /* TuDouSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuDouSDK.h; sourceTree = "<group>"; };
 		CE7408961559569C007B3905 /* TuDouSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuDouSDK.m; sourceTree = "<group>"; };
 		CE742717158327B3007D10F0 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
+		CE7695F9158C726700B22EAE /* UIVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIVideoView.h; sourceTree = "<group>"; };
+		CE7695FA158C726700B22EAE /* UIVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIVideoView.m; sourceTree = "<group>"; };
 		CE781385155514B20042F79F /* Oauth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Oauth.h; sourceTree = "<group>"; };
 		CE781386155514B20042F79F /* Oauth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Oauth.m; sourceTree = "<group>"; };
 		CE781387155514B20042F79F /* TuDouOauth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuDouOauth.h; sourceTree = "<group>"; };
@@ -219,6 +222,8 @@
 				CE4758671577365C0067A848 /* CommentView.m */,
 				CEE90050157C47660046FC6A /* SendWeiBoView.h */,
 				CEE90051157C47660046FC6A /* SendWeiBoView.m */,
+				CE7695F9158C726700B22EAE /* UIVideoView.h */,
+				CE7695FA158C726700B22EAE /* UIVideoView.m */,
 			);
 			path = VmeDemo;
 			sourceTree = "<group>";
@@ -376,6 +381,7 @@
 				CE4758681577365C0067A848 /* CommentView.m in Sources */,
 				CEC3A2EF1577C9BF00C6A86D /* SinaWeiBoSDK+HandleData.m in Sources */,
 				CEE90052157C47660046FC6A /* SendWeiBoView.m in Sources */,
+				CE7695FB158C726800B22EAE /* UIVideoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

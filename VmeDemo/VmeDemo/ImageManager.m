@@ -67,7 +67,7 @@ static ImageManager* singleton = nil;
 	UIImage* image = [_imageDic objectForKey:urlPath];
 	if (nil != image) 
 	{
-		[delegate OnReceiveImage:image];
+		[delegate OnReceiveImage:image ImageUrl:urlPath];
 		return;
 	}
 	
@@ -140,8 +140,8 @@ static ImageManager* singleton = nil;
 	}
 	else 
 	{
-		[_imageDic setObject:image forKey:[urlImageRequest imageURL]];
-		[[urlImageRequest urlImageDelegate] OnReceiveImage:image];
+		[_imageDic setObject:image forKey:urlImageRequest.imageURL];
+		[[urlImageRequest urlImageDelegate] OnReceiveImage:image ImageUrl:urlImageRequest.imageURL];
 		[self freeRequest:urlImageRequest URL:urlImageRequest.imageURL];
 	}
 }

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "WebRequest.h"
 @protocol URLImageDelegate
-- (void) OnReceiveImage:(UIImage*)image;
+- (void) OnReceiveImage:(UIImage*)image ImageUrl:(NSString*)imageUrl;
 - (void) OnReceiveError:(NSString*)imageURL;
 @end
 
