@@ -26,7 +26,6 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *bigPicIndicator;
 @property (strong, nonatomic) NSString* userNickName;
 @property (strong, nonatomic) VideoPageViewController* webView;
-@property (strong, nonatomic) SendWeiBoView* sendWeiBoView;
 @property (strong, nonatomic) CommentView* weiBoView;
 @end
 
@@ -40,7 +39,6 @@
 @synthesize userNickName = _userNickName;
 @synthesize webView = _webView;
 @synthesize sinaWeiBoSDK = _sinaWeiBoSDK;
-@synthesize sendWeiBoView = _sendWeiBoView;
 @synthesize weiBoView = _weiBoView;
 #pragma mark - life cycle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -72,14 +70,12 @@
 	[_share2SinaWeibo setFrame:CGRectMake(20.0f, 330.0f, [image size].width - 2, [image size].height - 2)];
 	[_share2SinaWeibo addTarget:self action:@selector(sendSinaWeiBo:) forControlEvents:UIControlEventTouchDown];
 	[_scrollView addSubview:_share2SinaWeibo];
-	_sendWeiBoView = [[SendWeiBoView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 0.0f, 0.0f)];
 	_weiBoView = [[CommentView alloc] initWithFrame:CGRectMake(0.0f, 320.0f, 300.0f, 0.0f)];
 }
 
 - (void)viewDidUnload
 {
 	_weiBoView = nil;
-	_sendWeiBoView = nil;
 	_bigPicImageView = nil;
 	_bigPicIndicator = nil;
 	_videoInfo = nil;
@@ -233,10 +229,10 @@
 
 - (IBAction)sendSinaWeiBo:(id)sender 
 {
-	_sendWeiBoView.videoInfo = _videoInfo;
-	_sendWeiBoView.weiBoSDK = _sinaWeiBoSDK;
-	_sendWeiBoView.weiboDelegate = self;
-	[_sendWeiBoView Show:YES];
+	[SendWeiBoView sharedSendWeiBoView].videoInfo = _videoInfo;
+	[SendWeiBoView sharedSendWeiBoView].weiBoSDK = _sinaWeiBoSDK;
+	[SendWeiBoView sharedSendWeiBoView].weiboDelegate = self;
+	[[SendWeiBoView sharedSendWeiBoView] Show:YES];
 	return;
 }
 

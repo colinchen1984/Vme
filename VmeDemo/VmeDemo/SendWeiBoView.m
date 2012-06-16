@@ -20,6 +20,7 @@
 @property (strong, nonatomic) UILabel* wordCount;
 @end
 
+static SendWeiBoView* singleton = nil;
 @implementation SendWeiBoView
 @synthesize weiBoSDK = _weiBoSDK;
 @synthesize videoInfo = _videoInfo;
@@ -29,6 +30,16 @@
 @synthesize sendButton = _sendButton;
 @synthesize wordCount = _wordCount;
 @synthesize weiboDelegate = _weiboDelegate;
+
++ (SendWeiBoView*) sharedSendWeiBoView
+{
+	if (nil == singleton) 
+	{
+		singleton = [[SendWeiBoView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 0.0f, 0.0f)];
+	}
+	return singleton;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = 

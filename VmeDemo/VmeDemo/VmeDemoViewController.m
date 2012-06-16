@@ -11,6 +11,7 @@
 #import "UIImageTouchableView.h"
 #import "VideoWeiBoDataManager.h"
 #import "UIVideoView.h"
+#import "SendWeiBoView.h"
 
 @interface VmeDemoViewController ()
 
@@ -176,5 +177,13 @@ static float yPosition[imageCountForRow] = {imageDis, imageDis, imageDis};
 - (void) OnWeiBoCommentUserAvatarClick:(SinaWeiBoUserPersonalInfo*) userInfo
 {
 
+}
+
+- (void) OnShare2SinaWeiBoClick:(UIVideoView*)view
+{
+	[SendWeiBoView sharedSendWeiBoView].videoInfo = view.videoInfo;
+	[SendWeiBoView sharedSendWeiBoView].weiBoSDK = _sinaWeiBoSDK;
+	[SendWeiBoView sharedSendWeiBoView].weiboDelegate = self;
+	[[SendWeiBoView sharedSendWeiBoView] Show:YES];	
 }
 @end

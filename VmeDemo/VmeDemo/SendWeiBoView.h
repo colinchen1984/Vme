@@ -16,4 +16,6 @@
 @property (weak, nonatomic) TudouVideoInfo* videoInfo;
 @property (weak, nonatomic) id<SinaWeiBoSDKDelegate> weiboDelegate;
 - (void) Show:(BOOL)animated;
+
++ (SendWeiBoView*) sharedSendWeiBoView;
 @end

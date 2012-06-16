@@ -9,6 +9,7 @@
 #import "UIVideoView.h"
 #import "TuDouSDK.h"
 #import "SinaWeiBoSDK.h"
+#import "ImageManager.h"
 #import "UIImageTouchableView.h"
 #import <QuartzCore/QuartzCore.h> 
 
@@ -16,6 +17,7 @@
 @property (strong, nonatomic) UIImageTouchableView* videoImageView;
 @property (strong, nonatomic) NSMutableArray* avatarImageViewArray;
 @property (strong, nonatomic) UILabel* textLable;
+@property (strong, nonatomic) UIButton* share2WeiBo;
 @end
 
 static const float videoImageWidth = 100.0f;
@@ -32,6 +34,7 @@ static const float avatarImageViewWidth = 47.5f;
 @synthesize avatarImageViewArray = _avatarImageViewArray;
 @synthesize textLable = _textLable;
 @synthesize videoViewDelegate = _videoViewDelegate;
+@synthesize share2WeiBo = _share2WeiBo;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -63,7 +66,14 @@ static const float avatarImageViewWidth = 47.5f;
 		[_avatarImageViewArray addObject:avatarImageView];
 		[avatarImageView addTarget:self action:@selector(OnWeiBoCommentUserAvatarClick:) forControlEvents:UIControlEventTouchDown];
 	}
-	
+	frame = CGRectMake(videoImageBeginPos, vH, 0, 0);
+	_share2WeiBo = [[UIButton alloc] initWithFrame:frame];
+	UIImage* weiBoIcon = [[ImageManager sharedImageManager] getImageFromBundle:@"Share2Sina.gif"];
+	[_share2WeiBo setImage:weiBoIcon forState:UIControlStateNormal];
+	frame.size = weiBoIcon.size;
+	_share2WeiBo.frame = frame;
+	[_share2WeiBo addTarget:self action:@selector(OnShare2SinaWeiBoClick) forControlEvents:UIControlEventTouchDown];
+	[self addSubview:_share2WeiBo];
     return self;
 }
 
@@ -77,11 +87,13 @@ static const float avatarImageViewWidth = 47.5f;
 	UIImage* image = nil == _videoInfo.bigPic ? _videoInfo.pic : _videoInfo.bigPic;
 	[_videoImageView setImage:image];
 	_textLable.text = nil != _weiBoData ? _weiBoData.text : _videoInfo.title;
+	_share2WeiBo.hidden = nil != _weiBoData;
 	if (nil == _weiBoData) 
 	{
 		//处理没有微博数据的情况
 		return;
 	}
+	
 	for (UIImageView* v in _avatarImageViewArray)
 	{
 		[v removeFromSuperview];
@@ -120,10 +132,17 @@ static const float avatarImageViewWidth = 47.5f;
 {
 	if ([_videoViewDelegate respondsToSelector:@selector(OnWeiBoCommentUserAvatarClick:)])
     {
-        [_videoViewDelegate OnVideoImageClick:sender.userData];
+        [_videoViewDelegate OnWeiBoCommentUserAvatarClick:sender.userData];
     }
 }
 
+- (void) OnShare2SinaWeiBoClick
+{
+	if ([_videoViewDelegate respondsToSelector:@selector(OnShare2SinaWeiBoClick:)])
+    {
+        [_videoViewDelegate OnShare2SinaWeiBoClick:self];
+    }	
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

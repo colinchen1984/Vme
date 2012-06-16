@@ -16,6 +16,7 @@
 @required
 - (void) OnVideoImageClick:(UIVideoView*)view;
 - (void) OnWeiBoCommentUserAvatarClick:(SinaWeiBoUserPersonalInfo*) userInfo;
+- (void) OnShare2SinaWeiBoClick:(UIVideoView*)view;
 @end
 
 @interface UIVideoView : UIView
