@@ -15,6 +15,7 @@ static const float discenten = 5.0f;
 @interface CommentView()
 {
 	BOOL isLeftDirection;
+	float textLabelMaxWidth;
 }
 @property (strong, nonatomic) UILabel* textLabel;
 @property (strong, nonatomic) UIImageView* avatarImageView;
@@ -35,7 +36,8 @@ static const float discenten = 5.0f;
         return nil;
     }
 	self.backgroundColor = [UIColor whiteColor];
-	_textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, frame.size.width - avatarImageWidth * 1.8f, frame.size.height)];
+	self->textLabelMaxWidth = frame.size.width - avatarImageWidth * 1.8f;
+	_textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, textLabelMaxWidth, frame.size.height)];
 	_textLabel.numberOfLines = 0;
 	_textLabel.lineBreakMode = UILineBreakModeCharacterWrap;
 	[_textLabel setBackgroundColor:[UIColor clearColor]];
@@ -76,6 +78,8 @@ static const float discenten = 5.0f;
 - (void) settext:(NSString*)text
 {
 	_textLabel.text = text;
+	CGRect frame = _textLabel.frame;
+	frame.size.width = self->textLabelMaxWidth;
 	[_textLabel sizeToFit];
 	[self layoutSubviews];
 }
