@@ -11,8 +11,7 @@
 @class SinaWeiBoUserPersonalInfo;
 @class SinaWeiBoData;
 @class SinaWeiBoComment;
-@protocol SinaWeiBoSDKDelegate
-@required
+@protocol SinaWeiBoSDKDelegate <NSObject>
 - (void) OnWeiBoOauthExpired;
 - (void) OnReceiveUserAllWeiBo:(NSArray*) weiBoArray;
 - (void) OnRecevieWeiBoUserPersonalInfo:(SinaWeiBoUserPersonalInfo*) userInfo;

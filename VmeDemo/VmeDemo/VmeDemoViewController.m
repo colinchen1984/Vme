@@ -153,15 +153,5 @@ static float yPosition[imageCountForRow] = {imageDis, imageDis, imageDis};
 }
 
 #pragma mark - sina weibo sdk delegat
-- (void) OnRecevieWeiBoUserPersonalInfo:(SinaWeiBoUserPersonalInfo*) userInfo
-{
-}
 
-- (void) OnReceiveUserAllWeiBo:(NSArray*) weiBoArray
-{
-	for (SinaWeiBoData* weiBo in weiBoArray) 
-	{
-		[[VideoWeiBoDataManager sharedVideoWeiBoDataManager] addVideoWeiBoData:[weiBo.annotation objectAtIndex:0] WeiBoData:weiBo];
-	}
-}
 @end

@@ -1197,19 +1197,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "VmeDemo/VmeDemoViewController.m"
-         timestampString = "361261740.96409"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "164"
-         endingLineNumber = "164"
-         landmarkName = "-OnReceiveUserAllWeiBo:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "VmeDemo/CommentView.m"
          timestampString = "361264133.20137"
          startingColumnNumber = "9223372036854775807"
@@ -1295,19 +1282,6 @@
          startingLineNumber = "87"
          endingLineNumber = "87"
          landmarkName = "-layoutSubviews"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "VmeDemo/VmeDemoViewController.m"
-         timestampString = "361261740.96409"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "162"
-         endingLineNumber = "162"
-         landmarkName = "-OnReceiveUserAllWeiBo:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

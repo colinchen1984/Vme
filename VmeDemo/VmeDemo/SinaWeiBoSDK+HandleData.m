@@ -38,13 +38,22 @@
 		[[ImageManager sharedImageManager] postURL2DownLoadImage:imageURL Delegate:userPersonalInfo];
 		[[VideoWeiBoDataManager sharedVideoWeiBoDataManager] addWeiBoUserPersonalInfo:userPersonalInfo.userID UserPersonalInfo:userPersonalInfo];
 	}
-	[delegate OnRecevieWeiBoUserPersonalInfo:userPersonalInfo];
+	
+	if ([delegate respondsToSelector:@selector(OnRecevieWeiBoUserPersonalInfo:)])
+    {
+        [delegate OnRecevieWeiBoUserPersonalInfo:userPersonalInfo];
+    }
+	
 }
 
 - (void) handlerSendWeiBoData:(NSDictionary*) dataDic Delegate:(id<SinaWeiBoSDKDelegate>)delegate
 {
 	SinaWeiBoData* weiBo = [self getWeiBoDataFromDic:dataDic];
-	[delegate OnReceiveSendWeiBoResult:weiBo];	
+	if ([delegate respondsToSelector:@selector(OnReceiveSendWeiBoResult:)])
+    {
+        [delegate OnReceiveSendWeiBoResult:weiBo];
+    }
+	
 }
 
 - (void) handlerGetWeiBoCommentsData:(NSDictionary*) dataDic Delegate:(id<SinaWeiBoSDKDelegate>)delegate
@@ -54,7 +63,13 @@
 	{
 		return;
 	}
-	NSMutableArray* resultArray = [[NSMutableArray alloc] initWithCapacity:[commentArray count]];
+	
+	NSMutableArray* resultArray = nil;
+	if ([delegate respondsToSelector:@selector(OnReceiveCommentForWeiBo: Comments:)])
+    {
+        resultArray = [[NSMutableArray alloc] initWithCapacity:[commentArray count]];
+    }
+	
 	for (NSDictionary* dic in commentArray) 
 	{
 		SinaWeiBoComment* weiBoComment = [self getCommentFromDic:dic];
@@ -63,19 +78,31 @@
 
 	SinaWeiBoData* weiBoData = ((SinaWeiBoComment*)[resultArray objectAtIndex:0]).weiBoData;
 	[[VideoWeiBoDataManager sharedVideoWeiBoDataManager] addWeiBoComentByVideID:[weiBoData.annotation objectAtIndex:0]  Comments:resultArray];
-	[delegate OnReceiveCommentForWeiBo:weiBoData Comments:resultArray];
+	if ([delegate respondsToSelector:@selector(OnReceiveCommentForWeiBo: Comments:)])
+    {
+        [delegate OnReceiveCommentForWeiBo:weiBoData Comments:resultArray];
+    }
+	
 }
 
 - (void) handlerGetUserAllWeiBoData:(NSDictionary*) dataDic Delegate:(id<SinaWeiBoSDKDelegate>)delegate
 {
 	NSArray*	weiBoArray = [dataDic objectForKey:@"statuses"];
-	NSMutableArray* resultArray = [[NSMutableArray alloc] initWithCapacity:[weiBoArray count]];
+	NSMutableArray* resultArray = nil;
+	if ([delegate respondsToSelector:@selector(OnReceiveUserAllWeiBo:)])
+    {
+        resultArray = [[NSMutableArray alloc] initWithCapacity:[weiBoArray count]];
+    }
 	for (NSDictionary* dic in weiBoArray)
 	{
-		SinaWeiBoData* weiBO = [self getWeiBoDataFromDic:dic];
-		[resultArray addObject:weiBO];
+		SinaWeiBoData* weiBo = [self getWeiBoDataFromDic:dic];
+		[[VideoWeiBoDataManager sharedVideoWeiBoDataManager] addVideoWeiBoData:[weiBo.annotation objectAtIndex:0] WeiBoData:weiBo];
+		[resultArray addObject:weiBo];
 	}
-	[delegate OnReceiveUserAllWeiBo:resultArray];	
+	if ([delegate respondsToSelector:@selector(OnReceiveUserAllWeiBo:)])
+    {
+        [delegate OnReceiveUserAllWeiBo:resultArray];
+    }
 }
 
 - (SinaWeiBoComment*) getCommentFromDic:(NSDictionary*) dataDic
@@ -114,7 +141,10 @@
 {
 	SinaWeiBoComment* weiBoComment = [self getCommentFromDic:dataDic];
 	[[VideoWeiBoDataManager sharedVideoWeiBoDataManager] addWeiBoComentByVideID:[weiBoComment.weiBoData.annotation objectAtIndex:0] Comment:weiBoComment];
-	[delegate OnReceiveCommentReplyResult:weiBoComment];
+	if ([delegate respondsToSelector:@selector(OnReceiveCommentReplyResult:)])
+    {
+        [delegate OnReceiveCommentReplyResult:weiBoComment];
+    }
 }
 
 @end
