@@ -264,7 +264,7 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80;
 	[v UpdateView];
 }
 
-- (void) OnReceiveCommentForWeiBo:(SinaWeiBoData*) weiBo Comments:(NSMutableArray*)comments
+- (void) OnReceiveCommentForWeiBo:(SinaWeiBoData*) weiBo Comments:(NSArray*)comments
 {
 	UIVideoView* v = [_videoViewDic objectForKey:[weiBo.annotation objectAtIndex:0]];
 	if (nil == v) 

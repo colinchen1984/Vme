@@ -110,13 +110,12 @@ static VideoWeiBoDataManager* singleton = nil;
 	}
 	if (nil == weiBo.comments) 
 	{
-		weiBo.comments = [[NSMutableArray alloc] initWithObjects:comment, nil];
-		
+		weiBo.comments = [[NSMutableArray alloc] initWithObjects:comment, nil];		
 	}
 	else 
 	{
 		NSMutableArray* cs = (NSMutableArray*)weiBo.comments;
-		[cs addObjectsFromArray:comment];
+		[cs addObject:comment];
 	}	
 }
 

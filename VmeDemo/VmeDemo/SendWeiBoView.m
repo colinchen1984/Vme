@@ -235,6 +235,7 @@ static SendWeiBoView* singleton = nil;
 		default:
 			assert(NO);
 	}
+	_textView.text = @"";
 	[self Hide:YES];
 	
 }

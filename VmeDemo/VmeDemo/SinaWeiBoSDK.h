@@ -32,7 +32,7 @@ typedef enum
 - (void) OnReceiveUserAllWeiBo:(NSArray*) weiBoArray;
 - (void) OnRecevieWeiBoUserPersonalInfo:(SinaWeiBoUserPersonalInfo*) userInfo;
 - (void) OnReceiveSendWeiBoResult:(SinaWeiBoData*) sendResult;
-- (void) OnReceiveCommentForWeiBo:(SinaWeiBoData*) weiBo Comments:(NSMutableArray*)comments;
+- (void) OnReceiveCommentForWeiBo:(SinaWeiBoData*) weiBo Comments:(NSArray*)comments;
 - (void) OnReceiveCommentReplyResult:(SinaWeiBoComment*)result;
 - (void) OnRateLimitate;
 @end

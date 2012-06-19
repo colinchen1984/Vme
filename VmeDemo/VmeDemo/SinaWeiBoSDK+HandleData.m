@@ -153,13 +153,24 @@
 - (void) handlerCreateWeiBoComent:(NSDictionary*) dataDic Delegate:(id<SinaWeiBoSDKDelegate>)delegate
 {
 	SinaWeiBoComment* weiBoComment = [self getCommentFromDic:dataDic];
+	if(nil == weiBoComment)
+	{
+		return;
+	}
 	[[VideoWeiBoDataManager sharedVideoWeiBoDataManager] addWeiBoComentByVideID:[weiBoComment.weiBoData.annotation objectAtIndex:0] Comment:weiBoComment];
-	[delegate OnReceiveCommentReplyResult:weiBoComment];	
+	if ([delegate respondsToSelector:@selector(OnReceiveCommentReplyResult:)])
+    {
+        [delegate OnReceiveCommentReplyResult:weiBoComment];
+    }	
 }
 
 - (void) handlerReplyCommentData:(NSDictionary*) dataDic Delegate:(id<SinaWeiBoSDKDelegate>)delegate
 {
 	SinaWeiBoComment* weiBoComment = [self getCommentFromDic:dataDic];
+	if(nil == weiBoComment)
+	{
+		return;
+	}
 	[[VideoWeiBoDataManager sharedVideoWeiBoDataManager] addWeiBoComentByVideID:[weiBoComment.weiBoData.annotation objectAtIndex:0] Comment:weiBoComment];
 	if ([delegate respondsToSelector:@selector(OnReceiveCommentReplyResult:)])
     {

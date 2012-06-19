@@ -28,7 +28,7 @@
         // Initialization code
 		return nil;
 	}
-	self.backgroundColor = GlobalBackGroundColor;
+	self.backgroundColor = [UIColor clearColor];
 	_touchButton = [[UIImageView alloc] init];
 	_touchButton.frame = CGRectMake(0.0f, 0.0f, frame.size.width, frame.size.height);
 	[self addSubview:_touchButton];

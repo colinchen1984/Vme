@@ -352,6 +352,7 @@
 	if (NSNotFound != [str rangeOfString:@"error"].location) 
 	{
 		[self freeRequest:weiBoRequest];
+		NSLog(@"%@\n", str);
 		return;
 	}
 	SBJSON *jsonParser = [[SBJSON alloc]init];
@@ -395,6 +396,7 @@
 		{
 			[self handlerReplyCommentData:dataDic Delegate:weiBoRequest.weiBoSDKDelegate];
 		}
+		break;
 		case SINA_WEIBO_GET_BATCH_WEIBO_COMMENT:
 		{
 			[self handlerBatchWeiBoComments:dataDic Delegate:weiBoRequest.weiBoSDKDelegate];

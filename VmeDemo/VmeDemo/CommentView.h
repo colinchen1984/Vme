@@ -20,5 +20,6 @@
 - (void) setAvatarImage:(UIImage*)avatarImage;
 - (void) settext:(NSString*)text;
 @property (weak, nonatomic) id userData;
+@property (strong, nonatomic) NSString* type;
 @property (weak, nonatomic) id<CommentViewDelegate> delegate;
 @end
