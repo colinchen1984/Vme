@@ -8,17 +8,20 @@
 
 #import "CommentView.h"
 #import "ImageManager.h"
+#import "UIImageTouchableView.h"
+#import "Utility.h"
 #import <QuartzCore/QuartzCore.h>
 static const float avatarImageWidth = 55.0f;
 static const float avatarImageHeight = avatarImageWidth;
 static const float discenten = 5.0f;
+static const float replyButtonSize = 10.0f;
 @interface CommentView()
 {
 	BOOL isLeftDirection;
 	float textLabelMaxWidth;
 }
 @property (strong, nonatomic) UILabel* textLabel;
-@property (strong, nonatomic) UIImageView* avatarImageView;
+@property (strong, nonatomic) UIImageTouchableView* avatarImageView;
 @property (strong, nonatomic) UIImageView* backGroundImageView;
 @end
 
@@ -27,6 +30,7 @@ static const float discenten = 5.0f;
 @synthesize textLabel = _textLabel;
 @synthesize avatarImageView = _avatarImageView;
 @synthesize backGroundImageView = _backGroundImageView;
+@synthesize delegate = _delegate;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -35,23 +39,21 @@ static const float discenten = 5.0f;
 	{
         return nil;
     }
-	self.backgroundColor = [UIColor whiteColor];
+	self.backgroundColor = GlobalBackGroundColor;
 	self->textLabelMaxWidth = frame.size.width - avatarImageWidth * 1.8f;
 	_textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, textLabelMaxWidth, frame.size.height)];
 	_textLabel.numberOfLines = 0;
 	_textLabel.lineBreakMode = UILineBreakModeCharacterWrap;
-	[_textLabel setBackgroundColor:[UIColor clearColor]];
+	_textLabel.backgroundColor = [UIColor clearColor];
 	_backGroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 0.0f, 0.0f)];
-	_avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, avatarImageWidth, avatarImageHeight)];
-	_avatarImageView.layer.borderColor = self.backgroundColor.CGColor;
-	_avatarImageView.layer.borderWidth = 5.0f;
-	_avatarImageView.layer.cornerRadius = 5.0f;
+	_avatarImageView = [[UIImageTouchableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, avatarImageWidth, avatarImageHeight)];
+	[_avatarImageView addTarget:self action:@selector(OnAvatarClick) forControlEvents:UIControlEventTouchDown];
+	
 	[self addSubview:_backGroundImageView];
-	[self addSubview:_avatarImageView];
 	[self addSubview:_textLabel];
+	[self addSubview:_avatarImageView];
 	self->isLeftDirection = NO;
 	[self setPopDirection:YES];
-
     return self;
 }
 
@@ -93,13 +95,19 @@ static const float discenten = 5.0f;
 	_avatarImageView.center = CGPointMake(self->isLeftDirection ? avatarImageWidth / 2.0f : self.frame.size.width - avatarImageWidth / 2.0f, self.frame.size.height - avatarImageHeight / 2.0f);
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (void) OnAvatarClick
 {
-    // Drawing code
+	if ([_delegate respondsToSelector:@selector(OnAvatarClick:)]) 
+	{
+		[_delegate OnAvatarClick:self];
+	}
 }
-*/
 
+- (void) OnReplyCommentButtonClick
+{
+	if ([_delegate respondsToSelector:@selector(OnReplyCommentButtonClick:)]) 
+	{
+		[_delegate OnAvatarClick:self];
+	}
+}
 @end

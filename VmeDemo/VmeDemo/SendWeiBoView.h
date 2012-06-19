@@ -11,10 +11,14 @@
 @class TudouVideoInfo;
 @protocol SinaWeiBoSDKDelegate;
 
+
 @interface SendWeiBoView : UIView
 @property (weak, nonatomic) SinaWeiBoSDK* weiBoSDK;
 @property (weak, nonatomic) TudouVideoInfo* videoInfo;
 @property (weak, nonatomic) id<SinaWeiBoSDKDelegate> weiboDelegate;
+@property (nonatomic) NSInteger operationType;
+@property (weak, nonatomic) id operationData;
+
 - (void) Show:(BOOL)animated;
 
 + (SendWeiBoView*) sharedSendWeiBoView;

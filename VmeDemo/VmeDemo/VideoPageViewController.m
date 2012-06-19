@@ -9,6 +9,7 @@
 #import "VideoPageViewController.h"
 #import "TuDouSDK.h"
 @interface VideoPageViewController ()
+@property (nonatomic) BOOL needReloadWeb;
 @property (strong, nonatomic) UIWebView* webView;
 @end
 
@@ -16,7 +17,17 @@
 
 @synthesize webView = _webView;
 @synthesize videoInfo = _videoInfo;
+@synthesize needReloadWeb = _needReloadWeb;
 
+- (void) setVideoInfo:(TudouVideoInfo*)videoInfo
+{
+	if(_videoInfo == videoInfo)
+	{
+		return;
+	}
+	_videoInfo = videoInfo;
+	_needReloadWeb = YES;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,6 +47,7 @@
 	_webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 480 )];
 	[_webView setScalesPageToFit:YES];
 	[[self view] addSubview:_webView];
+	_needReloadWeb = YES;
 }
 
 - (void)viewDidUnload
@@ -50,10 +62,14 @@
 	[super viewWillAppear:animated];
 	self.navigationItem.leftBarButtonItem.style = UIBarButtonSystemItemCancel;
 	self.navigationItem.title = _videoInfo.title;
-	NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:_videoInfo.itemUrl]
-                                            cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-                                        timeoutInterval:60.0];
-    [_webView loadRequest:request];
+	if(YES == _needReloadWeb)
+	{
+		_needReloadWeb = NO;
+		NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:_videoInfo.itemUrl]
+												cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+											timeoutInterval:60.0];
+		[_webView loadRequest:request];	
+	}
 }
 
 - (void)viewWillDisappear:(BOOL)animated

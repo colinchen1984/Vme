@@ -11,20 +11,7 @@
 #import "SinaWeiBoOauth.h"
 #import "SBJSON.h"
 #import "SinaWeiBoSDK+HandleData.h"
-
-typedef enum  
-{
-	SINA_WEIBO_REQUEST_USER_PERSONAL_INFO = 0,
-	SINA_WEIBO_SEND_WEIBO = 1,
-	SINA_WEIBO_GET_WEIBO_COMMENT = 2,
-	SINA_WEIBO_GET_USER_ALL_WEIBO = 3,
-	SINA_WEIBO_CREATE_COMMENT = 4,
-	SINA_WEIBO_REPLY_COMMENT = 5,
-	SINA_WEIBO_GET_BATCH_WEIBO_COMMENT = 6,
-
-	SINA_WEIBO_OPERATION_TYPE,
-	
-} SINA_WEIBO_REQUEST_OPERATION_TYPE;
+#import "TuDouSDK.h"
 
 @interface SinaWeiBoRequest : WebRequest
 {
@@ -156,6 +143,13 @@ typedef enum
 	[request postUrlRequest:@"https://api.weibo.com/2/users/show.json"];
 }
 
+- (void) sendWeiBo:(NSString*) text VideoInfo:(TudouVideoInfo*)videoInfo Delegate:(id<SinaWeiBoSDKDelegate>)delegate
+{
+	NSString* weiboText = [[NSString alloc] initWithFormat:@"%@%@", text, videoInfo.itemUrl];
+	NSString* annotation = [[NSString alloc] initWithFormat:@"[\"%@\"]", videoInfo.itemCode];
+	[self sendWeiBo:weiboText Annotations:annotation Delegate:delegate];	
+}
+
 - (void) sendWeiBo:(NSString*) text Annotations:(NSString*)annotations Delegate:(id<SinaWeiBoSDKDelegate>)delegate
 {
 	if (YES != VALID_OAUTH) 
@@ -273,7 +267,7 @@ typedef enum
 		//[str appendFormat:@","];
 		NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
 								[_sinaWeiBoOauth accessCode], @"access_token",
-								str, @"cids",
+								[[NSString alloc] initWithFormat:@"[%@]", str], @"cids",
 								nil];	
 		SinaWeiBoRequest* request = [self getFreeRequest];
 		request.delegate = self;

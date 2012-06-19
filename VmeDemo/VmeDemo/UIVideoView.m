@@ -10,6 +10,7 @@
 #import "TuDouSDK.h"
 #import "SinaWeiBoSDK.h"
 #import "ImageManager.h"
+#import "Utility.h"
 #import "UIImageTouchableView.h"
 #import <QuartzCore/QuartzCore.h> 
 
@@ -43,22 +44,26 @@ static const float avatarImageViewWidth = 47.5f;
 	{
 		return nil;
     }
+	self.layer.cornerRadius = 5.0f;
+	self.layer.borderWidth = 2.0f;
+	self.layer.borderColor = [UIColor blackColor].CGColor;
 	float iW = frame.size.width - 2 * videoImageBeginPos;
 	float vH = iW * (3.0f / 4.0f);
-	self.backgroundColor = [UIColor whiteColor];
+	self.backgroundColor = GlobalBackGroundColor;
 	_videoImageView = [[UIImageTouchableView alloc] initWithFrame:CGRectMake(videoImageBeginPos, videoImageBeginPos, iW, vH)];
 	[self addSubview:_videoImageView];
 	[_videoImageView addTarget:self action:@selector(OnVideoImageClick) forControlEvents:UIControlEventTouchDown];
-	
+	_videoImageView.backgroundColor = GlobalBackGroundColor;
 	float textHight = 30.0f;
 	vH += emptySize;
 	_textLable = [[UILabel alloc] initWithFrame:CGRectMake(videoImageBeginPos,  vH, frame.size.width - 2 * videoImageBeginPos, textHight)];
+	_textLable.backgroundColor = GlobalBackGroundColor;
 	[self addSubview:_textLable];
 	vH += textHight;
 	
 	_avatarImageViewArray = [[NSMutableArray alloc] initWithCapacity:avatarImageViewCount];
 	float aHight = frame.size.height - vH - emptySize;
-	vH += emptySize;
+	vH += emptySize - 5.0f;
 	
 	for (int i = 0; i < avatarImageViewCount; ++i) 
 	{

@@ -7,6 +7,8 @@
 //
 
 #import "UIImageTouchableView.h"
+#import "Utility.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface UIImageTouchableView()
 
@@ -26,12 +28,13 @@
         // Initialization code
 		return nil;
 	}
+	self.backgroundColor = GlobalBackGroundColor;
 	_touchButton = [[UIImageView alloc] init];
+	_touchButton.frame = CGRectMake(0.0f, 0.0f, frame.size.width, frame.size.height);
 	[self addSubview:_touchButton];
-	[_touchButton setFrame:CGRectMake(0.0f, 0.0f, frame.size.width, frame.size.height)];
-	[_touchButton setBackgroundColor:[UIColor lightGrayColor]];
     return self;
 }
+
 
 - (void) setFrame:(CGRect)frame
 {

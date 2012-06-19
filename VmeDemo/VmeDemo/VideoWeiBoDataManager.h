@@ -21,6 +21,8 @@
 
 - (SinaWeiBoData*) getWeiBoDataByVideoID:(NSString*)videoID;
 
+- (NSDictionary*) getAllWeiBoData;
+
 - (void) addWeiBoComentByVideID:(NSString*)videoID Comments:(NSMutableArray*)comments;
 
 - (void) addWeiBoComentByVideID:(NSString*)videoID Comment:(SinaWeiBoComment*)comment;

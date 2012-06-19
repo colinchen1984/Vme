@@ -14,7 +14,7 @@
 #import "VideoWeiBoDataManager.h"
 #import "CommentView.h"
 #import "SendWeiBoView.h"
-
+#import "Utility.h"
 @interface VideoDetailViewController ()
 {
 	NSMutableArray* commentsViewArray;	
@@ -57,7 +57,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 	[_bigPicIndicator setHidesWhenStopped:YES];
-	_bigPicImageView = [[UIImageTouchableView alloc] initWithFrame:CGRectMake(0.0f, 80.0f, 320.0f, 240.0f)];
+	_bigPicImageView = [[UIImageTouchableView alloc] initWithFrame:CGRectMake(5.0f, 40.0f, 310.0f, 232.5f)];
 	[_bigPicImageView addTarget:self action:@selector(onBigImageClicked:) forControlEvents:UIControlEventTouchDown];
 	//调整sub的顺序,防止imageview遮盖了InDicator
 	[_scrollView insertSubview:_bigPicImageView atIndex:0];
@@ -67,10 +67,12 @@
 	_share2SinaWeibo = [[UIImageTouchableView alloc] init];
 	UIImage* image = [[ImageManager sharedImageManager] getImageFromBundle:@"Share2Sina.gif"];
 	[_share2SinaWeibo setImage:image];
-	[_share2SinaWeibo setFrame:CGRectMake(20.0f, 330.0f, [image size].width - 2, [image size].height - 2)];
+	[_share2SinaWeibo setFrame:CGRectMake(20.0f, 290.0f, [image size].width - 2.0f, [image size].height - 2.0f)];
 	[_share2SinaWeibo addTarget:self action:@selector(sendSinaWeiBo:) forControlEvents:UIControlEventTouchDown];
 	[_scrollView addSubview:_share2SinaWeibo];
 	_weiBoView = [[CommentView alloc] initWithFrame:CGRectMake(0.0f, 320.0f, 300.0f, 0.0f)];
+	_weiBoView.delegate = self;
+	_scrollView.backgroundColor = GlobalBackGroundColor;
 }
 
 - (void)viewDidUnload
@@ -151,14 +153,16 @@
 		return;
 	}
 	
+	float weiBoViewY = _bigPicImageView.frame.origin.y + _bigPicImageView.frame.size.height + 10.0f;
 	CGRect frame = _weiBoView.frame;
-	_weiBoView.frame = CGRectMake(20.0f, 350.0f, 320.0f, frame.size.height);
-	[_weiBoView settext:weiboData.text];
+	_weiBoView.frame = CGRectMake(20.0f, weiBoViewY, 320.0f, frame.size.height);
 	[_weiBoView setPopDirection:YES];
+	[_weiBoView settext:weiboData.text];
 	[_weiBoView setAvatarImage:weiboData.userInfo.avatarImage];
-	_weiBoView.frame = CGRectMake(20.0f, 350.0f, 320.0f, frame.size.height);
+	frame = _weiBoView.frame;
+	_weiBoView.frame = CGRectMake(20.0f, weiBoViewY, 320.0f, frame.size.height);
 	_weiBoView.userData = (id)weiboData;
-	CGSize size = CGSizeMake(320, MAX(500.0f, 350.0f + frame.size.height));
+	CGSize size = CGSizeMake(320, weiBoViewY + frame.size.height);
 	_scrollView.contentSize = size;	
 	[_scrollView addSubview:_weiBoView];
 }
@@ -181,24 +185,26 @@
 		int count = [comments count] - [_commentsViewArray count];
 		for(int i = 0; i < count; ++i)
 		{
-			[_commentsViewArray addObject:[[CommentView alloc] initWithFrame:CGRectMake(0.0f, 320.0f, 300.0f, 0.0f)]];
+			CommentView* v = [[CommentView alloc] initWithFrame:CGRectMake(0.0f, 320.0f, 300.0f, 0.0f)];
+			v.delegate = self;
+			[_commentsViewArray addObject:v];
 		}
 	}
-	float h = _scrollView.contentSize.height;
+	float h = _scrollView.contentSize.height + 10.0f;
 	for(int i = 0; i < [comments count]; ++i)
 	{
 		SinaWeiBoComment* comment = [comments objectAtIndex:i];
 		CommentView* commentView = [_commentsViewArray objectAtIndex:i];
-		[commentView setPopDirection:0 == i % 2];
+		[commentView setPopDirection:0 != i % 2];
 		[commentView settext:comment.text];
 		[commentView setAvatarImage:comment.userInfo.avatarImage];
 		CGRect frame = commentView.frame;
-		commentView.frame = CGRectMake(0 == i % 2 ? 20.0f : 300.0f - frame.size.width, h, frame.size.width, frame.size.height);
+		commentView.frame = CGRectMake(0 != i % 2 ? 20.0f : 300.0f - frame.size.width, h, frame.size.width, frame.size.height);
 		commentView.userData = (id)comment;
 		h = commentView.frame.size.height + commentView.frame.origin.y + 10.0f;
 		[_scrollView addSubview:commentView];
 	}
-	CGSize size = CGSizeMake(320, _scrollView.contentSize.height > h + 100 ? _scrollView.contentSize.height : h + 100);
+	CGSize size = CGSizeMake(320, MAX(_scrollView.contentSize.height, h + 100.0f));
 	_scrollView.contentSize = size;	
 }
 
@@ -232,6 +238,8 @@
 	[SendWeiBoView sharedSendWeiBoView].videoInfo = _videoInfo;
 	[SendWeiBoView sharedSendWeiBoView].weiBoSDK = _sinaWeiBoSDK;
 	[SendWeiBoView sharedSendWeiBoView].weiboDelegate = self;
+	[SendWeiBoView sharedSendWeiBoView].operationType = SINA_WEIBO_SEND_WEIBO;
+	[SendWeiBoView sharedSendWeiBoView].operationData = nil;
 	[[SendWeiBoView sharedSendWeiBoView] Show:YES];
 	return;
 }
@@ -256,4 +264,19 @@
 	[self showComments:[[VideoWeiBoDataManager sharedVideoWeiBoDataManager] getWeiBoCommentsByVideoID:videoID]];
 }
 
+#pragma mark - CommentView delegate
+- (void) OnReplyCommentButtonClick:(CommentView*)commentView
+{
+	[SendWeiBoView sharedSendWeiBoView].videoInfo = _videoInfo;
+	[SendWeiBoView sharedSendWeiBoView].weiBoSDK = _sinaWeiBoSDK;
+	[SendWeiBoView sharedSendWeiBoView].weiboDelegate = self;
+	[SendWeiBoView sharedSendWeiBoView].operationData = commentView.userData;
+	[SendWeiBoView sharedSendWeiBoView].operationType = _weiBoView != commentView ? SINA_WEIBO_CREATE_COMMENT : SINA_WEIBO_REPLY_COMMENT;
+	[[SendWeiBoView sharedSendWeiBoView] Show:YES];
+}
+
+- (void) OnAvatarClick:(CommentView*)commentView
+{
+	
+}
 @end

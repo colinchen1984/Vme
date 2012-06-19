@@ -10,10 +10,12 @@
 #import "ImageManager.h"
 #import "TuDouSDK.h"
 #import "SinaWeiBoSDK.h"
+#import "Utility.h"
+#import "VideoWeiBoDataManager.h"
 #import <QuartzCore/QuartzCore.h> 
 #import <UIKit/UIFont.h>
 @interface SendWeiBoView()
-@property (strong, nonatomic) UIView* backGroundView;
+@property (strong, nonatomic) UIButton* backGroundView;
 @property (strong, nonatomic) UILabel* titleLable;
 @property (strong, nonatomic) UITextView* textView;
 @property (strong, nonatomic) UIButton* sendButton;
@@ -30,6 +32,8 @@ static SendWeiBoView* singleton = nil;
 @synthesize sendButton = _sendButton;
 @synthesize wordCount = _wordCount;
 @synthesize weiboDelegate = _weiboDelegate;
+@synthesize operationData = _operationData;
+@synthesize operationType = _operationType;
 
 + (SendWeiBoView*) sharedSendWeiBoView
 {
@@ -48,12 +52,13 @@ static SendWeiBoView* singleton = nil;
 	{
         return nil;
     }
-	_backGroundView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 480.0f)];
+	_backGroundView = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 480.0f)];
 	_backGroundView.alpha = 0.85f;
 	_backGroundView.backgroundColor = [UIColor blackColor];
-	self.backgroundColor = [UIColor whiteColor];
+	[_backGroundView addTarget:self action:@selector(cancelSendWeiBo:) forControlEvents:UIControlEventTouchDown];
+	self.backgroundColor = GlobalBackGroundColor;
 	self.frame = CGRectMake(10.0f, 100.0f, 300.0f, 280.0f);
-	[self setBackgroundColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.55]];
+	self.backgroundColor = GlobalBackGroundColor;
 	[[self layer] setMasksToBounds:NO]; // very important
 	[[self layer] setCornerRadius:16.89f];
 	
@@ -68,6 +73,7 @@ static SendWeiBoView* singleton = nil;
 	_titleLable = [[UILabel alloc] init];
 	_titleLable.frame = CGRectMake(45.0f, 0.0f, 200.0f, 35);
 	_titleLable.textAlignment = UITextAlignmentCenter;
+	_titleLable.backgroundColor = GlobalBackGroundColor;
 	[self addSubview:_titleLable];
 	
 	
@@ -206,9 +212,29 @@ static SendWeiBoView* singleton = nil;
 
 - (IBAction)sendSinaWeiBo:(id)sender 
 {
-	NSString* text = [[NSString alloc] initWithFormat:@"%@%@", _textView.text, _videoInfo.itemUrl];
-	NSString* annotation = [[NSString alloc] initWithFormat:@"[\"%@\"]", _videoInfo.itemCode];
-	[_weiBoSDK sendWeiBo:text Annotations:annotation Delegate:_weiboDelegate];
+
+	switch (_operationType) 
+	{
+		case SINA_WEIBO_SEND_WEIBO:
+		{
+			[_weiBoSDK sendWeiBo:_textView.text VideoInfo:_videoInfo Delegate:_weiboDelegate];
+		}
+		break;
+		case SINA_WEIBO_CREATE_COMMENT:
+		{
+			__weak SinaWeiBoData* weiBoData = (SinaWeiBoData*)_operationData;
+			[_weiBoSDK createCommentForWeiBo:weiBoData CommentText:_textView.text Delegate:_weiboDelegate];
+		}
+		break;
+		case SINA_WEIBO_REPLY_COMMENT:
+		{
+			__weak SinaWeiBoComment* weiBocomment = (SinaWeiBoComment*)_operationData;
+			[_weiBoSDK replyComment:weiBocomment CommentText:_textView.text Delegate:_weiboDelegate];
+		}
+		break;
+		default:
+			assert(NO);
+	}
 	[self Hide:YES];
 	
 }

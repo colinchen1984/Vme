@@ -78,6 +78,11 @@ static VideoWeiBoDataManager* singleton = nil;
 	return result;
 }
 
+- (NSDictionary*) getAllWeiBoData
+{
+	return _videoWeiBoData;
+}
+
 - (void) addWeiBoComentByVideID:(NSString*)videoID Comments:(NSMutableArray*)comments
 {
 	SinaWeiBoData* weiBo = [self getWeiBoDataByVideoID:videoID];

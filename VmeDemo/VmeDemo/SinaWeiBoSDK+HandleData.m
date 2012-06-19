@@ -51,6 +51,11 @@
 - (void) handlerSendWeiBoData:(NSDictionary*) dataDic Delegate:(id<SinaWeiBoSDKDelegate>)delegate
 {
 	SinaWeiBoData* weiBo = [self getWeiBoDataFromDic:dataDic];
+	if(nil == weiBo)
+	{
+		return;
+	}
+	[[VideoWeiBoDataManager sharedVideoWeiBoDataManager] addVideoWeiBoData:[weiBo.annotation objectAtIndex:0] WeiBoData:weiBo];
 	if ([delegate respondsToSelector:@selector(OnReceiveSendWeiBoResult:)])
     {
         [delegate OnReceiveSendWeiBoResult:weiBo];

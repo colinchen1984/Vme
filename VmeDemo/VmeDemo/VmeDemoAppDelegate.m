@@ -44,8 +44,8 @@
 	self.window.rootViewController = _startUpController;
 	
 	_tudouOauth = [[OauthEngine alloc] initWithProvider:[[TuDouOauth alloc] init] Delegate:self];
-	_tudouSDK = [[TuDouSDK alloc] initWithOauthEngine:_tudouOauth UserName:@"_102535446"];
-	self.viewController.tudouUserName = @"_102535446";
+	_tudouSDK = [[TuDouSDK alloc] initWithOauthEngine:_tudouOauth UserName:@"_79592344"];
+	self.viewController.tudouUserName = @"_79592344";
 	
 	_sinaWeiBoOauth = [[SinaWeiBoOauth alloc] init];
 	_sinaWeiBoOauth.delegate = self;
