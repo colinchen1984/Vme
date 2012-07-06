@@ -41,6 +41,7 @@ typedef enum
 @property (strong, nonatomic) NSString* userID;
 @property (strong, nonatomic) NSString* userName;
 @property (strong, nonatomic) UIImage* avatarImage;
+@property (strong, nonatomic) NSDate* createTime;
 @end
 
 @interface SinaWeiBoData : NSObject
@@ -49,12 +50,14 @@ typedef enum
 @property (strong, nonatomic) NSString* weiBoID;
 @property (strong, nonatomic) NSArray* comments;
 @property (strong, nonatomic) NSString* userID;
+@property (strong, nonatomic) NSDate* createTime;
 @property (weak, nonatomic) SinaWeiBoUserPersonalInfo* userInfo;
 @end
 
 @interface SinaWeiBoComment : NSObject
 @property (strong, nonatomic) NSString* text;
 @property (strong, nonatomic) NSString* weiBoCommentID;
+@property (strong, nonatomic) NSDate* createTime;
 @property (weak, nonatomic) SinaWeiBoUserPersonalInfo* userInfo;
 @property (weak, nonatomic) SinaWeiBoData* weiBoData;
 @end

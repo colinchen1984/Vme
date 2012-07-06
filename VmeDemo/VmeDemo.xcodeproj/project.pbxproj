@@ -11,12 +11,16 @@
 		CE4758681577365C0067A848 /* CommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4758671577365C0067A848 /* CommentView.m */; };
 		CE71C39D155D26810047F25C /* ImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE71C39C155D26810047F25C /* ImageManager.m */; };
 		CE71C3A1155D28A10047F25C /* WebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE71C3A0155D28A10047F25C /* WebRequest.m */; };
+		CE7278831595AC97005C75EE /* envelop.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7278821595AC97005C75EE /* envelop.png */; };
 		CE7408971559569C007B3905 /* TuDouSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7408961559569C007B3905 /* TuDouSDK.m */; };
 		CE742718158327B3007D10F0 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = CE742717158327B3007D10F0 /* cancel.png */; };
+		CE7519371591B0D1001FB8BD /* send.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7519361591B0D1001FB8BD /* send.png */; };
+		CE75D957159305FF00FEF256 /* SendWeiBoView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = CE75D956159305FF00FEF256 /* SendWeiBoView+Animation.m */; };
 		CE7695FB158C726800B22EAE /* UIVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7695FA158C726700B22EAE /* UIVideoView.m */; };
 		CE781389155514B20042F79F /* Oauth.m in Sources */ = {isa = PBXBuildFile; fileRef = CE781386155514B20042F79F /* Oauth.m */; };
 		CE78138A155514B20042F79F /* TuDouOauth.m in Sources */ = {isa = PBXBuildFile; fileRef = CE781388155514B20042F79F /* TuDouOauth.m */; };
 		CE7AA3E815727C5E00B51543 /* VideoWeiBoDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7AA3E715727C5E00B51543 /* VideoWeiBoDataManager.m */; };
+		CE7B21C815A735C20091D9B7 /* backGround.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7B21C715A735C20091D9B7 /* backGround.jpg */; };
 		CE97D0AD154CF1BD004F6C9A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE97D0AC154CF1BD004F6C9A /* UIKit.framework */; };
 		CE97D0B7154CF1BD004F6C9A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE97D0B5154CF1BD004F6C9A /* InfoPlist.strings */; };
 		CE97D0B9154CF1BD004F6C9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE97D0B8154CF1BD004F6C9A /* main.m */; };
@@ -61,9 +65,13 @@
 		CE71C39C155D26810047F25C /* ImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageManager.m; sourceTree = "<group>"; };
 		CE71C39F155D28A10047F25C /* WebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRequest.h; sourceTree = "<group>"; };
 		CE71C3A0155D28A10047F25C /* WebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRequest.m; sourceTree = "<group>"; };
+		CE7278821595AC97005C75EE /* envelop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = envelop.png; sourceTree = "<group>"; };
 		CE7408951559569C007B3905 /* TuDouSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuDouSDK.h; sourceTree = "<group>"; };
 		CE7408961559569C007B3905 /* TuDouSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuDouSDK.m; sourceTree = "<group>"; };
 		CE742717158327B3007D10F0 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
+		CE7519361591B0D1001FB8BD /* send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = send.png; sourceTree = "<group>"; };
+		CE75D955159305FE00FEF256 /* SendWeiBoView+Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SendWeiBoView+Animation.h"; sourceTree = "<group>"; };
+		CE75D956159305FF00FEF256 /* SendWeiBoView+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SendWeiBoView+Animation.m"; sourceTree = "<group>"; };
 		CE7695F9158C726700B22EAE /* UIVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIVideoView.h; sourceTree = "<group>"; };
 		CE7695FA158C726700B22EAE /* UIVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIVideoView.m; sourceTree = "<group>"; };
 		CE781385155514B20042F79F /* Oauth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Oauth.h; sourceTree = "<group>"; };
@@ -72,6 +80,7 @@
 		CE781388155514B20042F79F /* TuDouOauth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuDouOauth.m; sourceTree = "<group>"; };
 		CE7AA3E615727C5E00B51543 /* VideoWeiBoDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoWeiBoDataManager.h; sourceTree = "<group>"; };
 		CE7AA3E715727C5E00B51543 /* VideoWeiBoDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoWeiBoDataManager.m; sourceTree = "<group>"; };
+		CE7B21C715A735C20091D9B7 /* backGround.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = backGround.jpg; sourceTree = "<group>"; };
 		CE97D0A8154CF1BD004F6C9A /* Vme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE97D0AC154CF1BD004F6C9A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE97D0AE154CF1BD004F6C9A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -221,6 +230,8 @@
 				CE4758661577365C0067A848 /* CommentView.h */,
 				CE4758671577365C0067A848 /* CommentView.m */,
 				CEE90050157C47660046FC6A /* SendWeiBoView.h */,
+				CE75D955159305FE00FEF256 /* SendWeiBoView+Animation.h */,
+				CE75D956159305FF00FEF256 /* SendWeiBoView+Animation.m */,
 				CEE90051157C47660046FC6A /* SendWeiBoView.m */,
 				CE7695F9158C726700B22EAE /* UIVideoView.h */,
 				CE7695FA158C726700B22EAE /* UIVideoView.m */,
@@ -231,6 +242,9 @@
 		CE97D0B3154CF1BD004F6C9A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CE7B21C715A735C20091D9B7 /* backGround.jpg */,
+				CE7278821595AC97005C75EE /* envelop.png */,
+				CE7519361591B0D1001FB8BD /* send.png */,
 				CE742717158327B3007D10F0 /* cancel.png */,
 				CEDA331B157A0FF4004C9F12 /* share2Sina.gif */,
 				CEB7C8FB15778F2B00ACA533 /* rightPop.png */,
@@ -343,6 +357,9 @@
 				CEB7C8FE15778F2B00ACA533 /* leftPop.png in Resources */,
 				CEDA331C157A0FF4004C9F12 /* share2Sina.gif in Resources */,
 				CE742718158327B3007D10F0 /* cancel.png in Resources */,
+				CE7519371591B0D1001FB8BD /* send.png in Resources */,
+				CE7278831595AC97005C75EE /* envelop.png in Resources */,
+				CE7B21C815A735C20091D9B7 /* backGround.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +399,7 @@
 				CEC3A2EF1577C9BF00C6A86D /* SinaWeiBoSDK+HandleData.m in Sources */,
 				CEE90052157C47660046FC6A /* SendWeiBoView.m in Sources */,
 				CE7695FB158C726800B22EAE /* UIVideoView.m in Sources */,
+				CE75D957159305FF00FEF256 /* SendWeiBoView+Animation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,7 @@
 - (void) oauthStart;
 - (BOOL) expires;
 - (BOOL) isLogining;
-
+- (void) loadAccessToken;
 @property (weak, nonatomic) id<OauthDelegate> delegate;
 @property (strong, nonatomic, readonly) NSString* userID;
 @property (strong, nonatomic, readonly) NSString* accessCode;

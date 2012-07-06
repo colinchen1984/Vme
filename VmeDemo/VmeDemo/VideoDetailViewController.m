@@ -15,6 +15,8 @@
 #import "CommentView.h"
 #import "SendWeiBoView.h"
 #import "Utility.h"
+#import <QuartzCore/QuartzCore.h>
+
 @interface VideoDetailViewController ()
 {
 	NSMutableArray* commentsViewArray;	
@@ -40,6 +42,7 @@
 @synthesize webView = _webView;
 @synthesize sinaWeiBoSDK = _sinaWeiBoSDK;
 @synthesize weiBoView = _weiBoView;
+
 #pragma mark - life cycle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,24 +59,38 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+	
+	//添加视频截图
+	[_bigPicIndicator removeFromSuperview];
 	[_bigPicIndicator setHidesWhenStopped:YES];
 	_bigPicImageView = [[UIImageTouchableView alloc] initWithFrame:CGRectMake(5.0f, 40.0f, 310.0f, 232.5f)];
 	[_bigPicImageView addTarget:self action:@selector(onBigImageClicked:) forControlEvents:UIControlEventTouchDown];
+	_bigPicIndicator.center = _bigPicImageView.center;
+	
 	//调整sub的顺序,防止imageview遮盖了InDicator
-	[_scrollView insertSubview:_bigPicImageView atIndex:0];
+	[_scrollView addSubview:_bigPicImageView];
+	[_scrollView addSubview:_bigPicIndicator];
+	_scrollView.backgroundColor = [UIColor clearColor];
 	
 	_webView = [[VideoPageViewController alloc] init];
 	_commentsViewArray = [[NSMutableArray alloc] init];
+
+	//添加新浪分享按钮
 	_share2SinaWeibo = [[UIImageTouchableView alloc] init];
 	UIImage* image = [[ImageManager sharedImageManager] getImageFromBundle:@"Share2Sina.gif"];
 	[_share2SinaWeibo setImage:image];
-	[_share2SinaWeibo setFrame:CGRectMake(20.0f, 290.0f, [image size].width - 2.0f, [image size].height - 2.0f)];
+	[_share2SinaWeibo setFrame:CGRectMake(( 320.0f - image.size.width + 2.0f) / 2.0f, _bigPicImageView.frame.origin.y + _bigPicImageView.frame.size.height + 30.0f, [image size].width - 2.0f, [image size].height - 2.0f)];
 	[_share2SinaWeibo addTarget:self action:@selector(sendSinaWeiBo:) forControlEvents:UIControlEventTouchDown];
 	[_scrollView addSubview:_share2SinaWeibo];
+	
+	//添加新浪微薄以及评论的view
 	_weiBoView = [[CommentView alloc] initWithFrame:CGRectMake(0.0f, 320.0f, 300.0f, 0.0f)];
 	_weiBoView.delegate = self;
 	_weiBoView.type = @"WeiBo";
-	_scrollView.backgroundColor = GlobalBackGroundColor;
+	_bigPicImageView.layer.shadowColor = [UIColor blackColor].CGColor;
+	_bigPicImageView.layer.shadowOpacity = 1.f;
+	_bigPicImageView.layer.shadowOffset = CGSizeMake(5.f, 5.f);
+	_bigPicImageView.layer.shadowRadius = 5.f;
 }
 
 - (void)viewDidUnload
@@ -98,7 +115,7 @@
 	[_bigPicImageView setImage:nil];
 	[self navigationItem].title = _videoInfo.title;
 	[[ImageManager sharedImageManager] postURL2DownLoadImage:_videoInfo.bigPicURL Delegate:self];
-	
+	self.navigationController.navigationBarHidden = NO;
 	//查找该视频是否已经发送过weibo,如果发送过,尝试得到该微博的评论
 	SinaWeiBoData* weiBo = [[VideoWeiBoDataManager sharedVideoWeiBoDataManager] getWeiBoDataByVideoID:_videoInfo.itemCode];
 	[self updateUI:weiBo];

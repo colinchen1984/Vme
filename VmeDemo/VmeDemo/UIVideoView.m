@@ -79,6 +79,10 @@ static const float avatarImageViewWidth = 47.5f;
 	_share2WeiBo.frame = frame;
 	[_share2WeiBo addTarget:self action:@selector(OnShare2SinaWeiBoClick) forControlEvents:UIControlEventTouchDown];
 	[self addSubview:_share2WeiBo];
+	self.layer.shadowColor = [UIColor blackColor].CGColor;
+	self.layer.shadowRadius = 5.0f;
+	self.layer.shadowOpacity = 1.0f;
+	self.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
     return self;
 }
 

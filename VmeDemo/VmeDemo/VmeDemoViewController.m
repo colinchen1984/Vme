@@ -13,6 +13,7 @@
 #import "UIVideoView.h"
 #import "SendWeiBoView.h"
 #import "Utility.h"
+
 @interface VmeDemoViewController ()
 
 @property (strong, nonatomic) NSMutableDictionary* videoViewDic;
@@ -42,7 +43,6 @@ static const int imageCountForPage = rowCountForPage * imageCountForRow;
 static const float imageWidth = 100.0f;
 static const float xPosition[imageCountForRow] = {5.0f, 110.0f, 215.0f};
 static const float imageDis = 5.0f;
-static float yPosition[imageCountForRow] = {imageDis, imageDis, imageDis};
 			  
 #pragma mark - ui operation
 
@@ -60,14 +60,17 @@ static float yPosition[imageCountForRow] = {imageDis, imageDis, imageDis};
 	_indicator.color = [UIColor blackColor];
 	_scrollViewForImage.minimumZoomScale=0.5;
     _scrollViewForImage.maximumZoomScale=6.0;
-	_scrollViewForImage.backgroundColor = GlobalBackGroundColor;
+	_scrollViewForImage.backgroundColor = [UIColor clearColor];
 	_videoDetailInfoController = [[VideoDetailViewController alloc] initWithNibName:nil bundle:nil];
 	_scrollViewForImage.showsVerticalScrollIndicator = NO;
 	_scrollViewForImage.delegate = self;
+
+	
 	[_indicator startAnimating];
 	[_sinaWeiBoSDK requireUserAllWeiBo:YES Delegate:self];
 	_tableViewForVideoPic.dataSource = self;
 	_tableViewForVideoPic.delegate = self;
+	
 }
 
 - (void)viewDidUnload
@@ -202,6 +205,10 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80;
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
+	[UIView beginAnimations:nil context:nil];
+	self.navigationController.navigationBarHidden = targetContentOffset->y < scrollView.contentOffset.y ? NO : YES;
+	
+	[UIView commitAnimations];
 	NSInteger index = (int)targetContentOffset->y % ((int)videoViewHeigth);
 	if (0 == index || index >= [_videoInfosArray count]) 
 	{

@@ -82,7 +82,7 @@
 
 - (void) oauthStart
 {
-	if ([self isLogining]) 
+	if (NO == [self expires]) 
 	{
 		[_delegate OnAlreadyLogin];
 		return;

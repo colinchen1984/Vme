@@ -64,6 +64,11 @@ static ImageManager* singleton = nil;
 #pragma mark - interface ImageManger
 - (void) postURL2DownLoadImage:(NSString*) urlPath Delegate:(id<URLImageDelegate>)delegate
 {
+	if(nil == urlPath)
+	{
+		return;
+	}
+	
 	UIImage* image = [_imageDic objectForKey:urlPath];
 	if (nil != image) 
 	{

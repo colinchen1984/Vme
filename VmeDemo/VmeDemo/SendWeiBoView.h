@@ -21,5 +21,8 @@
 
 - (void) Show:(BOOL)animated;
 
+- (void) OnSendAnnimateFinish;
+- (void) OnHideAnimateFinish;
+
 + (SendWeiBoView*) sharedSendWeiBoView;
 @end

@@ -12,6 +12,18 @@
 
 @implementation SinaWeiBoSDK (HandleData)
 
+- (NSDateFormatter*) getDateFormatter
+{
+	static NSDateFormatter* dateFormatter = nil;
+	if (nil == dateFormatter) 
+	{
+		dateFormatter = [[NSDateFormatter alloc] init];
+		[dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+		dateFormatter.dateFormat = @"EEE MMM dd HH:mm:ss zzz yyyy";
+	}
+	return dateFormatter;
+}
+
 #pragma mark - private interface
 - (SinaWeiBoData*) getWeiBoDataFromDic:(NSDictionary*)dic
 {
@@ -23,6 +35,8 @@
 	weiBo.text = NSNotFound != range.location ? [text substringToIndex:range.location] : text;
 	weiBo.userID = [[dic objectForKey:@"user"] objectForKey:@"idstr"];
 	weiBo.userInfo = [[VideoWeiBoDataManager sharedVideoWeiBoDataManager] getWeiBoUserPersonalInfo:weiBo.userID];
+	NSString* timeStr = [dic objectForKey:@"created_at"];
+	weiBo.createTime = [[self getDateFormatter] dateFromString:timeStr];
 	return weiBo;
 }
 
@@ -130,6 +144,8 @@
 	SinaWeiBoComment* weiBoComment = [[SinaWeiBoComment alloc] init];
 	weiBoComment.weiBoCommentID = [dataDic objectForKey:@"idstr"];
 	weiBoComment.text = [dataDic objectForKey:@"text"];
+	NSString* timeStr = [dataDic objectForKey:@"created_at"];
+	weiBoComment.createTime = [[self getDateFormatter] dateFromString:timeStr];
 	NSDictionary* userDataDic = [dataDic objectForKey:@"user"];
 	NSString* userID = [userDataDic objectForKey:@"idstr"];
 	SinaWeiBoUserPersonalInfo* userInfo = [[VideoWeiBoDataManager sharedVideoWeiBoDataManager] getWeiBoUserPersonalInfo:userID];
@@ -139,6 +155,8 @@
 		userInfo.userName = [userDataDic objectForKey:@"screen_name"];
 		userInfo.userID = userID;
 		[[VideoWeiBoDataManager sharedVideoWeiBoDataManager] addWeiBoUserPersonalInfo:userID UserPersonalInfo:userInfo];
+		NSString* timeStr = [userDataDic objectForKey:@"created_at"];
+		userInfo.createTime = [[self getDateFormatter] dateFromString:timeStr];
 		NSString* imageURL = [userDataDic objectForKey:@"profile_image_url"];
 		[[ImageManager sharedImageManager] postURL2DownLoadImage:imageURL Delegate:userInfo];
 	}

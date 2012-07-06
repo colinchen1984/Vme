@@ -15,10 +15,10 @@
 #import "SinaWeiBoOauth.h"
 #import "SinaWeiBoSDK.h"
 
+@class SinaWeiBoOauth;
+
 @interface VmeDemoAppDelegate()
-@property (strong, nonatomic) OauthEngine* tudouOauth;
 @property (strong, nonatomic) TuDouSDK* tudouSDK;
-@property (strong, nonatomic) SinaWeiBoOauth* sinaWeiBoOauth;
 @property (strong, nonatomic) SinaWeiBoSDK* sinaWeiboSDK;
 @property (strong, nonatomic) UINavigationController* navigationController;
 @end
@@ -28,9 +28,7 @@
 @synthesize window = _window;
 @synthesize viewController = _viewController;
 @synthesize startUpController = _startUpController;
-@synthesize tudouOauth = _tudouOauth;
 @synthesize tudouSDK = _tudouSDK;
-@synthesize sinaWeiBoOauth = _sinaWeiBoOauth;
 @synthesize sinaWeiboSDK = _sinaWeiboSDK;
 @synthesize navigationController = _navigationController;
 
@@ -41,24 +39,11 @@
 	self.viewController = [[VmeDemoViewController alloc] initWithNibName:@"VmeDemoViewController" bundle:nil];
 	
 	self.startUpController = [[VmeStartUpController alloc] initWithNibName:@"VmeStartUp" bundle:nil];
+	self.startUpController.startUpDelegate = self;
 	self.window.rootViewController = _startUpController;
 	
-	_tudouOauth = [[OauthEngine alloc] initWithProvider:[[TuDouOauth alloc] init] Delegate:self];
-	_tudouSDK = [[TuDouSDK alloc] initWithOauthEngine:_tudouOauth UserName:@"_79592344"];
-	self.viewController.tudouUserName = @"_79592344";
-	
-	_sinaWeiBoOauth = [[SinaWeiBoOauth alloc] init];
-	_sinaWeiBoOauth.delegate = self;
-	_sinaWeiboSDK = [[SinaWeiBoSDK alloc] initWithSinaWeiBoOauth:_sinaWeiBoOauth];
-	
-	[_startUpController setTudouOuath:_tudouOauth];
-	[_startUpController setSinaOauth:_sinaWeiBoOauth];
-	
-	[_viewController setTudouSDK:_tudouSDK];
-	[_viewController setSinaWeiBoSDK:_sinaWeiboSDK];
-	
 	_navigationController = [[UINavigationController alloc] initWithRootViewController:_viewController];
-	
+	_navigationController.navigationBar.tintColor = [UIColor colorWithRed:205.0f / 256.0f green:44.0f / 256.0f blue:36.0f / 256.0f alpha:1.0f];
 	[self.window makeKeyAndVisible];
 
     return YES;
@@ -68,16 +53,22 @@
 
 #pragma mark - OauthEngine delegate
 
-- (void) OnOauthLoginSucessce
+- (void) OnSinaWeiBoLogin:(SinaWeiBoOauth*)sinaOauth
 {
-	self.window.rootViewController = _navigationController;
+	_sinaWeiboSDK = [[SinaWeiBoSDK alloc] initWithSinaWeiBoOauth:sinaOauth];
 }
-- (void) OnOauthLoginFail
+
+- (void) OnSinaWeiBoLogInFail
 {
 	
 }
-- (void) OnAlreadyLogin
+
+- (void) OnTudouLogin:(NSString*)userName TuDouOauth:(OauthEngine*)tudouOuath;
 {
+	self.viewController.tudouUserName = userName;
+	_tudouSDK = [[TuDouSDK alloc] initWithOauthEngine:tudouOuath UserName:userName];
+	_viewController.tudouSDK = _tudouSDK;
+	_viewController.sinaWeiBoSDK = _sinaWeiboSDK;
 	self.window.rootViewController = _navigationController;
 }
 

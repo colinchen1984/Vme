@@ -68,7 +68,7 @@
 		break;
 		case OAUTH_STATUS_AUTHORIZE:
 		{
-			ret = [[NSString alloc] initWithFormat:@"%@?oauth_token=%@&oauth_callback=http://localhost/", _authorizeURL, _token];
+			ret = [[NSString alloc] initWithFormat:@"%@?oauth_token=%@&oauth_callback=http://", _authorizeURL, _token];
 		}
 		break;
 		case OAUTH_STATUS_ACCESS_TOKEN:

@@ -12,6 +12,7 @@
 #import "SinaWeiBoSDK.h"
 #import "Utility.h"
 #import "VideoWeiBoDataManager.h"
+#import "SendWeiBoView+Animation.h"
 #import <QuartzCore/QuartzCore.h> 
 #import <UIKit/UIFont.h>
 @interface SendWeiBoView()
@@ -20,6 +21,7 @@
 @property (strong, nonatomic) UITextView* textView;
 @property (strong, nonatomic) UIButton* sendButton;
 @property (strong, nonatomic) UILabel* wordCount;
+
 @end
 
 static SendWeiBoView* singleton = nil;
@@ -34,6 +36,7 @@ static SendWeiBoView* singleton = nil;
 @synthesize weiboDelegate = _weiboDelegate;
 @synthesize operationData = _operationData;
 @synthesize operationType = _operationType;
+
 
 + (SendWeiBoView*) sharedSendWeiBoView
 {
@@ -81,7 +84,7 @@ static SendWeiBoView* singleton = nil;
 	_sendButton.frame = CGRectMake(250.0f, 0, 35, 35);
 	[_sendButton setTitle:NSLocalizedString(@"发送", nil)  forState:UIControlStateNormal];
 	_sendButton.contentMode = UIViewContentModeScaleToFill;
-	[_sendButton setImage:[[ImageManager sharedImageManager] getImageFromBundle:@"cancel.png"] forState:UIControlStateNormal];
+	[_sendButton setImage:[[ImageManager sharedImageManager] getImageFromBundle:@"send.png"] forState:UIControlStateNormal];
 	[_sendButton addTarget:self action:@selector(sendSinaWeiBo:) forControlEvents:UIControlEventTouchDown];
 	[self addSubview:_sendButton];
 	
@@ -99,7 +102,7 @@ static SendWeiBoView* singleton = nil;
 	[_textView addSubview:_wordCount];
 	[self addSubview:_textView];
 	[self calculateTextLength];
-    return self;
+	return self;
 }
 
 - (void) Show:(BOOL)animated
@@ -112,6 +115,7 @@ static SendWeiBoView* singleton = nil;
 	}
 	[window addSubview:_backGroundView];
   	[window addSubview:self];
+	[self beginShowAnimation];
 	_titleLable.text = _videoInfo.title;
 	[self addObservers];
     	
@@ -119,9 +123,9 @@ static SendWeiBoView* singleton = nil;
 
 - (void) Hide:(BOOL)animated
 {
-	[_backGroundView removeFromSuperview];
-	[self removeFromSuperview];
-	[self removeObservers];
+	[self removeFromSuperview]; 
+	[self beginHideAnimation];
+	return;
 }
 
 #pragma mark Obeservers
@@ -151,7 +155,7 @@ static SendWeiBoView* singleton = nil;
 
 - (void)keyboardWillHide:(NSNotification*)notification
 {
-	self.frame = CGRectMake(10.0f, 0.0f, 300.0f, 280.0f);    
+	self.frame = CGRectMake(10.0f, 100.0f, 300.0f, 280.0f);    
 }
 
 #pragma mark - text length
@@ -236,13 +240,29 @@ static SendWeiBoView* singleton = nil;
 			assert(NO);
 	}
 	_textView.text = @"";
-	[self Hide:YES];
+	[_textView resignFirstResponder];
+	[self performSelector:@selector(beginSendAnimation) withObject:nil afterDelay:0.3f];
 	
 }
 
 - (IBAction)cancelSendWeiBo:(id)sender 
 {
+	[_textView resignFirstResponder];
 	[self Hide:YES];
+}
+
+- (void) OnSendAnnimateFinish
+{
+	[_backGroundView removeFromSuperview];
+	[self removeFromSuperview];
+	[self removeObservers];
+}
+
+- (void) OnHideAnimateFinish
+{
+	[_backGroundView removeFromSuperview];
+	[self removeFromSuperview];
+	[self removeObservers];
 }
 
 /*

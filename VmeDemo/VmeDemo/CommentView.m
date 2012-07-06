@@ -40,16 +40,25 @@ static const float replyButtonSize = 10.0f;
 	{
         return nil;
     }
+	self.backgroundColor = [UIColor clearColor];
 	self->textLabelMaxWidth = frame.size.width - avatarImageWidth - discenten - 35.0f;
-	self.backgroundColor = GlobalBackGroundColor;
 	_textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, textLabelMaxWidth, frame.size.height)];
 	_textLabel.numberOfLines = 0;
 	_textLabel.lineBreakMode = UILineBreakModeCharacterWrap;
 	_textLabel.backgroundColor = [UIColor clearColor];
 	_backGroundImageView = [[UIImageTouchableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 0.0f, 0.0f)];
 	[_backGroundImageView addTarget:self action:@selector(OnReplyCommentButtonClick) forControlEvents:UIControlEventTouchDown];
+	_backGroundImageView.layer.shadowRadius = 2.f;
+	_backGroundImageView.layer.shadowOffset = CGSizeMake(2.f, 2.f);
+	_backGroundImageView.layer.shadowOpacity = 1.f;
+	_backGroundImageView.layer.shadowColor = [UIColor grayColor].CGColor;
 	_avatarImageView = [[UIImageTouchableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, avatarImageWidth, avatarImageHeight)];
 	[_avatarImageView addTarget:self action:@selector(OnAvatarClick) forControlEvents:UIControlEventTouchDown];
+	_avatarImageView.layer.shadowRadius = 2.f;
+	_avatarImageView.layer.shadowOffset = CGSizeMake(2.f, 2.f);
+	_avatarImageView.layer.shadowOpacity = 1.f;
+	_avatarImageView.layer.shadowColor = [UIColor grayColor].CGColor;
+	
 	[self addSubview:_backGroundImageView];
 	[self addSubview:_textLabel];
 	[self addSubview:_avatarImageView];

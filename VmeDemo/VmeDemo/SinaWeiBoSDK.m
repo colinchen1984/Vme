@@ -35,6 +35,7 @@
 @synthesize userID = _userID;
 @synthesize userName = _userName;
 @synthesize avatarImage = _avatarImage;
+@synthesize createTime = _createTime;
 - (void) OnReceiveImage:(UIImage*)image ImageUrl:(NSString*)imageUrl
 {
 	_avatarImage = image;
@@ -48,6 +49,7 @@
 @synthesize comments = _comments;
 @synthesize userID = _userID;
 @synthesize userInfo = _userInfo;
+@synthesize createTime = _createTime;
 @end
 
 @implementation SinaWeiBoComment
@@ -55,6 +57,11 @@
 @synthesize weiBoCommentID = _weiBoCommentID;
 @synthesize userInfo = _userInfo;
 @synthesize weiBoData = _weiBoData;
+@synthesize createTime = _createTime;
+-(NSComparisonResult) compare:(SinaWeiBoComment*) other
+{
+	return [other.createTime compare:_createTime];
+}
 @end
 
 @interface SinaWeiBoSDK()
@@ -65,6 +72,7 @@
 @property (strong, nonatomic) NSMutableArray* freeConnection;
 @property (strong, nonatomic) SinaWeiBoOauth* sinaWeiBoOauth;
 @property (strong, nonatomic) SinaWeiBoUserPersonalInfo* userPersonalInfo;
+
 @end
 
 @implementation SinaWeiBoSDK
@@ -72,6 +80,7 @@
 @synthesize usingConnection = _usingConnection;
 @synthesize freeConnection = _freeConnection;
 @synthesize userPersonalInfo = _userPersonalInfo;
+
 #pragma mark - life cycle
 - (id) initWithSinaWeiBoOauth:(SinaWeiBoOauth*)oauth
 {

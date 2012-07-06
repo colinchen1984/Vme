@@ -93,11 +93,13 @@ static VideoWeiBoDataManager* singleton = nil;
 	if (nil == weiBo.comments) 
 	{
 		weiBo.comments = comments;
+		[comments sortUsingSelector:@selector(compare:)];
 	}
 	else 
 	{
 		NSMutableArray* cs = (NSMutableArray*)weiBo.comments;
 		[cs addObjectsFromArray:comments];
+		[comments sortUsingSelector:@selector(compare:)];
 	}
 }
 
@@ -110,12 +112,17 @@ static VideoWeiBoDataManager* singleton = nil;
 	}
 	if (nil == weiBo.comments) 
 	{
-		weiBo.comments = [[NSMutableArray alloc] initWithObjects:comment, nil];		
+		weiBo.comments = [[NSMutableArray alloc] initWithObjects:comment, nil];	
 	}
 	else 
 	{
 		NSMutableArray* cs = (NSMutableArray*)weiBo.comments;
 		[cs addObject:comment];
+		SinaWeiBoComment* w = [cs objectAtIndex:(cs.count - 2)];
+		if (NSOrderedAscending == [comment.createTime compare:w.createTime]) 
+		{
+			[cs sortUsingSelector:@selector(compare:)];
+		}
 	}	
 }
 
