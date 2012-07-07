@@ -11,6 +11,7 @@
 #import "SinaWeiBoOauth.h"
 #import "TuDouOauth.h"
 #import "SFHFKeychainUtils.h"
+#import "VmeDemoViewController.h"
 
 @interface VmeStartUpController()
 @property (strong, nonatomic) OauthEngine* tudouOuath;
@@ -18,6 +19,10 @@
 @property (strong, nonatomic) NSString* tudouUserName;
 @property (weak, nonatomic) IBOutlet UITextField *inputTudouUserName;
 @property (weak, nonatomic) IBOutlet UIButton *loginSina;
+@property (strong, nonatomic) VmeDemoViewController *videoController;
+@property (strong, nonatomic) TuDouSDK* tudouSDK;
+@property (strong, nonatomic) SinaWeiBoSDK* sinaWeiboSDK;
+
 @end
 
 @implementation VmeStartUpController
@@ -27,7 +32,9 @@
 @synthesize tudouUserName = _tudouUserName;
 @synthesize inputTudouUserName = _inputTudouUserName;
 @synthesize loginSina = _loginSina;
-@synthesize startUpDelegate = _startUpDelegate;
+@synthesize videoController = _videoController;
+@synthesize tudouSDK = _tudouSDK;
+@synthesize sinaWeiboSDK = _sinaWeiboSDK;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,6 +48,8 @@
 	_tudouOauth = [[OauthEngine alloc] initWithProvider:[[TuDouOauth alloc] init] Delegate:self];
 	_sinaOauth = [[SinaWeiBoOauth alloc] init];
 	_sinaOauth.delegate = self;
+	_videoController = [[VmeDemoViewController alloc] initWithNibName:@"VmeDemoViewController" bundle:nil];
+
     return self;
 }
 
@@ -48,6 +57,7 @@
 {
     [super viewDidLoad];
 	_inputTudouUserName.delegate = self;
+
 	// Do any additional setup after loading the view.
 }
 
@@ -63,7 +73,7 @@
 - (void) viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-
+	self.navigationItem.title = @"Vme";
 	[_sinaOauth loadAccessToken];
 	
 	[self loadTuDouUserName];
@@ -106,8 +116,13 @@
 
 - (void) finishLogin
 {
-	[_startUpDelegate OnSinaWeiBoLogin:_sinaOauth];
-	[_startUpDelegate OnTudouLogin:@"_79592344" TuDouOauth:_tudouOauth];
+	_sinaWeiboSDK = [[SinaWeiBoSDK alloc] initWithSinaWeiBoOauth:_sinaOauth];
+	_videoController.tudouUserName = _tudouUserName;
+	_tudouSDK = [[TuDouSDK alloc] initWithOauthEngine:_tudouOauth UserName:_tudouUserName];
+	_videoController.tudouSDK = _tudouSDK;
+	_videoController.sinaWeiBoSDK = _sinaWeiboSDK;
+	self.navigationItem.title = nil;
+	[self.navigationController pushViewController:_videoController animated:YES];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -117,6 +132,7 @@
 
 - (void) loadTuDouUserName
 {
+	return;
 	_tudouUserName = [SFHFKeychainUtils getPasswordForUsername:@"TuDouUserName" andServiceName:@"TuDou" error:nil];	
 }
 
@@ -145,7 +161,7 @@
 
 - (void) OnOauthLoginFail
 {
-	[_startUpDelegate OnSinaWeiBoLogInFail];
+
 }
 
 - (void) OnAlreadyLogin

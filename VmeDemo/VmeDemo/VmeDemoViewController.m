@@ -97,6 +97,7 @@ static const float imageDis = 5.0f;
 	_tableViewForVideoPic.frame = frame;
 	_tableViewForVideoPic.alpha = 0.0f;
 	[self UpdateVideoView];
+	self.navigationItem.hidesBackButton = YES;
 	
 }
 

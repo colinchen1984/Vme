@@ -154,7 +154,7 @@
 
 - (void) sendWeiBo:(NSString*) text VideoInfo:(TudouVideoInfo*)videoInfo Delegate:(id<SinaWeiBoSDKDelegate>)delegate
 {
-	NSString* weiboText = [[NSString alloc] initWithFormat:@"%@%@", text, videoInfo.itemUrl];
+	NSString* weiboText = [[NSString alloc] initWithFormat:@"%@ %@", text, videoInfo.itemUrl];
 	NSString* annotation = [[NSString alloc] initWithFormat:@"[\"%@\"]", videoInfo.itemCode];
 	[self sendWeiBo:weiboText Annotations:annotation Delegate:delegate];	
 }

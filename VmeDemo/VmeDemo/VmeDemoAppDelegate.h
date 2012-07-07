@@ -7,16 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Oauth.h"
 
 @class VmeDemoViewController;
 @class VmeStartUpController;
 
-@interface VmeDemoAppDelegate : UIResponder <UIApplicationDelegate, OauthDelegate>
-
+@interface VmeDemoAppDelegate : UIResponder <UIApplicationDelegate>
 @property (strong, nonatomic) UIWindow *window;
-
-@property (strong, nonatomic) VmeDemoViewController *viewController;
-
-@property (strong, nonatomic) VmeStartUpController* startUpController;
 @end
