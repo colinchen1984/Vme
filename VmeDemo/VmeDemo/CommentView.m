@@ -100,9 +100,9 @@ static const float replyButtonSize = 10.0f;
 - (void) layoutSubviews
 {
 	[super layoutSubviews];
-	_backGroundImageView.frame = CGRectMake(self->isLeftDirection ? avatarImageWidth + discenten : 0.0f, 0, _textLabel.frame.size.width + 30.0f, _textLabel.frame.size.height + 20.0f);
+	_backGroundImageView.frame = CGRectMake(self->isLeftDirection ? avatarImageWidth + discenten : 0.0f, 0, _textLabel.frame.size.width + 30.0f, MAX(avatarImageHeight, _textLabel.frame.size.height + 20.0f));
 	_textLabel.center = _backGroundImageView.center;
-	self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _backGroundImageView.frame.size.width + avatarImageWidth + discenten, MAX(avatarImageHeight, _textLabel.frame.size.height));
+	self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _backGroundImageView.frame.size.width + avatarImageWidth + discenten, MAX(avatarImageHeight, _textLabel.frame.size.height + 20.0f));
 	_avatarImageView.center = CGPointMake(self->isLeftDirection ? avatarImageWidth / 2.0f : self.frame.size.width - avatarImageWidth / 2.0f, self.frame.size.height - avatarImageHeight / 2.0f);
 }
 

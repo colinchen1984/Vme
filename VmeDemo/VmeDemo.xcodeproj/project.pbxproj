@@ -11,6 +11,7 @@
 		CE4758681577365C0067A848 /* CommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4758671577365C0067A848 /* CommentView.m */; };
 		CE71C39D155D26810047F25C /* ImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE71C39C155D26810047F25C /* ImageManager.m */; };
 		CE71C3A1155D28A10047F25C /* WebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE71C3A0155D28A10047F25C /* WebRequest.m */; };
+		CE72246715AF069800B52409 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = CE72246615AF069700B52409 /* logo.png */; };
 		CE7278831595AC97005C75EE /* envelop.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7278821595AC97005C75EE /* envelop.png */; };
 		CE7408971559569C007B3905 /* TuDouSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7408961559569C007B3905 /* TuDouSDK.m */; };
 		CE742718158327B3007D10F0 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = CE742717158327B3007D10F0 /* cancel.png */; };
@@ -65,6 +66,7 @@
 		CE71C39C155D26810047F25C /* ImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageManager.m; sourceTree = "<group>"; };
 		CE71C39F155D28A10047F25C /* WebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebRequest.h; sourceTree = "<group>"; };
 		CE71C3A0155D28A10047F25C /* WebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebRequest.m; sourceTree = "<group>"; };
+		CE72246615AF069700B52409 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		CE7278821595AC97005C75EE /* envelop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = envelop.png; sourceTree = "<group>"; };
 		CE7408951559569C007B3905 /* TuDouSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuDouSDK.h; sourceTree = "<group>"; };
 		CE7408961559569C007B3905 /* TuDouSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuDouSDK.m; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 		CE97D0B3154CF1BD004F6C9A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CE72246615AF069700B52409 /* logo.png */,
 				CE7B21C715A735C20091D9B7 /* backGround.jpg */,
 				CE7278821595AC97005C75EE /* envelop.png */,
 				CE7519361591B0D1001FB8BD /* send.png */,
@@ -360,6 +363,7 @@
 				CE7519371591B0D1001FB8BD /* send.png in Resources */,
 				CE7278831595AC97005C75EE /* envelop.png in Resources */,
 				CE7B21C815A735C20091D9B7 /* backGround.jpg in Resources */,
+				CE72246715AF069800B52409 /* logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

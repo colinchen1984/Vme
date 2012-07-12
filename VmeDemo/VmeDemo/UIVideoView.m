@@ -49,15 +49,22 @@ static const float avatarImageViewWidth = 47.5f;
 	self.layer.borderColor = [UIColor blackColor].CGColor;
 	float iW = frame.size.width - 2 * videoImageBeginPos;
 	float vH = iW * (3.0f / 4.0f);
-	self.backgroundColor = GlobalBackGroundColor;
+	self.backgroundColor = [UIColor clearColor];
+	CGRect imageFrame = self.frame;
+	imageFrame.origin = CGPointMake(0.0f, 0.0f);
+	UIImageView* image = [[UIImageView alloc] initWithFrame:imageFrame];
+	[self addSubview:image];
+	
+	image.image = [[ImageManager sharedImageManager] getImageFromBundle:@"backGround.jpg"];
+	
 	_videoImageView = [[UIImageTouchableView alloc] initWithFrame:CGRectMake(videoImageBeginPos, videoImageBeginPos, iW, vH)];
 	[self addSubview:_videoImageView];
 	[_videoImageView addTarget:self action:@selector(OnVideoImageClick) forControlEvents:UIControlEventTouchDown];
-	_videoImageView.backgroundColor = GlobalBackGroundColor;
+	_videoImageView.backgroundColor = [UIColor clearColor];
 	float textHight = 30.0f;
 	vH += emptySize;
 	_textLable = [[UILabel alloc] initWithFrame:CGRectMake(videoImageBeginPos,  vH, frame.size.width - 2 * videoImageBeginPos, textHight)];
-	_textLable.backgroundColor = GlobalBackGroundColor;
+	_textLable.backgroundColor = [UIColor clearColor];
 	[self addSubview:_textLable];
 	vH += textHight;
 	
@@ -79,7 +86,7 @@ static const float avatarImageViewWidth = 47.5f;
 	_share2WeiBo.frame = frame;
 	[_share2WeiBo addTarget:self action:@selector(OnShare2SinaWeiBoClick) forControlEvents:UIControlEventTouchDown];
 	[self addSubview:_share2WeiBo];
-	self.layer.shadowColor = [UIColor blackColor].CGColor;
+	self.layer.shadowColor = [UIColor grayColor].CGColor;
 	self.layer.shadowRadius = 5.0f;
 	self.layer.shadowOpacity = 1.0f;
 	self.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);

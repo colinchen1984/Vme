@@ -29,6 +29,7 @@
 @property (strong, nonatomic) NSString* callBackUrl;
 @property (strong, nonatomic) VmOauthWebViewController* webOauth;
 @property (strong, nonatomic) WebRequest* webRequest;
+@property (weak, nonatomic) id swapedController;
 @end 
 
 @implementation SinaWeiBoOauth
@@ -41,6 +42,7 @@
 @synthesize accessCode = _accessCode;
 @synthesize webRequest = _webRequest;
 @synthesize userID = _userID;
+@synthesize swapedController = _swapedController;
 
 #pragma mark - TuDouOauth life cycle
 - (id) init
@@ -100,7 +102,7 @@
 	
 	NSString* urlStr = [[NSString alloc] initWithFormat:@"https://api.weibo.com/oauth2/authorize?display=mobile&response_type=code&redirect_uri=%@&client_id=%@", [_callBackUrl URLEncodedString], _consumerKey];
 	__weak UIViewController* c = [UIApplication sharedApplication].delegate.window.rootViewController;
-	[c presentModalViewController:_webOauth animated:NO];
+	[c presentViewController:_webOauth animated:YES	completion:nil];
 	[_webOauth loadUrl:urlStr OauthEngine:(OauthEngine*)self];
 	
 }
@@ -136,6 +138,9 @@
 	if (NSNotFound != fail2Access.location) 
 	{
 		[_delegate OnOauthLoginFail];
+		
+		__weak UIViewController* c = [UIApplication sharedApplication].delegate.window.rootViewController;
+		[c dismissViewControllerAnimated:YES completion:nil];
 		return;
 	}
 	
@@ -146,6 +151,8 @@
 		accessCodeLocation.length = [data length] - accessCodeLocation.location;
 		_accessCode = [data substringWithRange:accessCodeLocation];
 		[self getAccessToken];
+		__weak UIViewController* c = [UIApplication sharedApplication].delegate.window.rootViewController;
+		[c dismissViewControllerAnimated:YES completion:nil];
 		return;
 	}
 

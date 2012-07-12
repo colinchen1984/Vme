@@ -73,7 +73,7 @@
 - (void) viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	self.navigationItem.title = @"Vme";
+	self.navigationController.navigationBarHidden = YES;
 	[_sinaOauth loadAccessToken];
 	
 	[self loadTuDouUserName];
