@@ -59,7 +59,7 @@
 	_webOauth = [[VmOauthWebViewController alloc] init];
 	_callBackUrl = @"http://";
 	_webRequest = [[WebRequest alloc] init];
-	_webRequest.delegate = self;
+	_webRequest.delegate = (id<WebRequestDelegate>)self;
 	return self;
 }
 

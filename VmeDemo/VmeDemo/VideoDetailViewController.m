@@ -77,7 +77,7 @@
 
 	//添加新浪分享按钮
 	_share2SinaWeibo = [[UIImageTouchableView alloc] init];
-	UIImage* image = [[ImageManager sharedImageManager] getImageFromBundle:@"Share2Sina.gif"];
+	UIImage* image = [[ImageManager sharedImageManager] getImageFromBundle:@"share2Sina.gif"];
 	[_share2SinaWeibo setImage:image];
 	[_share2SinaWeibo setFrame:CGRectMake(( 320.0f - image.size.width + 2.0f) / 2.0f, _bigPicImageView.frame.origin.y + _bigPicImageView.frame.size.height + 30.0f, [image size].width - 2.0f, [image size].height - 2.0f)];
 	[_share2SinaWeibo addTarget:self action:@selector(sendSinaWeiBo:) forControlEvents:UIControlEventTouchDown];
@@ -149,7 +149,7 @@
 	_scrollView.contentOffset = currentPoint;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (BOOL)shouldAcutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }

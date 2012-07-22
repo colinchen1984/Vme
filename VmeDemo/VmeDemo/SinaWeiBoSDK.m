@@ -185,7 +185,7 @@
 		[params setObject:annotations forKey:@"annotations"];
 	}
 	SinaWeiBoRequest* request = [self getFreeRequest];
-	request.delegate = self;
+	request.delegate = (id<WebRequestDelegate>)self;
 	request.weiBoSDKDelegate = delegate;
 	request.httpBody = params;
 	request.httpMethod = @"POST";

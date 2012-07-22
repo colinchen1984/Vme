@@ -63,13 +63,13 @@ static const float imageDis = 5.0f;
 	_scrollViewForImage.backgroundColor = [UIColor clearColor];
 	_videoDetailInfoController = [[VideoDetailViewController alloc] initWithNibName:nil bundle:nil];
 	_scrollViewForImage.showsVerticalScrollIndicator = NO;
-	_scrollViewForImage.delegate = self;
+	_scrollViewForImage.delegate = (id<UIScrollViewDelegate>)self;
 
 	
 	[_indicator startAnimating];
-	[_sinaWeiBoSDK requireUserAllWeiBo:YES Delegate:self];
-	_tableViewForVideoPic.dataSource = self;
-	_tableViewForVideoPic.delegate = self;
+	[_sinaWeiBoSDK requireUserAllWeiBo:YES Delegate:(id<SinaWeiBoSDKDelegate>)self];
+	_tableViewForVideoPic.dataSource = (id<UITableViewDataSource>)self;
+	_tableViewForVideoPic.delegate = (id<UITableViewDelegate>)self;
 	
 }
 
@@ -90,7 +90,7 @@ static const float imageDis = 5.0f;
 {
 	[super viewWillAppear:animated];
 	[_tudouSDK requireUserPersonalInfo:self UserName:_tudouUserName];
-	[_sinaWeiBoSDK requireUserPersonalInfo:self];
+	[_sinaWeiBoSDK requireUserPersonalInfo:(id<SinaWeiBoSDKDelegate>)self];
 	self.navigationItem.title = _tudouPersonalInfo.userNickName;
 	CGRect frame = _tableViewForVideoPic.frame;
 	frame.origin.x = 321.0f;
@@ -142,7 +142,7 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80;
 	v.videoInfo = videoInfo;
 	SinaWeiBoData* w = [[VideoWeiBoDataManager sharedVideoWeiBoDataManager] getWeiBoDataByVideoID:videoInfo.itemCode];
 	v.weiBoData = w;
-	v.videoViewDelegate = self;
+	v.videoViewDelegate = (id<UIVideoViewDelegate>)self;
 	[v UpdateView];
 	[_videoViewDic setObject:v forKey:videoInfo.itemCode];
 	
@@ -256,7 +256,7 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80;
 {
 	for (SinaWeiBoData* w in weiBoArray) 
 	{
-		[_sinaWeiBoSDK requireWeiBoComment:w Delegate:self];
+		[_sinaWeiBoSDK requireWeiBoComment:w Delegate:(id<SinaWeiBoSDKDelegate>)self];
 	}
 	
 }
@@ -300,7 +300,7 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80;
 {
 	[SendWeiBoView sharedSendWeiBoView].videoInfo = view.videoInfo;
 	[SendWeiBoView sharedSendWeiBoView].weiBoSDK = _sinaWeiBoSDK;
-	[SendWeiBoView sharedSendWeiBoView].weiboDelegate = self;
+	[SendWeiBoView sharedSendWeiBoView].weiboDelegate = (id<SinaWeiBoSDKDelegate>)self;
 	[SendWeiBoView sharedSendWeiBoView].operationType = SINA_WEIBO_SEND_WEIBO;
 	[SendWeiBoView sharedSendWeiBoView].operationData = nil;
 	[[SendWeiBoView sharedSendWeiBoView] Show:YES];	

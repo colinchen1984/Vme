@@ -44,22 +44,15 @@ static const float avatarImageViewWidth = 47.5f;
 	{
 		return nil;
     }
-	self.layer.cornerRadius = 5.0f;
-	self.layer.borderWidth = 2.0f;
-	self.layer.borderColor = [UIColor blackColor].CGColor;
 	float iW = frame.size.width - 2 * videoImageBeginPos;
 	float vH = iW * (3.0f / 4.0f);
-	self.backgroundColor = [UIColor clearColor];
-	CGRect imageFrame = self.frame;
-	imageFrame.origin = CGPointMake(0.0f, 0.0f);
-	UIImageView* image = [[UIImageView alloc] initWithFrame:imageFrame];
-	[self addSubview:image];
-	
-	image.image = [[ImageManager sharedImageManager] getImageFromBundle:@"backGround.jpg"];
-	
+	self.backgroundColor = [UIColor blackColor];
 	_videoImageView = [[UIImageTouchableView alloc] initWithFrame:CGRectMake(videoImageBeginPos, videoImageBeginPos, iW, vH)];
 	[self addSubview:_videoImageView];
 	[_videoImageView addTarget:self action:@selector(OnVideoImageClick) forControlEvents:UIControlEventTouchDown];
+	_videoImageView.layer.borderWidth = 5.0f;
+	_videoImageView.layer.borderColor = [UIColor whiteColor].CGColor;
+	_videoImageView.layer.cornerRadius = 5.0f;
 	_videoImageView.backgroundColor = [UIColor clearColor];
 	float textHight = 30.0f;
 	vH += emptySize;
@@ -80,7 +73,7 @@ static const float avatarImageViewWidth = 47.5f;
 	}
 	frame = CGRectMake(videoImageBeginPos, vH, 0, 0);
 	_share2WeiBo = [[UIButton alloc] initWithFrame:frame];
-	UIImage* weiBoIcon = [[ImageManager sharedImageManager] getImageFromBundle:@"Share2Sina.gif"];
+	UIImage* weiBoIcon = [[ImageManager sharedImageManager] getImageFromBundle:@"share2Sina.gif"];
 	[_share2WeiBo setImage:weiBoIcon forState:UIControlStateNormal];
 	frame.size = weiBoIcon.size;
 	_share2WeiBo.frame = frame;
@@ -90,6 +83,9 @@ static const float avatarImageViewWidth = 47.5f;
 	self.layer.shadowRadius = 5.0f;
 	self.layer.shadowOpacity = 1.0f;
 	self.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
+	self.layer.cornerRadius = 5.0f;
+	self.layer.borderWidth = 2.0f;
+	self.layer.borderColor = [UIColor blackColor].CGColor;
     return self;
 }
 
@@ -103,6 +99,7 @@ static const float avatarImageViewWidth = 47.5f;
 	UIImage* image = nil == _videoInfo.bigPic ? _videoInfo.pic : _videoInfo.bigPic;
 	[_videoImageView setImage:image];
 	_textLable.text = nil != _weiBoData ? _weiBoData.text : _videoInfo.title;
+	_textLable.textColor = [UIColor whiteColor];
 	_share2WeiBo.hidden = nil != _weiBoData;
 	if (nil == _weiBoData) 
 	{
