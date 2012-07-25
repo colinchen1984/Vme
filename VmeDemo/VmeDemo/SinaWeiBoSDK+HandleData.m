@@ -77,7 +77,6 @@
 	
 }
 
-
 - (void) handlerGetWeiBoCommentsData:(NSDictionary*) dataDic Delegate:(id<SinaWeiBoSDKDelegate>)delegate
 {
 	NSArray* commentArray = [dataDic objectForKey:@"comments"];

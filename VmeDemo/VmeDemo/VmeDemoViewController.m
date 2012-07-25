@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *videoViewTable;
 
 @property (strong, nonatomic) TuDouUserPersonalInfo* tudouPersonalInfo;
+@property (strong, nonatomic) SinaWeiBoUserPersonalInfo* sinaPersnalInfo;
 @property (weak, nonatomic) IBOutlet UITableView *table4FastScroll;
 @end
 
@@ -34,6 +35,7 @@
 @synthesize tudouPersonalInfo = _tudouPersonalInfo;
 @synthesize table4FastScroll = _table4FastScroll;
 @synthesize sinaWeiBoSDK = _sinaWeiBoSDK;
+@synthesize sinaPersnalInfo = _sinaPersnalInfo;
 
 #pragma mark - ui operation
 
@@ -58,19 +60,18 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80;
 	_table4FastScroll.delegate = (id<UITableViewDelegate>)self;
     _videoViewTable.dataSource = (id<UITableViewDataSource>)self;
     _videoViewTable.delegate = (id<UITableViewDelegate>)self;
+	((UIScrollView*)_videoViewTable).delegate = (id<UIScrollViewDelegate>)self;
 	_videoViewTable.backgroundColor = [UIColor clearColor];
 	_videoViewTable.separatorStyle = NO;
 	_videoViewTable.rowHeight = videoViewHeigth;
 	_table4FastScroll.separatorStyle = NO;
 	_table4FastScroll.backgroundColor = [UIColor clearColor];
+	CGRect frame = _table4FastScroll.frame;
+	frame.origin.x = 279.0f;
+	_table4FastScroll.frame = frame;
+	_table4FastScroll.alpha = 0.7f;
     [_tudouSDK requireUserPersonalInfo:self UserName:_tudouUserName];
     [_sinaWeiBoSDK requireUserPersonalInfo:(id<SinaWeiBoSDKDelegate>)self];
-    /*CGRect frame = _table4FastScroll.frame;
-    frame.origin.x = 321.0f;
-    _table4FastScroll.frame = frame;
-    _table4FastScroll.alpha = 0.0f;
-    self.navigationItem.hidesBackButton = YES;*/
-	
 }
 
 - (void)viewDidUnload
@@ -94,7 +95,8 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80;
 - (void) viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-
+	self.navigationItem.hidesBackButton = YES;
+	self.navigationItem.title = _sinaPersnalInfo.userName;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -109,7 +111,7 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80;
 	[_tudouSDK requireUserVideoInfo:self UserName:_tudouUserName PageNo:(self->currentPageNo + 1)];
 	[_tudouSDK requireUserVideoInfo:self UserName:_tudouUserName PageNo:(self->currentPageNo + 2)];
 	_tudouPersonalInfo = userPersonalInfo;
-	self.navigationItem.title = _tudouPersonalInfo.userNickName;
+	//self.navigationItem.title = _tudouPersonalInfo.userNickName;
 }
 
 - (void) OnReceiveVideoInfo:(TudouVideoInfo*) videoInfo
@@ -188,6 +190,12 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80;
 	[v UpdateView];
 }
 
+- (void) OnRecevieWeiBoUserPersonalInfo:(SinaWeiBoUserPersonalInfo*) userInfo
+{
+	self.navigationItem.title = userInfo.userName;
+	_sinaPersnalInfo = userInfo;
+}
+
 #pragma mark - UIVideoView delegate
 - (void) OnVideoImageClick:(UIVideoView*)view
 {
@@ -210,6 +218,27 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80;
 	[SendWeiBoView sharedSendWeiBoView].operationType = SINA_WEIBO_SEND_WEIBO;
 	[SendWeiBoView sharedSendWeiBoView].operationData = nil;
 	[[SendWeiBoView sharedSendWeiBoView] Show:YES];	
+}
+#pragma makr - UIScrollViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+	[self ShowFastVideoTableView];
+	[NSObject cancelPreviousPerformRequestsWithTarget:self];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+	[self performSelector:@selector(HideFastVideoTableView) withObject:nil afterDelay:3.0f];
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+	[UIView beginAnimations:nil context:nil];
+	[UIView setAnimationDuration:0.7f];
+	self.navigationController.navigationBarHidden = targetContentOffset->y < scrollView.contentOffset.y ? NO : YES;
+	
+	[UIView commitAnimations];
+	return;
 }
 
 #pragma mark - UITableViewDataSource
