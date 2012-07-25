@@ -18,6 +18,8 @@
 		CE7519371591B0D1001FB8BD /* send.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7519361591B0D1001FB8BD /* send.png */; };
 		CE75D957159305FF00FEF256 /* SendWeiBoView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = CE75D956159305FF00FEF256 /* SendWeiBoView+Animation.m */; };
 		CE7695FB158C726800B22EAE /* UIVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7695FA158C726700B22EAE /* UIVideoView.m */; };
+		CE76E2D915BEFB9100973400 /* VmeDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE76E2D815BEFB9100973400 /* VmeDemoViewController.xib */; };
+		CE76E2DD15BF1F5600973400 /* videoviewback.png in Resources */ = {isa = PBXBuildFile; fileRef = CE76E2DC15BF1F5500973400 /* videoviewback.png */; };
 		CE781389155514B20042F79F /* Oauth.m in Sources */ = {isa = PBXBuildFile; fileRef = CE781386155514B20042F79F /* Oauth.m */; };
 		CE78138A155514B20042F79F /* TuDouOauth.m in Sources */ = {isa = PBXBuildFile; fileRef = CE781388155514B20042F79F /* TuDouOauth.m */; };
 		CE7AA3E815727C5E00B51543 /* VideoWeiBoDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7AA3E715727C5E00B51543 /* VideoWeiBoDataManager.m */; };
@@ -27,7 +29,6 @@
 		CE97D0B9154CF1BD004F6C9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE97D0B8154CF1BD004F6C9A /* main.m */; };
 		CE97D0BD154CF1BD004F6C9A /* VmeDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE97D0BC154CF1BD004F6C9A /* VmeDemoAppDelegate.m */; };
 		CE97D0C0154CF1BD004F6C9A /* VmeDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE97D0BF154CF1BD004F6C9A /* VmeDemoViewController.m */; };
-		CE97D0C3154CF1BD004F6C9A /* VmeDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE97D0C1154CF1BD004F6C9A /* VmeDemoViewController.xib */; };
 		CEB7C8FD15778F2B00ACA533 /* rightPop.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB7C8FB15778F2B00ACA533 /* rightPop.png */; };
 		CEB7C8FE15778F2B00ACA533 /* leftPop.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB7C8FC15778F2B00ACA533 /* leftPop.png */; };
 		CEB86BC8155CE16C002E2F66 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB86BC6155CE16C002E2F66 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -76,6 +77,8 @@
 		CE75D956159305FF00FEF256 /* SendWeiBoView+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SendWeiBoView+Animation.m"; sourceTree = "<group>"; };
 		CE7695F9158C726700B22EAE /* UIVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIVideoView.h; sourceTree = "<group>"; };
 		CE7695FA158C726700B22EAE /* UIVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIVideoView.m; sourceTree = "<group>"; };
+		CE76E2D815BEFB9100973400 /* VmeDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VmeDemoViewController.xib; sourceTree = "<group>"; };
+		CE76E2DC15BF1F5500973400 /* videoviewback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = videoviewback.png; sourceTree = "<group>"; };
 		CE781385155514B20042F79F /* Oauth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Oauth.h; sourceTree = "<group>"; };
 		CE781386155514B20042F79F /* Oauth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Oauth.m; sourceTree = "<group>"; };
 		CE781387155514B20042F79F /* TuDouOauth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuDouOauth.h; sourceTree = "<group>"; };
@@ -95,7 +98,6 @@
 		CE97D0BC154CF1BD004F6C9A /* VmeDemoAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VmeDemoAppDelegate.m; sourceTree = "<group>"; };
 		CE97D0BE154CF1BD004F6C9A /* VmeDemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VmeDemoViewController.h; sourceTree = "<group>"; };
 		CE97D0BF154CF1BD004F6C9A /* VmeDemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VmeDemoViewController.m; sourceTree = "<group>"; };
-		CE97D0C2154CF1BD004F6C9A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/VmeDemoViewController.xib; sourceTree = "<group>"; };
 		CEB7C8FB15778F2B00ACA533 /* rightPop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightPop.png; sourceTree = "<group>"; };
 		CEB7C8FC15778F2B00ACA533 /* leftPop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftPop.png; sourceTree = "<group>"; };
 		CEB86BC5155CE16C002E2F66 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
@@ -202,7 +204,7 @@
 				CE97D0BC154CF1BD004F6C9A /* VmeDemoAppDelegate.m */,
 				CE97D0BE154CF1BD004F6C9A /* VmeDemoViewController.h */,
 				CE97D0BF154CF1BD004F6C9A /* VmeDemoViewController.m */,
-				CE97D0C1154CF1BD004F6C9A /* VmeDemoViewController.xib */,
+				CE76E2D815BEFB9100973400 /* VmeDemoViewController.xib */,
 				CED4C9C3155576FC00A97207 /* VmeStartUp.h */,
 				CED4C9C4155576FC00A97207 /* VmeStartUp.m */,
 				CEBFB65B155619B300D929B4 /* VmeStartUpView.xib */,
@@ -244,6 +246,7 @@
 		CE97D0B3154CF1BD004F6C9A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CE76E2DC15BF1F5500973400 /* videoviewback.png */,
 				CE72246615AF069700B52409 /* logo.png */,
 				CE7B21C715A735C20091D9B7 /* backGround.jpg */,
 				CE7278821595AC97005C75EE /* envelop.png */,
@@ -353,7 +356,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE97D0B7154CF1BD004F6C9A /* InfoPlist.strings in Resources */,
-				CE97D0C3154CF1BD004F6C9A /* VmeDemoViewController.xib in Resources */,
 				CEBFB65C155619B300D929B4 /* VmeStartUpView.xib in Resources */,
 				CEF6EF7E156003BC00859ADC /* VideoDetailViewController.xib in Resources */,
 				CEB7C8FD15778F2B00ACA533 /* rightPop.png in Resources */,
@@ -364,6 +366,8 @@
 				CE7278831595AC97005C75EE /* envelop.png in Resources */,
 				CE7B21C815A735C20091D9B7 /* backGround.jpg in Resources */,
 				CE72246715AF069800B52409 /* logo.png in Resources */,
+				CE76E2D915BEFB9100973400 /* VmeDemoViewController.xib in Resources */,
+				CE76E2DD15BF1F5600973400 /* videoviewback.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,14 +420,6 @@
 				CE97D0B6154CF1BD004F6C9A /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		CE97D0C1154CF1BD004F6C9A /* VmeDemoViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE97D0C2154CF1BD004F6C9A /* en */,
-			);
-			name = VmeDemoViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

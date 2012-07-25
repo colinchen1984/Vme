@@ -16,8 +16,6 @@
 @interface ImageManager : NSObject <WebRequestDelegate>
 - (void) postURL2DownLoadImage:(NSString*) urlPath Delegate:(__weak id<URLImageDelegate>)delegate;
 
-- (void) cancelURLDownLoadImage:(NSString*) urlPath;
-
 - (UIImage*) getImageFromBundle:(NSString*) fileName;
 
 + (ImageManager*) sharedImageManager;

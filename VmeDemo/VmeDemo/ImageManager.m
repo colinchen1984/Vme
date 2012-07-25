@@ -29,16 +29,12 @@ static ImageManager* singleton = nil;
 
 @interface ImageManager()
 @property (strong, nonatomic) NSMutableDictionary* imageDic;
-@property (strong, nonatomic) NSMutableDictionary* usingConnection;
-//在收到memory warrning时可以释放freeconnection内的connection
-@property (strong, nonatomic) NSMutableArray* freeConnection;
 
 @end
 
 @implementation ImageManager
 @synthesize imageDic = _imageDic;
-@synthesize usingConnection = _usingConnection;
-@synthesize freeConnection = _freeConnection;
+
 #pragma mark - Singleton
 +(ImageManager*) sharedImageManager
 {
@@ -57,8 +53,6 @@ static ImageManager* singleton = nil;
 		return nil;
 	}
 	_imageDic = [[NSMutableDictionary alloc] init];
-	_usingConnection = [[NSMutableDictionary alloc] init];
-	_freeConnection = [[NSMutableArray alloc] init];
 	return self;
 }
 - (NSString*) getMD5FromURL:(NSString*)url
@@ -127,21 +121,14 @@ static ImageManager* singleton = nil;
 		return;
 	}
 	
-	URLImageRequest* request = [self getFreeRequestByURL:urlPath];
-	[request setDelegate:self];
+	URLImageRequest* request = [[URLImageRequest alloc] init];
+	request.imageURL = urlPath;
+	request.urlImageDelegate = delegate;
+	request.delegate = self;
 	[request setUrlImageDelegate:delegate];
 	[request setImageURL:urlPath];
 	[request postUrlRequest:urlPath];
 	return;
-}
-
-- (void) cancelURLDownLoadImage:(NSString*) urlPath
-{
-	URLImageRequest* request = [_usingConnection objectForKey:urlPath];
-	if (nil != request) 
-	{
-		[self freeRequest:request URL:urlPath];	
-	}
 }
 
 - (UIImage*) getImageFromBundle:(NSString*) fileName
@@ -156,30 +143,6 @@ static ImageManager* singleton = nil;
 	return image;
 }
 
-#pragma mark - private interface for manger request
-- (void) freeRequest:(URLImageRequest*) request URL:(NSString*)urlPath
-{
-	[_freeConnection addObject:request];
-	[_usingConnection removeObjectForKey:urlPath];
-	[request cancelRequest];
-}
-
-- (URLImageRequest*) getFreeRequestByURL:(NSString*)urlPath
-{
-	URLImageRequest* request = nil;
-	int freeConnectionCount = [_freeConnection count];
-	if (0 != freeConnectionCount)
-	{
-		request = [_freeConnection objectAtIndex:(freeConnectionCount - 1)];
-		[_freeConnection removeObjectAtIndex:(freeConnectionCount - 1)];
-	}
-	else 
-	{
-		request = [[URLImageRequest alloc] init];
-	}
-	[_usingConnection setObject:request forKey:urlPath];
-	return request;
-}
 
 #pragma mark - WebRequest Delegate Methods
 - (void) OnReceiveData:(WebRequest*) request Data:(NSData*)data;
@@ -191,7 +154,6 @@ static ImageManager* singleton = nil;
 	{
 		NSString* url = urlImageRequest.imageURL;
 		id<URLImageDelegate> delegate = urlImageRequest.urlImageDelegate;
-		[self freeRequest:urlImageRequest URL:urlImageRequest.imageURL];
 		[self postURL2DownLoadImage:url Delegate:delegate];
 	}
 	else 
@@ -199,7 +161,6 @@ static ImageManager* singleton = nil;
 		[_imageDic setObject:image forKey:urlImageRequest.imageURL];
 		[self writeImageToLocalDisk:[self getMD5FromURL:urlImageRequest.imageURL] Image:data];
 		[[urlImageRequest urlImageDelegate] OnReceiveImage:image ImageUrl:urlImageRequest.imageURL];
-		[self freeRequest:urlImageRequest URL:urlImageRequest.imageURL];
 	}
 }
 
@@ -207,7 +168,6 @@ static ImageManager* singleton = nil;
 {
 	URLImageRequest* urlImageRequest = (URLImageRequest*)request;
 	//请勿调整顺序
-	[self freeRequest:urlImageRequest URL:urlImageRequest.imageURL];
 	[[urlImageRequest urlImageDelegate] OnReceiveError:[urlImageRequest imageURL]];
 }
 

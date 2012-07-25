@@ -52,14 +52,9 @@
 	{
 		return nil;
 	}
-	
-	_serviceName = [[NSString alloc] initWithString:@"SinaWeiBoService"];
-	_consumerKey = [[NSString alloc] initWithString:@"3702859613"];
-	_consumerSecrectKey = [[NSString alloc] initWithString:@"95881335a0dea9ab28afa9888071d9be"];
-	_webOauth = [[VmOauthWebViewController alloc] init];
-	_callBackUrl = @"http://";
-	_webRequest = [[WebRequest alloc] init];
-	_webRequest.delegate = (id<WebRequestDelegate>)self;
+	_serviceName = @"SinaWeiBoService";
+	_consumerKey = @"3702859613";
+	[self loadAccessToken];
 	return self;
 }
 
@@ -100,8 +95,17 @@
 		return;
 	}
 	
+	_consumerSecrectKey = [[NSString alloc] initWithString:@"95881335a0dea9ab28afa9888071d9be"];
+	_webRequest = [[WebRequest alloc] init];
+	_callBackUrl = @"http://";
+	_webRequest.delegate = (id<WebRequestDelegate>)self;
+	
 	NSString* urlStr = [[NSString alloc] initWithFormat:@"https://api.weibo.com/oauth2/authorize?display=mobile&response_type=code&redirect_uri=%@&client_id=%@", [_callBackUrl URLEncodedString], _consumerKey];
 	__weak UIViewController* c = [UIApplication sharedApplication].delegate.window.rootViewController;
+	if (nil == _webOauth) 
+	{
+		_webOauth = [[VmOauthWebViewController alloc] init];
+	}
 	[c presentViewController:_webOauth animated:YES	completion:nil];
 	[_webOauth loadUrl:urlStr OauthEngine:(OauthEngine*)self];
 	

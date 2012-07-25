@@ -39,20 +39,25 @@ static const float avatarImageViewWidth = 47.5f;
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
+	[super setFrame:frame];
     if (nil == self) 
 	{
 		return nil;
     }
+	UIImageView* back = [[UIImageView alloc] initWithImage:[[ImageManager sharedImageManager] getImageFromBundle:@"videoviewback.png"]];
+	back.frame = CGRectMake(0.0f, 0.0f, frame.size.width, frame.size.height);
+	[self addSubview:back];
 	float iW = frame.size.width - 2 * videoImageBeginPos;
 	float vH = iW * (3.0f / 4.0f);
-	self.backgroundColor = [UIColor blackColor];
+	self.backgroundColor = [UIColor clearColor];
 	_videoImageView = [[UIImageTouchableView alloc] initWithFrame:CGRectMake(videoImageBeginPos, videoImageBeginPos, iW, vH)];
 	[self addSubview:_videoImageView];
 	[_videoImageView addTarget:self action:@selector(OnVideoImageClick) forControlEvents:UIControlEventTouchDown];
 	_videoImageView.layer.borderWidth = 5.0f;
 	_videoImageView.layer.borderColor = [UIColor whiteColor].CGColor;
 	_videoImageView.layer.cornerRadius = 5.0f;
+	_videoImageView.layer.backgroundColor = [UIColor clearColor].CGColor;
 	_videoImageView.backgroundColor = [UIColor clearColor];
 	float textHight = 30.0f;
 	vH += emptySize;
@@ -83,9 +88,6 @@ static const float avatarImageViewWidth = 47.5f;
 	self.layer.shadowRadius = 5.0f;
 	self.layer.shadowOpacity = 1.0f;
 	self.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
-	self.layer.cornerRadius = 5.0f;
-	self.layer.borderWidth = 2.0f;
-	self.layer.borderColor = [UIColor blackColor].CGColor;
     return self;
 }
 

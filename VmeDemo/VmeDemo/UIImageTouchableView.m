@@ -12,12 +12,10 @@
 
 @interface UIImageTouchableView()
 
-@property (strong, nonatomic) UIImageView* touchButton;
-
 @end
 
 @implementation UIImageTouchableView
-@synthesize touchButton = _touchButton;
+
 @synthesize userData = _userData;
 
 - (id)initWithFrame:(CGRect)frame
@@ -29,38 +27,17 @@
 		return nil;
 	}
 	self.backgroundColor = [UIColor clearColor];
-	_touchButton = [[UIImageView alloc] init];
-	_touchButton.frame = CGRectMake(0.0f, 0.0f, frame.size.width, frame.size.height);
-	[self addSubview:_touchButton];
+	self.layer.backgroundColor = self.backgroundColor.CGColor;
     return self;
 }
 
 
-- (void) setFrame:(CGRect)frame
-{
-	[super setFrame:frame];
-	[_touchButton setFrame:CGRectMake(0.0f, 0.0f, frame.size.width, frame.size.height)];
-	[self setNeedsDisplay];
-}
-
 - (void) setImage:(UIImage*) image
 {
-	[_touchButton setImage:image];
+	[self setImage:image forState:UIControlStateNormal];
+	[self setImage:image forState:UIControlStateDisabled];
+	[self setImage:image forState:UIControlStateSelected];
 	[self setNeedsDisplay];
-}
-
-- (UIImage*) image
-{
-	return [_touchButton image];
-}
-
-
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-	[_touchButton drawRect:rect];
 }
 
 

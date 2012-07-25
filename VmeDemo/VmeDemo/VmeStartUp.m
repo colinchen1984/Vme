@@ -45,10 +45,10 @@
 		return nil;
     }
 	
-	_tudouOauth = [[OauthEngine alloc] initWithProvider:[[TuDouOauth alloc] init] Delegate:self];
+	_tudouOauth = [[OauthEngine alloc] initWithProvider:[[TuDouOauth alloc] init] Delegate:(id<OauthDelegate>)self];
 	_sinaOauth = [[SinaWeiBoOauth alloc] init];
-	_sinaOauth.delegate = self;
-	_videoController = [[VmeDemoViewController alloc] initWithNibName:@"VmeDemoViewController" bundle:nil];
+	_sinaOauth.delegate = (id<OauthDelegate>)self;
+	_videoController = [[VmeDemoViewController alloc] initWithNibName:nil bundle:nil];
 
     return self;
 }
@@ -56,7 +56,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	_inputTudouUserName.delegate = self;
+	_inputTudouUserName.delegate = (id<UITextFieldDelegate>)self;
 
 	// Do any additional setup after loading the view.
 }

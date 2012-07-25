@@ -11,7 +11,6 @@
 @interface UIImageTouchableView : UIButton
 
 @property (weak, nonatomic) id userData;
-- (void) setFrame:(CGRect)frame;
 - (void) setImage:(UIImage*) image;
 - (UIImage*) image;
 

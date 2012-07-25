@@ -39,9 +39,9 @@ typedef enum
 @property (copy, nonatomic) NSString* title;			//视频标题	
 @property (strong, nonatomic) NSString* tags;			//视频标签字符串,多个标签之间用逗号','分隔
 @property (copy, nonatomic) NSString* description;		//视频描述	
-@property (strong, nonatomic) UIImage* pic;				//视频截图	
+@property (weak, nonatomic) UIImage* pic;				//视频截图	
 @property (strong, nonatomic) NSString* bigPicURL;		//高质量视频截图url地址
-@property (strong, nonatomic) UIImage* bigPic;			//高质量视频截图
+@property (weak, nonatomic) UIImage* bigPic;			//高质量视频截图
 @property (copy, nonatomic) NSString* itemUrl;			//播放页URL
 @end
 

@@ -19,7 +19,7 @@
 - (void) OnShare2SinaWeiBoClick:(UIVideoView*)view;
 @end
 
-@interface UIVideoView : UIView
+@interface UIVideoView : UITableViewCell
 - (void) UpdateView;
 @property (weak, nonatomic) SinaWeiBoData* weiBoData;
 @property (weak, nonatomic) TudouVideoInfo* videoInfo;
