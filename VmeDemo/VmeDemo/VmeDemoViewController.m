@@ -40,8 +40,8 @@
 #pragma mark - ui operation
 
 
-const static float videoViewWidth = 320.0f;
-const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80;
+const static float videoViewWidth = 320;
+const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80.0f;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -87,7 +87,7 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80;
 	_videoViewTable = nil;
     _videoInfosArray = nil;
     _videoViewDic = nil;
-	[self setVideoViewTable:nil];
+    _videoViewTable = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -95,8 +95,11 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80;
 - (void) viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.hidesBackButton = TRUE;
+    self.navigationController.navigationBarHidden = FALSE;
 	self.navigationItem.title = _sinaPersnalInfo.userName;
+    [_table4FastScroll reloadData];
+    [_videoViewTable reloadData];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -104,24 +107,25 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80;
 	return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+- (void) requestMoreVideoInfo
+{
+    if(self->totalPageCount > self->currentPageNo)
+    {
+        [_tudouSDK requireUserVideoInfo:self UserName:_tudouUserName PageNo:(self->currentPageNo + 1)];
+    }
+}
 
 #pragma mark - tudousdk delegate
 - (void) OnReceiveUserPersonalInfo:(TuDouUserPersonalInfo*) userPersonalInfo
 {
-	[_tudouSDK requireUserVideoInfo:self UserName:_tudouUserName PageNo:(self->currentPageNo + 1)];
-	[_tudouSDK requireUserVideoInfo:self UserName:_tudouUserName PageNo:(self->currentPageNo + 2)];
-	_tudouPersonalInfo = userPersonalInfo;
-	//self.navigationItem.title = _tudouPersonalInfo.userNickName;
+    self->totalPageCount = 1000;
+    [self requestMoreVideoInfo];
+    _tudouPersonalInfo = userPersonalInfo;
 }
 
 - (void) OnReceiveVideoInfo:(TudouVideoInfo*) videoInfo
 {
-	if (nil != [_videoViewDic objectForKey:videoInfo.itemCode])
-	{
-		return;
-	}
 	[_videoInfosArray addObject:videoInfo];
-
 	[_table4FastScroll reloadData];
 	[_videoViewTable reloadData];
 }
@@ -197,17 +201,9 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80;
 }
 
 #pragma mark - UIVideoView delegate
-- (void) OnVideoImageClick:(UIVideoView*)view
-{
-	self.navigationItem.title = nil;
-	_videoDetailInfoController.videoInfo = view.videoInfo;
-	_videoDetailInfoController.sinaWeiBoSDK = _sinaWeiBoSDK;
-	[[self navigationController] pushViewController:_videoDetailInfoController animated:YES];
-}
-
 - (void) OnWeiBoCommentUserAvatarClick:(SinaWeiBoUserPersonalInfo*) userInfo
 {
-
+    
 }
 
 - (void) OnShare2SinaWeiBoClick:(UIVideoView*)view
@@ -219,6 +215,7 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80;
 	[SendWeiBoView sharedSendWeiBoView].operationData = nil;
 	[[SendWeiBoView sharedSendWeiBoView] Show:YES];	
 }
+
 #pragma makr - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
@@ -231,16 +228,6 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80;
 	[self performSelector:@selector(HideFastVideoTableView) withObject:nil afterDelay:3.0f];
 }
 
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
-{
-	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:0.7f];
-	self.navigationController.navigationBarHidden = targetContentOffset->y < scrollView.contentOffset.y ? NO : YES;
-	
-	[UIView commitAnimations];
-	return;
-}
-
 #pragma mark - UITableViewDataSource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -251,12 +238,29 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80;
 		UIVideoView* v = (UIVideoView*)cell;
         if(nil == v)
         {
-            v = [[UIVideoView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, videoViewWidth, videoViewHeigth)];
+            float xPos = (tableView.frame.size.width - videoViewWidth) * 0.5f;
+            v = [[UIVideoView alloc] initWithFrame:CGRectMake(xPos, 0.0f, videoViewWidth, videoViewHeigth)];
         }
 		v.videoInfo = video;
-		v.weiBoData = [[VideoWeiBoDataManager sharedVideoWeiBoDataManager] getWeiBoDataByVideoID:video.itemId];
+		v.weiBoData = [[VideoWeiBoDataManager sharedVideoWeiBoDataManager] getWeiBoDataByVideoID:video.itemCode];
 		[v UpdateView];
+        v.videoViewDelegate = (id<UIVideoViewDelegate>)self;
 		cell = v;
+        for (NSString* key in [_videoViewDic allKeys])
+        {
+            UIVideoView* o = [_videoViewDic objectForKey:key];
+            if([o.videoInfo.itemCode isEqualToString:video.itemCode])
+            {
+                [_videoViewDic removeObjectForKey:key];
+                break;
+            }
+        }
+        [_videoViewDic setObject:v forKey:video.itemCode];
+        if(indexPath.row == [_videoInfosArray count] - 1)
+        {
+            //请求更过视屏数据
+            [self requestMoreVideoInfo];
+        }
     }
     else
     {
@@ -268,7 +272,7 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80;
     }
 
 
-
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	return cell;
 }
 
@@ -303,7 +307,10 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80;
 		UIVideoView* cell = (UIVideoView*)[tableView cellForRowAtIndexPath:indexPath];
 		if(nil != cell)
 		{
-			[self OnVideoImageClick:(UIVideoView*)cell];
+            self.navigationItem.title = nil;
+            _videoDetailInfoController.videoInfo = cell.videoInfo;
+            _videoDetailInfoController.sinaWeiBoSDK = _sinaWeiBoSDK;
+            [[self navigationController] pushViewController:_videoDetailInfoController animated:YES];
 		}
 	}
 	else 

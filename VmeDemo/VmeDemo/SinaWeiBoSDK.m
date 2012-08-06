@@ -121,7 +121,7 @@
 							nil];
 	
 	SinaWeiBoRequest* request = [self getFreeRequest];
-	request.delegate = self;
+	request.delegate = (id<WebRequestDelegate>)self;
 	request.weiBoSDKDelegate = delegate;
 	request.httpHeader = params;
 	request->operation = SINA_WEIBO_GET_USER_ALL_WEIBO;
@@ -145,7 +145,7 @@
 							[_sinaWeiBoOauth userID], @"uid", nil];
 	
 	SinaWeiBoRequest* request = [self getFreeRequest];
-	request.delegate = self;
+	request.delegate = (id<WebRequestDelegate>)self;
 	request.weiBoSDKDelegate = delegate;
 	request.httpHeader = params;
 	request->operation = SINA_WEIBO_REQUEST_USER_PERSONAL_INFO;
@@ -216,7 +216,7 @@
 								   nil];	
 	
 	SinaWeiBoRequest* request = [self getFreeRequest];
-	request.delegate = self;
+	request.delegate = (id<WebRequestDelegate>)self;
 	request.weiBoSDKDelegate = delegate;
 	request.httpHeader = params;
 	request->operation = SINA_WEIBO_GET_WEIBO_COMMENT;
@@ -262,7 +262,7 @@
 									str, @"cids",
 									nil];	
 			SinaWeiBoRequest* request = [self getFreeRequest];
-			request.delegate = self;
+			request.delegate = (id<WebRequestDelegate>)self;
 			request.weiBoSDKDelegate = delegate;
 			request.httpHeader = params;
 			request->operation = SINA_WEIBO_GET_BATCH_WEIBO_COMMENT;
@@ -279,7 +279,7 @@
 								[[NSString alloc] initWithFormat:@"[%@]", str], @"cids",
 								nil];	
 		SinaWeiBoRequest* request = [self getFreeRequest];
-		request.delegate = self;
+		request.delegate = (id<WebRequestDelegate>)self;
 		request.weiBoSDKDelegate = delegate;
 		request.httpHeader = params;
 		request->operation = SINA_WEIBO_GET_BATCH_WEIBO_COMMENT;
@@ -309,7 +309,7 @@
 							commentText, @"comment",
 							nil];		
 	SinaWeiBoRequest* request = [self getFreeRequest];
-	request.delegate = self;
+	request.delegate = (id<WebRequestDelegate>)self;
 	request.weiBoSDKDelegate = delegate;
 	request.httpBody = params;
 	request.httpMethod = @"POST";
@@ -342,7 +342,7 @@
 							nil];	
 	
 	SinaWeiBoRequest* request = [self getFreeRequest];
-	request.delegate = self;
+	request.delegate = (id<WebRequestDelegate>)self;
 	request.weiBoSDKDelegate = delegate;
 	request.httpBody = params;
 	request.httpMethod = @"POST";
@@ -411,6 +411,11 @@
 			[self handlerBatchWeiBoComments:dataDic Delegate:weiBoRequest.weiBoSDKDelegate];
 		}
 		break;
+        case SINA_WEIBO_OPERATION_TYPE:
+        {
+            assert(NO);
+        }
+        break;
 	}
 	
 	[self freeRequest:weiBoRequest];

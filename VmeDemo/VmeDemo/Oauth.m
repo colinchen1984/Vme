@@ -64,7 +64,7 @@
 #pragma mark - OauthEngine Get oauth request param
 - (NSString*) oauthTimeStamp
 {
-	NSString* t = [[NSString alloc] initWithFormat:@"%d", time(NULL)];
+	NSString* t = [[NSString alloc] initWithFormat:@"%ld", time(NULL)];
 	[self setTimeStamp:t];
 	return [self timeStamp];
 }
@@ -95,7 +95,7 @@
 		[self loadAccessToken];
 	}
 	
-	if (NO != [self isLogining]) 
+	if (YES != [self isLogining])
 	{
 		[self requestToken];
 	}

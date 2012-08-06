@@ -15,7 +15,7 @@
 - (void) OnAvatarClick:(CommentView*)commentView;
 @end
 
-@interface CommentView : UIView
+@interface CommentView : UITableViewCell
 - (void) setPopDirection:(BOOL)isLeft;
 - (void) setAvatarImage:(UIImage*)avatarImage;
 - (void) settext:(NSString*)text;

@@ -49,7 +49,7 @@
 	_sinaOauth = [[SinaWeiBoOauth alloc] init];
 	_sinaOauth.delegate = (id<OauthDelegate>)self;
 	_videoController = [[VmeDemoViewController alloc] initWithNibName:nil bundle:nil];
-
+    _tudouUserName = @"_79592344";
     return self;
 }
 

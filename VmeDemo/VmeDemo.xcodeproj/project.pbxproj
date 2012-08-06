@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B1755B715C4449700D57E56 /* avataback.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B1755B615C4449700D57E56 /* avataback.png */; };
+		3B8C365715C5CB5C00FAD3A3 /* bigimageback.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B8C365615C5CB5C00FAD3A3 /* bigimageback.png */; };
 		CE398C2B156CABC900E58DEC /* SinaWeiBoOauth.m in Sources */ = {isa = PBXBuildFile; fileRef = CE398C2A156CABC800E58DEC /* SinaWeiBoOauth.m */; };
 		CE4758681577365C0067A848 /* CommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4758671577365C0067A848 /* CommentView.m */; };
 		CE71C39D155D26810047F25C /* ImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE71C39C155D26810047F25C /* ImageManager.m */; };
@@ -58,6 +60,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B1755B615C4449700D57E56 /* avataback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avataback.png; sourceTree = "<group>"; };
+		3B8C365615C5CB5C00FAD3A3 /* bigimageback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bigimageback.png; sourceTree = "<group>"; };
 		CE08CC84154D5A43004CD2EE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CE398C29156CABC800E58DEC /* SinaWeiBoOauth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinaWeiBoOauth.h; sourceTree = "<group>"; };
 		CE398C2A156CABC800E58DEC /* SinaWeiBoOauth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinaWeiBoOauth.m; sourceTree = "<group>"; };
@@ -86,7 +90,7 @@
 		CE7AA3E615727C5E00B51543 /* VideoWeiBoDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoWeiBoDataManager.h; sourceTree = "<group>"; };
 		CE7AA3E715727C5E00B51543 /* VideoWeiBoDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoWeiBoDataManager.m; sourceTree = "<group>"; };
 		CE7B21C715A735C20091D9B7 /* backGround.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = backGround.jpg; sourceTree = "<group>"; };
-		CE97D0A8154CF1BD004F6C9A /* Vme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vme.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE97D0A8154CF1BD004F6C9A /* vme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE97D0AC154CF1BD004F6C9A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE97D0AE154CF1BD004F6C9A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CE97D0B0154CF1BD004F6C9A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -170,7 +174,7 @@
 		CE97D0A9154CF1BD004F6C9A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CE97D0A8154CF1BD004F6C9A /* Vme.app */,
+				CE97D0A8154CF1BD004F6C9A /* vme.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -216,6 +220,7 @@
 				CEC3A2EE1577C9BF00C6A86D /* SinaWeiBoSDK+HandleData.m */,
 				CECC2DB5156E0ECA00DEBFC1 /* SinaWeiBoSDK.h */,
 				CECC2DB6156E0ECA00DEBFC1 /* SinaWeiBoSDK.m */,
+				CED252461567927B00851FC3 /* VideoPageViewController.m */,
 				CE71C39B155D26810047F25C /* ImageManager.h */,
 				CE71C39C155D26810047F25C /* ImageManager.m */,
 				CE71C39F155D28A10047F25C /* WebRequest.h */,
@@ -226,13 +231,12 @@
 				CED8F4711561D3E200E9032B /* UIImageTouchableView.h */,
 				CED8F4721561D3E200E9032B /* UIImageTouchableView.m */,
 				CED252451567927A00851FC3 /* VideoPageViewController.h */,
-				CED252461567927B00851FC3 /* VideoPageViewController.m */,
 				CECC2DB1156DF60D00DEBFC1 /* Utility.h */,
 				CECC2DB2156DF60D00DEBFC1 /* Utility.m */,
 				CE7AA3E615727C5E00B51543 /* VideoWeiBoDataManager.h */,
 				CE7AA3E715727C5E00B51543 /* VideoWeiBoDataManager.m */,
-				CE4758661577365C0067A848 /* CommentView.h */,
 				CE4758671577365C0067A848 /* CommentView.m */,
+				CE4758661577365C0067A848 /* CommentView.h */,
 				CEE90050157C47660046FC6A /* SendWeiBoView.h */,
 				CE75D955159305FE00FEF256 /* SendWeiBoView+Animation.h */,
 				CE75D956159305FF00FEF256 /* SendWeiBoView+Animation.m */,
@@ -246,6 +250,8 @@
 		CE97D0B3154CF1BD004F6C9A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3B8C365615C5CB5C00FAD3A3 /* bigimageback.png */,
+				3B1755B615C4449700D57E56 /* avataback.png */,
 				CE76E2DC15BF1F5500973400 /* videoviewback.png */,
 				CE72246615AF069700B52409 /* logo.png */,
 				CE7B21C715A735C20091D9B7 /* backGround.jpg */,
@@ -319,7 +325,7 @@
 			);
 			name = VmeDemo;
 			productName = VmeDemo;
-			productReference = CE97D0A8154CF1BD004F6C9A /* Vme.app */;
+			productReference = CE97D0A8154CF1BD004F6C9A /* vme.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -368,6 +374,8 @@
 				CE72246715AF069800B52409 /* logo.png in Resources */,
 				CE76E2D915BEFB9100973400 /* VmeDemoViewController.xib in Resources */,
 				CE76E2DD15BF1F5600973400 /* videoviewback.png in Resources */,
+				3B1755B715C4449700D57E56 /* avataback.png in Resources */,
+				3B8C365715C5CB5C00FAD3A3 /* bigimageback.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,7 +488,7 @@
 					"$(inherited)",
 					"\"$(SDKROOT)/usr/lib/system\"",
 				);
-				PRODUCT_NAME = Vme;
+				PRODUCT_NAME = vme;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -495,7 +503,7 @@
 					"$(inherited)",
 					"\"$(SDKROOT)/usr/lib/system\"",
 				);
-				PRODUCT_NAME = Vme;
+				PRODUCT_NAME = vme;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

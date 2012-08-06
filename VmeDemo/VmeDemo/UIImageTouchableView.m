@@ -10,9 +10,6 @@
 #import "Utility.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface UIImageTouchableView()
-
-@end
 
 @implementation UIImageTouchableView
 

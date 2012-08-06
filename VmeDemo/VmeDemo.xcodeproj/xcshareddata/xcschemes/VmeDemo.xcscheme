@@ -14,7 +14,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CE97D0A7154CF1BD004F6C9A"
-               BuildableName = "Vme.app"
+               BuildableName = "vme.app"
                BlueprintName = "VmeDemo"
                ReferencedContainer = "container:VmeDemo.xcodeproj">
             </BuildableReference>
@@ -32,7 +32,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE97D0A7154CF1BD004F6C9A"
-            BuildableName = "Vme.app"
+            BuildableName = "vme.app"
             BlueprintName = "VmeDemo"
             ReferencedContainer = "container:VmeDemo.xcodeproj">
          </BuildableReference>
@@ -46,12 +46,13 @@
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
+      enableOpenGLFrameCaptureMode = "0"
       allowLocationSimulation = "YES">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE97D0A7154CF1BD004F6C9A"
-            BuildableName = "Vme.app"
+            BuildableName = "vme.app"
             BlueprintName = "VmeDemo"
             ReferencedContainer = "container:VmeDemo.xcodeproj">
          </BuildableReference>
@@ -69,7 +70,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE97D0A7154CF1BD004F6C9A"
-            BuildableName = "Vme.app"
+            BuildableName = "vme.app"
             BlueprintName = "VmeDemo"
             ReferencedContainer = "container:VmeDemo.xcodeproj">
          </BuildableReference>

@@ -51,7 +51,7 @@
 		userPersonalInfo.userID = userID;
 		userPersonalInfo.userName = [dataDic objectForKey:@"screen_name"];
 		NSString* imageURL = [dataDic objectForKey:@"profile_image_url"];
-		[[ImageManager sharedImageManager] postURL2DownLoadImage:imageURL Delegate:userPersonalInfo];
+		[[ImageManager sharedImageManager] postURL2DownLoadImage:imageURL Delegate:(id<URLImageDelegate>)userPersonalInfo];
 		[[VideoWeiBoDataManager sharedVideoWeiBoDataManager] addWeiBoUserPersonalInfo:userPersonalInfo.userID UserPersonalInfo:userPersonalInfo];
 	}
 	
@@ -157,7 +157,7 @@
 		NSString* timeStr = [userDataDic objectForKey:@"created_at"];
 		userInfo.createTime = [[self getDateFormatter] dateFromString:timeStr];
 		NSString* imageURL = [userDataDic objectForKey:@"profile_image_url"];
-		[[ImageManager sharedImageManager] postURL2DownLoadImage:imageURL Delegate:userInfo];
+		[[ImageManager sharedImageManager] postURL2DownLoadImage:imageURL Delegate:(id<URLImageDelegate>)userInfo];
 	}
 	weiBoComment.userInfo = userInfo;
 	NSDictionary* weiBoDic = [dataDic objectForKey:@"status"];

@@ -166,7 +166,7 @@
 
 - (void) failToLoadVideoInfo:(TudouVideoInfo*) videoInfo URL:(NSString*) url
 {
-	[[ImageManager sharedImageManager] postURL2DownLoadImage:url Delegate:videoInfo];
+	[[ImageManager sharedImageManager] postURL2DownLoadImage:url Delegate:(id<URLImageDelegate>)videoInfo];
 }
 
 - (void) freeRequest:(TudouWeiRequest*) request
@@ -207,7 +207,8 @@
 	
 	if (parseError)
     {
-		;
+        NSLog(@"%@", str);
+		return;
 	}
 	
 	switch (tudouRequest->operation) 
@@ -219,7 +220,7 @@
 			personalInfo.userNickName = [userInfo objectForKey:@"nickname"];
 			NSString* userPicPath = [userInfo objectForKey:@"userpicurl"];
 			[personalInfo setDelegate:tudouRequest.tudouSDKDeletage];
-			[[ImageManager sharedImageManager] postURL2DownLoadImage:userPicPath Delegate:personalInfo];
+			[[ImageManager sharedImageManager] postURL2DownLoadImage:userPicPath Delegate:(id<URLImageDelegate>)personalInfo];
 			[_personalInfoRequest addObject:personalInfo];
 		}
 		break;
@@ -250,8 +251,8 @@
 				video.delegate = tudouRequest.tudouSDKDeletage;
 				video.sdk = self;
 				NSString* pictureURL = [v objectForKey:@"picUrl"];
-				[[ImageManager sharedImageManager] postURL2DownLoadImage:pictureURL Delegate:video];
-				[[ImageManager sharedImageManager] postURL2DownLoadImage:video.bigPicURL Delegate:video];
+				[[ImageManager sharedImageManager] postURL2DownLoadImage:pictureURL Delegate:(id<URLImageDelegate>)video];
+				[[ImageManager sharedImageManager] postURL2DownLoadImage:video.bigPicURL Delegate:(id<URLImageDelegate>)video];
 				[_videoRequest addObject:video];
 			}
 		}

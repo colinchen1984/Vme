@@ -12,6 +12,4 @@
 
 @property (weak, nonatomic) id userData;
 - (void) setImage:(UIImage*) image;
-- (UIImage*) image;
-
 @end

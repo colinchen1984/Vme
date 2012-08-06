@@ -20,16 +20,18 @@ static const float replyButtonSize = 10.0f;
 	BOOL isLeftDirection;
 	float textLabelMaxWidth;
 }
-@property (strong, nonatomic) UILabel* textLabel;
+@property (strong, nonatomic) UILabel* textLabelForView;
 @property (strong, nonatomic) UIImageTouchableView* avatarImageView;
-@property (strong, nonatomic) UIImageTouchableView* backGroundImageView;
+@property (strong, nonatomic) UIImageView* backGroundImageView;
+@property (strong, nonatomic) UIImageView* avatarback;
 @end
 
 @implementation CommentView
 @synthesize userData = _userData;
-@synthesize textLabel = _textLabel;
+@synthesize textLabelForView = _textLabelForView;
 @synthesize avatarImageView = _avatarImageView;
 @synthesize backGroundImageView = _backGroundImageView;
+@synthesize avatarback = _avatarback;
 @synthesize delegate = _delegate;
 @synthesize type = _type;
 
@@ -42,25 +44,19 @@ static const float replyButtonSize = 10.0f;
     }
 	self.backgroundColor = [UIColor clearColor];
 	self->textLabelMaxWidth = frame.size.width - avatarImageWidth - discenten - 35.0f;
-	_textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, textLabelMaxWidth, frame.size.height)];
-	_textLabel.numberOfLines = 0;
-	_textLabel.lineBreakMode = UILineBreakModeCharacterWrap;
-	_textLabel.backgroundColor = [UIColor clearColor];
-	_backGroundImageView = [[UIImageTouchableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 0.0f, 0.0f)];
-	[_backGroundImageView addTarget:self action:@selector(OnReplyCommentButtonClick) forControlEvents:UIControlEventTouchDown];
-	_backGroundImageView.layer.shadowRadius = 2.f;
-	_backGroundImageView.layer.shadowOffset = CGSizeMake(2.f, 2.f);
-	_backGroundImageView.layer.shadowOpacity = 1.f;
-	_backGroundImageView.layer.shadowColor = [UIColor grayColor].CGColor;
+	_textLabelForView = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, textLabelMaxWidth, frame.size.height)];
+	_textLabelForView.numberOfLines = 0;
+	_textLabelForView.lineBreakMode = UILineBreakModeCharacterWrap;
+	_textLabelForView.backgroundColor = [UIColor clearColor];
+	_backGroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 0.0f, 0.0f)];
 	_avatarImageView = [[UIImageTouchableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, avatarImageWidth, avatarImageHeight)];
 	[_avatarImageView addTarget:self action:@selector(OnAvatarClick) forControlEvents:UIControlEventTouchDown];
-	_avatarImageView.layer.shadowRadius = 2.f;
-	_avatarImageView.layer.shadowOffset = CGSizeMake(2.f, 2.f);
-	_avatarImageView.layer.shadowOpacity = 1.f;
-	_avatarImageView.layer.shadowColor = [UIColor grayColor].CGColor;
-	
+	_avatarback = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, avatarImageWidth - 3.5f, avatarImageHeight - 3.5f)];
+    _avatarback.center = _avatarImageView.center;
+    _avatarback.image = [[ImageManager sharedImageManager] getImageFromBundle:@"avataback.png"];
+    [self addSubview:_avatarback];
 	[self addSubview:_backGroundImageView];
-	[self addSubview:_textLabel];
+	[self addSubview:_textLabelForView];
 	[self addSubview:_avatarImageView];
 	self->isLeftDirection = NO;
 	[self setPopDirection:YES];
@@ -89,21 +85,21 @@ static const float replyButtonSize = 10.0f;
 
 - (void) settext:(NSString*)text
 {
-	_textLabel.text = text;
-	CGRect frame = _textLabel.frame;
+	_textLabelForView.text = text;
+	CGRect frame = _textLabelForView.frame;
 	frame.size.width = self->textLabelMaxWidth;
-	_textLabel.frame = frame;
-	[_textLabel sizeToFit];
+	_textLabelForView.frame = frame;
+	[_textLabelForView sizeToFit];
 	[self layoutSubviews];
 }
 
 - (void) layoutSubviews
 {
 	[super layoutSubviews];
-	_backGroundImageView.frame = CGRectMake(self->isLeftDirection ? avatarImageWidth + discenten : 0.0f, 0, _textLabel.frame.size.width + 30.0f, MAX(avatarImageHeight, _textLabel.frame.size.height + 20.0f));
-	_textLabel.center = _backGroundImageView.center;
-	self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _backGroundImageView.frame.size.width + avatarImageWidth + discenten, MAX(avatarImageHeight, _textLabel.frame.size.height + 20.0f));
-	_avatarImageView.center = CGPointMake(self->isLeftDirection ? avatarImageWidth / 2.0f : self.frame.size.width - avatarImageWidth / 2.0f, self.frame.size.height - avatarImageHeight / 2.0f);
+	_backGroundImageView.frame = CGRectMake(self->isLeftDirection ? avatarImageWidth + discenten : 0.0f, 0, MAX(_textLabelForView.frame.size.width + 30.0f, 180.0f), MAX(avatarImageHeight, _textLabelForView.frame.size.height + 20.0f));
+	_textLabelForView.center = _backGroundImageView.center;
+	self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _backGroundImageView.frame.size.width + avatarImageWidth + discenten, MAX(avatarImageHeight, _textLabelForView.frame.size.height + 20.0f));
+    _avatarback.center = _avatarImageView.center = CGPointMake(self->isLeftDirection ? avatarImageWidth / 2.0f : self.frame.size.width - avatarImageWidth / 2.0f, self.frame.size.height - avatarImageHeight / 2.0f);
 }
 
 - (void) OnAvatarClick

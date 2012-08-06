@@ -56,7 +56,7 @@ static SendWeiBoView* singleton = nil;
         return nil;
     }
 	_backGroundView = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 480.0f)];
-	_backGroundView.alpha = 0.85f;
+	_backGroundView.alpha = 0.6f;
 	_backGroundView.backgroundColor = [UIColor blackColor];
 	[_backGroundView addTarget:self action:@selector(cancelSendWeiBo:) forControlEvents:UIControlEventTouchDown];
 	self.backgroundColor = GlobalBackGroundColor;
@@ -89,7 +89,7 @@ static SendWeiBoView* singleton = nil;
 	[self addSubview:_sendButton];
 	
 	_textView = [[UITextView alloc] init];
-	_textView.delegate = self;
+	_textView.delegate = (id<UITextViewDelegate>)self;
 	_textView.frame = CGRectMake(5.0f, 40.0f, 290.0f, 200.0f);
 	_textView.font = [UIFont systemFontOfSize:16.0f];
 	_textView.layer.borderColor = [UIColor grayColor].CGColor;

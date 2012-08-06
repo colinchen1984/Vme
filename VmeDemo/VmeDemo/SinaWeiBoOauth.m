@@ -95,7 +95,7 @@
 		return;
 	}
 	
-	_consumerSecrectKey = [[NSString alloc] initWithString:@"95881335a0dea9ab28afa9888071d9be"];
+	_consumerSecrectKey = @"95881335a0dea9ab28afa9888071d9be";
 	_webRequest = [[WebRequest alloc] init];
 	_callBackUrl = @"http://";
 	_webRequest.delegate = (id<WebRequestDelegate>)self;

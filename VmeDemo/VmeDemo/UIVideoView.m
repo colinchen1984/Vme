@@ -45,19 +45,13 @@ static const float avatarImageViewWidth = 47.5f;
 	{
 		return nil;
     }
-	UIImageView* back = [[UIImageView alloc] initWithImage:[[ImageManager sharedImageManager] getImageFromBundle:@"videoviewback.png"]];
-	back.frame = CGRectMake(0.0f, 0.0f, frame.size.width, frame.size.height);
-	[self addSubview:back];
+
 	float iW = frame.size.width - 2 * videoImageBeginPos;
 	float vH = iW * (3.0f / 4.0f);
 	self.backgroundColor = [UIColor clearColor];
 	_videoImageView = [[UIImageTouchableView alloc] initWithFrame:CGRectMake(videoImageBeginPos, videoImageBeginPos, iW, vH)];
 	[self addSubview:_videoImageView];
 	[_videoImageView addTarget:self action:@selector(OnVideoImageClick) forControlEvents:UIControlEventTouchDown];
-	_videoImageView.layer.borderWidth = 5.0f;
-	_videoImageView.layer.borderColor = [UIColor whiteColor].CGColor;
-	_videoImageView.layer.cornerRadius = 5.0f;
-	_videoImageView.layer.backgroundColor = [UIColor clearColor].CGColor;
 	_videoImageView.backgroundColor = [UIColor clearColor];
 	float textHight = 30.0f;
 	vH += emptySize;
@@ -74,6 +68,7 @@ static const float avatarImageViewWidth = 47.5f;
 	{
 		UIImageTouchableView* avatarImageView = [[UIImageTouchableView alloc] initWithFrame:CGRectMake(videoImageBeginPos + (avatarImageViewWidth + emptySize) * i, vH, avatarImageViewWidth, aHight)];
 		[_avatarImageViewArray addObject:avatarImageView];
+        [self addSubview:avatarImageView];
 		[avatarImageView addTarget:self action:@selector(OnWeiBoCommentUserAvatarClick:) forControlEvents:UIControlEventTouchDown];
 	}
 	frame = CGRectMake(videoImageBeginPos, vH, 0, 0);
@@ -84,10 +79,6 @@ static const float avatarImageViewWidth = 47.5f;
 	_share2WeiBo.frame = frame;
 	[_share2WeiBo addTarget:self action:@selector(OnShare2SinaWeiBoClick) forControlEvents:UIControlEventTouchDown];
 	[self addSubview:_share2WeiBo];
-	self.layer.shadowColor = [UIColor grayColor].CGColor;
-	self.layer.shadowRadius = 5.0f;
-	self.layer.shadowOpacity = 1.0f;
-	self.layer.shadowOffset = CGSizeMake(5.0f, 5.0f);
     return self;
 }
 
@@ -101,23 +92,22 @@ static const float avatarImageViewWidth = 47.5f;
 	UIImage* image = nil == _videoInfo.bigPic ? _videoInfo.pic : _videoInfo.bigPic;
 	[_videoImageView setImage:image];
 	_textLable.text = nil != _weiBoData ? _weiBoData.text : _videoInfo.title;
-	_textLable.textColor = [UIColor whiteColor];
 	_share2WeiBo.hidden = nil != _weiBoData;
+    for (UIImageView* v in _avatarImageViewArray)
+	{
+		v.hidden = YES;
+	}
+    
 	if (nil == _weiBoData) 
 	{
 		//处理没有微博数据的情况
 		return;
 	}
 	
-	for (UIImageView* v in _avatarImageViewArray)
-	{
-		[v removeFromSuperview];
-	}
-	
 	UIImageTouchableView* avatarView = [_avatarImageViewArray objectAtIndex:0];
 	[avatarView setImage:_weiBoData.userInfo.avatarImage];
 	avatarView.userData = _weiBoData.userInfo;
-	[self addSubview:avatarView];
+	avatarView.hidden = NO;
 	if (nil == _weiBoData.comments) 
 	{
 		//处理微博没有comment的情况
@@ -129,7 +119,7 @@ static const float avatarImageViewWidth = 47.5f;
 	{
 		avatarView = [_avatarImageViewArray objectAtIndex:i];
 		SinaWeiBoComment* comment = [_weiBoData.comments objectAtIndex:i - 1];
-		[self addSubview:avatarView];
+		avatarView.hidden = NO;
 		[avatarView setImage:comment.userInfo.avatarImage];
 		avatarView.userData = comment.userInfo;
 	}

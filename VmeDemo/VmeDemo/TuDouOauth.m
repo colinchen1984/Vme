@@ -33,14 +33,14 @@
 		return nil;
 	}
 
-	_serverName = [[NSString alloc] initWithString:@"TudouService"];
-	_comsumerKey = [[NSString alloc] initWithString:@"f3db9710183157f4"];
-	_consumerSecrectKey = [[NSString alloc] initWithString:@"83ba9687ec4f174279bb74ced70de0f2"];
-	_requestTokenURL = [[NSString alloc] initWithString:@"http://api.tudou.com/auth/request_token.oauth"];
-	_authorizeURL = [[NSString alloc] initWithString:@"http://api.tudou.com/auth/authorize.oauth"];
-	_accessTokenURL = [[NSString alloc] initWithString:@"http://api.tudou.com/auth/access_token.oauth"];
-	_token = @"";
-	_tokenSecrect = @"";
+	_serverName = @"TudouService";
+	_comsumerKey = @"f3db9710183157f4";
+	_consumerSecrectKey = @"83ba9687ec4f174279bb74ced70de0f2";
+	_requestTokenURL = @"http://api.tudou.com/auth/request_token.oauth";
+	_authorizeURL = @"http://api.tudou.com/auth/authorize.oauth";
+	_accessTokenURL = @"http://api.tudou.com/auth/access_token.oauth";
+	_token = nil;
+	_tokenSecrect = nil;
 	return self;
 }
 

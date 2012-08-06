@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "1.0">
+   <FileBreakpoints>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "VmeDemo/TuDouSDK.m"
+         timestampString = "365700784.003229"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "256"
+         endingLineNumber = "256"
+         landmarkName = "-OnReceiveData:Data:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "VmeDemo/VmeDemoViewController.m"
+         timestampString = "365938726.934254"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "262"
+         endingLineNumber = "262"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "VmeDemo/VmeDemoViewController.m"
+         timestampString = "365254423.482973"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "122"
+         endingLineNumber = "122"
+         landmarkName = "-OnReceiveUserPersonalInfo:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "VmeDemo/VmeDemoViewController.m"
+         timestampString = "365254430.031533"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "112"
+         endingLineNumber = "112"
+         landmarkName = "-requestMoreVideoInfo"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "VmeDemo/TuDouOauth.m"
+         timestampString = "365441675.592008"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "174"
+         endingLineNumber = "174"
+         landmarkName = "-getSignature:Key:URL:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "VmeDemo/VmeDemoViewController.m"
+         timestampString = "365442172.101868"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "97"
+         endingLineNumber = "97"
+         landmarkName = "-viewWillAppear:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "VmeDemo/Oauth.m"
+         timestampString = "365442215.904578"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "104"
+         endingLineNumber = "104"
+         landmarkName = "-oauthStart"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "VmeDemo/VmeStartUp.m"
+         timestampString = "365442220.778927"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1"
+         endingLineNumber = "1">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "VmeDemo/SinaWeiBoSDK.m"
+         timestampString = "365442275.802425"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "107"
+         endingLineNumber = "107"
+         landmarkName = "-requireUserAllWeiBo:Delegate:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "VmeDemo/TuDouSDK.m"
+         timestampString = "365700762.499367"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "210"
+         endingLineNumber = "210"
+         landmarkName = "-OnReceiveData:Data:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "VmeDemo/SinaWeiBoSDK.m"
+         timestampString = "365700835.938238"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "377"
+         endingLineNumber = "377"
+         landmarkName = "-OnReceiveData:Data:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "VmeDemo/VmeDemoViewController.m"
+         timestampString = "365938770.776209"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "241"
+         endingLineNumber = "241"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "VmeDemo/UIVideoView.m"
+         timestampString = "365950478.175728"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "108"
+         endingLineNumber = "108"
+         landmarkName = "-UpdateView"
+         landmarkType = "5">
+      </FileBreakpoint>
+   </FileBreakpoints>
+</Bucket>
