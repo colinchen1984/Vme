@@ -16,7 +16,6 @@ typedef enum
 	
 } TUDOU_SDK_REQUEST_OPERATION_TYPE;
 
-@class OauthEngine;
 @class TuDouUserPersonalInfo;
 @class TudouVideoInfo;
 @protocol TuDouSDKDelegate
@@ -47,7 +46,7 @@ typedef enum
 
 @interface TuDouSDK : NSObject<WebRequestDelegate>
 
-- (id) initWithOauthEngine:(OauthEngine*) engine UserName:(NSString*) userName;
+- (id) initUserName:(NSString*) userName;
 
 - (void) requireUserPersonalInfo:(id<TuDouSDKDelegate>)delegate UserName:(NSString*)userName;
 

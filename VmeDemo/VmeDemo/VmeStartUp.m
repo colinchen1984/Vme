@@ -9,7 +9,6 @@
 #import "VmeStartUp.h"
 #import "Oauth.h"
 #import "SinaWeiBoOauth.h"
-#import "TuDouOauth.h"
 #import "SFHFKeychainUtils.h"
 #import "VmeDemoViewController.h"
 #import "GTMBase64.h"
@@ -28,7 +27,6 @@
 
 @implementation VmeStartUpController
 @synthesize startUpView = _startUpView;
-@synthesize tudouOuath = _tudouOauth;
 @synthesize sinaOauth = _sinaOauth;
 @synthesize tudouUserName = _tudouUserName;
 @synthesize inputTudouUserName = _inputTudouUserName;
@@ -46,7 +44,6 @@
 		return nil;
     }
 	
-	_tudouOauth = [[OauthEngine alloc] initWithProvider:[[TuDouOauth alloc] init] Delegate:(id<OauthDelegate>)self];
 	_sinaOauth = [[SinaWeiBoOauth alloc] init];
 	_sinaOauth.delegate = (id<OauthDelegate>)self;
 	_videoController = [[VmeDemoViewController alloc] initWithNibName:nil bundle:nil];
@@ -119,7 +116,7 @@
 {
 	_sinaWeiboSDK = [[SinaWeiBoSDK alloc] initWithSinaWeiBoOauth:_sinaOauth];
 	_videoController.tudouUserName = _tudouUserName;
-	_tudouSDK = [[TuDouSDK alloc] initWithOauthEngine:_tudouOauth UserName:_tudouUserName];
+	_tudouSDK = [[TuDouSDK alloc] initUserName:_tudouUserName];
 	_videoController.tudouSDK = _tudouSDK;
 	_videoController.sinaWeiBoSDK = _sinaWeiboSDK;
 	self.navigationItem.title = nil;

@@ -7,12 +7,10 @@
 //
 
 #import "TuDouSDK.h"
-#import "Oauth.h"
 #import "SBJSON.h"
 #import "ImageManager.h"
 
 @interface TuDouSDK()
-@property (strong, nonatomic) OauthEngine* oauthEngine;
 @property (strong, nonatomic) NSMutableSet* usingConnection;
 @property (strong, nonatomic) NSMutableArray* freeConnection;
 @property (strong, nonatomic) NSMutableSet* personalInfoRequest;
@@ -103,27 +101,25 @@
 
 
 //appKey%@ userName%@
+#define oauthAppKey @"f3db9710183157f4"
 #define API4TUDOU2GETUSERPERSONALINFO @"http://api.tudou.com/v3/gw?method=user.info.get&appKey=%@&format=json&user=%@"
 //appKey%@ userName%@ pageNo%d
 #define API4TUDOU2GETUSERVIDEOINFO @"http://api.tudou.com/v3/gw?method=user.item.get&appKey=%@&format=&user=%@&pageNo=%d&pageSize=10"
 
 @implementation TuDouSDK
-@synthesize oauthEngine = _oauthEngine;
 @synthesize freeConnection = _freeConnection;
 @synthesize usingConnection = _usingConnection;
 @synthesize personalInfoRequest = _personalInfoRequest;
 @synthesize videoRequest = _videoRequest;
 
 #pragma mark - life cycle
-- (id) initWithOauthEngine:(OauthEngine*) engine UserName:(NSString*) userName
+- (id) initUserName:(NSString*) userName;
 {
 	self = [super init];
 	if (nil == self)
 	{
 		return nil;
 	}
-	
-	_oauthEngine = engine;
 	_freeConnection = [[NSMutableArray alloc] init];
 	_usingConnection = [[NSMutableSet alloc] init];
 	_personalInfoRequest = [[NSMutableSet alloc] init];
@@ -138,7 +134,7 @@
 	request->operation = TUDOU_SDK_REQUEST_USER_PERSONAL_INFO; 
 	[request setDelegate:self];
 	[request setTudouSDKDeletage:delegate];
-	NSString* apiUrl = [[NSString alloc] initWithFormat:API4TUDOU2GETUSERPERSONALINFO, [_oauthEngine oauthAppKey], userName];
+	NSString* apiUrl = [[NSString alloc] initWithFormat:API4TUDOU2GETUSERPERSONALINFO, oauthAppKey, userName];
 	[request postUrlRequest:apiUrl];
 }
 
@@ -148,7 +144,7 @@
 	request->operation = TUDOU_SDK_REQUEST_USER_VIDEO_INFO; 
 	[request setDelegate:self];
 	[request setTudouSDKDeletage:delegate];
-	NSString* apiUrl = [[NSString alloc] initWithFormat:API4TUDOU2GETUSERVIDEOINFO, [_oauthEngine oauthAppKey], userName, pageNo];
+	NSString* apiUrl = [[NSString alloc] initWithFormat:API4TUDOU2GETUSERVIDEOINFO, oauthAppKey, userName, pageNo];
 	[request postUrlRequest:apiUrl];
 
 }

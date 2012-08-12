@@ -7,11 +7,11 @@
 //
 
 #import "VmOauthWebViewController.h"
-#import "Oauth.h"
+#import "SinaWeiBoOauth.h"
 
 @interface VmOauthWebViewController ()
 @property (strong, nonatomic) UIWebView* webView;
-@property (weak, nonatomic) OauthEngine* engine;
+@property (weak, nonatomic) SinaWeiBoOauth* engine;
 @end
 
 @implementation VmOauthWebViewController
@@ -46,7 +46,7 @@
     // Release any retained subviews of the main view.
 }
 
-- (void) loadUrl:(NSString*) url OauthEngine:(OauthEngine*) engine
+- (void) loadUrl:(NSString*) url OauthEngine:(SinaWeiBoOauth*) engine
 {
 	NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]
                                             cachePolicy:NSURLRequestReloadIgnoringLocalCacheData

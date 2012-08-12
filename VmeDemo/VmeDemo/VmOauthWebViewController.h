@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-@class OauthEngine;
+@class SinaWeiBoOauth;
 
 @interface VmOauthWebViewController : UIViewController <UIWebViewDelegate>
 
-- (void) loadUrl:(NSString*) url OauthEngine:(OauthEngine*) engine;
+- (void) loadUrl:(NSString*) url OauthEngine:(SinaWeiBoOauth*) engine;
 @end

@@ -10,7 +10,6 @@
 #import "VmeDemoViewController.h"
 #import "VmeStartUp.h"
 #import "Oauth.h"
-#import "TuDouOauth.h"
 #import "TuDouSDK.h"
 #import "SinaWeiBoOauth.h"
 #import "SinaWeiBoSDK.h"

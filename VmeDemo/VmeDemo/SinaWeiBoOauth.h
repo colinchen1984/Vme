@@ -1,4 +1,4 @@
-#import "Oauth.h"
+
 
 @protocol OauthDelegate;
 
@@ -8,6 +8,7 @@
 - (BOOL) expires;
 - (BOOL) isLogining;
 - (void) loadAccessToken;
+- (void) handleOauthWebViewData:(NSString*) data;
 @property (weak, nonatomic) id<OauthDelegate> delegate;
 @property (strong, nonatomic, readonly) NSString* userID;
 @property (strong, nonatomic, readonly) NSString* accessCode;

@@ -14,7 +14,7 @@
 #import "SFHFKeychainUtils.h"
 #import "JSON.h"
 #import "Utility.h"
-
+#import "Oauth.h"
 
 #define ACCESS_TOKEN @"Access_Token"
 #define USER_ID @"USER_ID"
@@ -107,7 +107,7 @@
 		_webOauth = [[VmOauthWebViewController alloc] init];
 	}
 	[c presentViewController:_webOauth animated:YES	completion:nil];
-	[_webOauth loadUrl:urlStr OauthEngine:(OauthEngine*)self];
+	[_webOauth loadUrl:urlStr OauthEngine:self];
 	
 }
 
