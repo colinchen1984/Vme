@@ -15,15 +15,15 @@
 #import <QuartzCore/QuartzCore.h> 
 
 @interface UIVideoView()
-@property (strong, nonatomic) UIImageTouchableView* videoImageView;
+@property (strong, nonatomic) UIImageView* videoImageView;
 @property (strong, nonatomic) NSMutableArray* avatarImageViewArray;
 @property (strong, nonatomic) UILabel* textLable;
 @property (strong, nonatomic) UIButton* share2WeiBo;
 @end
 
-static const float videoImageWidth = 100.0f;
-static const float videoImageBeginPos = 5.0f;
-static const float emptySize = 5.0f;
+static const float videoImageWidth = 240.0f;
+static const float videoImageHBeginPos = 15.0f;
+static const float emptySize = 10.0f;
 static const float textLableXPos = videoImageWidth + 5.0f;
 static const int avatarImageViewCount = 4;
 static const float avatarImageViewWidth = 47.5f;
@@ -45,33 +45,36 @@ static const float avatarImageViewWidth = 47.5f;
 	{
 		return nil;
     }
-
-	float iW = frame.size.width - 2 * videoImageBeginPos;
-	float vH = iW * (3.0f / 4.0f);
+	UIView* back = [[UIView alloc] initWithFrame:CGRectMake(20.0f, 0.0f, 280.0f, 292.5)];
+	[self addSubview: back];
+	back.backgroundColor = [UIColor whiteColor];
+	
+	float vH = videoImageWidth * (3.0f / 4.0f) ;
 	self.backgroundColor = [UIColor clearColor];
-	_videoImageView = [[UIImageTouchableView alloc] initWithFrame:CGRectMake(videoImageBeginPos, videoImageBeginPos, iW, vH)];
+    float xpos = 0.5f * (frame.size.width - videoImageWidth);
+	_videoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(xpos, videoImageHBeginPos, videoImageWidth, vH)];
 	[self addSubview:_videoImageView];
-	[_videoImageView addTarget:self action:@selector(OnVideoImageClick) forControlEvents:UIControlEventTouchDown];
 	_videoImageView.backgroundColor = [UIColor clearColor];
-	float textHight = 30.0f;
+	vH += videoImageHBeginPos;
+	
+	float textHight = 20.0f;
 	vH += emptySize;
-	_textLable = [[UILabel alloc] initWithFrame:CGRectMake(videoImageBeginPos,  vH, frame.size.width - 2 * videoImageBeginPos, textHight)];
+	_textLable = [[UILabel alloc] initWithFrame:CGRectMake(xpos,  vH, videoImageWidth, textHight)];
 	_textLable.backgroundColor = [UIColor clearColor];
 	[self addSubview:_textLable];
 	vH += textHight;
 	
 	_avatarImageViewArray = [[NSMutableArray alloc] initWithCapacity:avatarImageViewCount];
-	float aHight = frame.size.height - vH - emptySize;
 	vH += emptySize - 5.0f;
 	
 	for (int i = 0; i < avatarImageViewCount; ++i) 
 	{
-		UIImageTouchableView* avatarImageView = [[UIImageTouchableView alloc] initWithFrame:CGRectMake(videoImageBeginPos + (avatarImageViewWidth + emptySize) * i, vH, avatarImageViewWidth, aHight)];
+		UIImageTouchableView* avatarImageView = [[UIImageTouchableView alloc] initWithFrame:CGRectMake(xpos + (avatarImageViewWidth + emptySize) * i, vH, avatarImageViewWidth, avatarImageViewWidth)];
 		[_avatarImageViewArray addObject:avatarImageView];
         [self addSubview:avatarImageView];
 		[avatarImageView addTarget:self action:@selector(OnWeiBoCommentUserAvatarClick:) forControlEvents:UIControlEventTouchDown];
 	}
-	frame = CGRectMake(videoImageBeginPos, vH, 0, 0);
+	frame = CGRectMake(xpos, vH + 10.0f, 0, 0);
 	_share2WeiBo = [[UIButton alloc] initWithFrame:frame];
 	UIImage* weiBoIcon = [[ImageManager sharedImageManager] getImageFromBundle:@"share2Sina.gif"];
 	[_share2WeiBo setImage:weiBoIcon forState:UIControlStateNormal];
@@ -79,6 +82,7 @@ static const float avatarImageViewWidth = 47.5f;
 	_share2WeiBo.frame = frame;
 	[_share2WeiBo addTarget:self action:@selector(OnShare2SinaWeiBoClick) forControlEvents:UIControlEventTouchDown];
 	[self addSubview:_share2WeiBo];
+	
     return self;
 }
 

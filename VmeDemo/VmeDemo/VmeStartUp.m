@@ -12,6 +12,7 @@
 #import "TuDouOauth.h"
 #import "SFHFKeychainUtils.h"
 #import "VmeDemoViewController.h"
+#import "GTMBase64.h"
 
 @interface VmeStartUpController()
 @property (strong, nonatomic) OauthEngine* tudouOuath;
@@ -49,8 +50,8 @@
 	_sinaOauth = [[SinaWeiBoOauth alloc] init];
 	_sinaOauth.delegate = (id<OauthDelegate>)self;
 	_videoController = [[VmeDemoViewController alloc] initWithNibName:nil bundle:nil];
-    _tudouUserName = @"_79592344";
-    return self;
+    //_tudouUserName = @"_79592344";
+	return self;
 }
 
 - (void)viewDidLoad

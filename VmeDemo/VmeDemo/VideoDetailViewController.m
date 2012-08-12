@@ -56,7 +56,7 @@ IBOutlet UIImageTouchableView *bigPicImageView;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-	
+	self.view.backgroundColor = [UIColor colorWithRed:(237.0 / 256.0) green:(233.0 / 256.0) blue:(227.0 / 256.0) alpha:1.0f];
 	//添加视频截图
 	[_bigPicImageView addTarget:self action:@selector(onBigImageClicked:) forControlEvents:UIControlEventTouchDown];
     _bigPicImageView.backgroundColor = [UIColor clearColor];

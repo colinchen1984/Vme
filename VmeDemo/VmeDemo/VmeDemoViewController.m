@@ -19,6 +19,7 @@
 @property (strong, nonatomic) NSMutableArray* videoInfosArray;
 @property (strong, nonatomic) VideoDetailViewController* videoDetailInfoController;
 @property (weak, nonatomic) IBOutlet UITableView *videoViewTable;
+@property (weak, nonatomic) IBOutlet UIView *backGround;
 
 @property (strong, nonatomic) TuDouUserPersonalInfo* tudouPersonalInfo;
 @property (strong, nonatomic) SinaWeiBoUserPersonalInfo* sinaPersnalInfo;
@@ -32,6 +33,7 @@
 @synthesize tudouUserName = _tudouUserName;
 @synthesize videoDetailInfoController = _videoDetailInfoController;
 @synthesize videoViewTable = _videoViewTable;
+@synthesize backGround = _backGround;
 @synthesize tudouPersonalInfo = _tudouPersonalInfo;
 @synthesize table4FastScroll = _table4FastScroll;
 @synthesize sinaWeiBoSDK = _sinaWeiBoSDK;
@@ -40,8 +42,8 @@
 #pragma mark - ui operation
 
 
-const static float videoViewWidth = 320;
-const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80.0f;
+const static float videoViewWidth = 320.f;
+const static float videoViewHeigth = 292.5 + 25;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -72,6 +74,8 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80.0f;
 	_table4FastScroll.alpha = 0.7f;
     [_tudouSDK requireUserPersonalInfo:self UserName:_tudouUserName];
     [_sinaWeiBoSDK requireUserPersonalInfo:(id<SinaWeiBoSDKDelegate>)self];
+	
+	_backGround.backgroundColor = [UIColor colorWithRed:(237.0 / 256.0) green:(233.0 / 256.0) blue:(227.0 / 256.0) alpha:1.0f];
 }
 
 - (void)viewDidUnload
@@ -88,6 +92,7 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80.0f;
     _videoInfosArray = nil;
     _videoViewDic = nil;
     _videoViewTable = nil;
+	[self setBackGround:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -170,6 +175,7 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80.0f;
 	{
 		[_sinaWeiBoSDK requireWeiBoComment:w Delegate:(id<SinaWeiBoSDKDelegate>)self];
 	}
+//    [_sinaWeiBoSDK requireBatchWeiBoComment:weiBoArray Delegate:(id<SinaWeiBoSDKDelegate>)self];
 	
 }
 
@@ -238,8 +244,8 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80.0f;
 		UIVideoView* v = (UIVideoView*)cell;
         if(nil == v)
         {
-            float xPos = (tableView.frame.size.width - videoViewWidth) * 0.5f;
-            v = [[UIVideoView alloc] initWithFrame:CGRectMake(xPos, 0.0f, videoViewWidth, videoViewHeigth)];
+            
+            v = [[UIVideoView alloc] initWithFrame:CGRectMake(0.0f, 10.0f, videoViewWidth, videoViewHeigth)];
         }
 		v.videoInfo = video;
 		v.weiBoData = [[VideoWeiBoDataManager sharedVideoWeiBoDataManager] getWeiBoDataByVideoID:video.itemCode];
@@ -291,7 +297,7 @@ const static float videoViewHeigth = videoViewWidth * (3.0f / 4.0f) + 80.0f;
 	[NSObject cancelPreviousPerformRequestsWithTarget:self];
 	if (_videoViewTable == tableView) 
 	{
-		[self performSelector:@selector(HideFastVideoTableView) withObject:nil afterDelay:5.0];
+		[self performSelector:@selector(HideFastVideoTableView) withObject:nil afterDelay:2.5f];
 	}
 	else 
 	{

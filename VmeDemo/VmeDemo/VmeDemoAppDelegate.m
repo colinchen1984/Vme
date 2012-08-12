@@ -39,7 +39,15 @@
 	_navigationController = [[UINavigationController alloc] initWithRootViewController:_startUpController];
 	_navigationController.navigationBar.tintColor = [UIColor colorWithRed:205.0f / 256.0f green:44.0f / 256.0f blue:36.0f / 256.0f alpha:1.0f];
 	_navigationController.navigationBar.barStyle = UIBarStyleBlack;
-	self.window.rootViewController = _navigationController;
+    _navigationController.navigationBar.translucent = NO;
+    [_navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [_navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsLandscapePhone];
+
+    UILabel *label;
+    label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _navigationController.navigationBar.frame.size.width, _navigationController.navigationBar.frame.size.height)];
+    label.backgroundColor = [UIColor colorWithRed:(165.0 / 256.0) green:(39.0 / 256.0) blue:(37.0 / 256.0) alpha:1.0f];
+    [_navigationController.navigationBar addSubview:label];
+    self.window.rootViewController = _navigationController;
 	[self.window makeKeyAndVisible];
 
     return YES;

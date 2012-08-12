@@ -231,15 +231,18 @@
 		[delegate OnWeiBoOauthExpired]; 
 		return;
 	}
+    
 	if (nil == weiBoData) 
 	{
 		return;
 	}
+    
 	if ([self LimitationCheck:SINA_WEIBO_GET_BATCH_WEIBO_COMMENT]) 
 	{
 		[delegate OnRateLimitate];
 		return;
 	}
+    
 	int count = 0;
 	const static int maxCount = 50;
 	NSMutableString* str = [[NSMutableString alloc] initWithCapacity:maxCount * (12)];
@@ -253,7 +256,7 @@
 		{
 			[str appendFormat:@"%@", w.weiBoID];
 		}
-		
+		++count;
 		if (count == maxCount) 
 		{
 			//[str appendFormat:@","];
@@ -276,7 +279,7 @@
 		//[str appendFormat:@","];
 		NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
 								[_sinaWeiBoOauth accessCode], @"access_token",
-								[[NSString alloc] initWithFormat:@"[%@]", str], @"cids",
+								[[NSString alloc] initWithFormat:@"%@", str], @"cids",
 								nil];	
 		SinaWeiBoRequest* request = [self getFreeRequest];
 		request.delegate = (id<WebRequestDelegate>)self;
