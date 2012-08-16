@@ -9,12 +9,14 @@
 #import "TuDouSDK.h"
 #import "SBJSON.h"
 #import "ImageManager.h"
-
+#import "GTMBase64.h"
 @interface TuDouSDK()
 @property (strong, nonatomic) NSMutableSet* usingConnection;
 @property (strong, nonatomic) NSMutableArray* freeConnection;
 @property (strong, nonatomic) NSMutableSet* personalInfoRequest;
 @property (strong, nonatomic) NSMutableSet* videoRequest;
+@property (strong, nonatomic) NSString* userName;
+@property (strong, nonatomic) NSString* athorize;
 - (void) finishUserPersonalInfoRequest:(TuDouUserPersonalInfo*)userInfo;
 
 - (void) finishVideoInfoRequest:(TudouVideoInfo*)videoInfo;
@@ -111,15 +113,20 @@
 @synthesize usingConnection = _usingConnection;
 @synthesize personalInfoRequest = _personalInfoRequest;
 @synthesize videoRequest = _videoRequest;
+@synthesize userName = _userName;
+@synthesize athorize = _athorize;
 
 #pragma mark - life cycle
-- (id) initUserName:(NSString*) userName;
+- (id) initUserName:(NSString*) userName Pass:(NSString*)pass
 {
 	self = [super init];
 	if (nil == self)
 	{
 		return nil;
 	}
+	_userName = userName;
+	NSString* tempStr = [NSString stringWithFormat:@"%@:%@", userName, pass];
+	_athorize = [GTMBase64 stringByEncodingBytes:[tempStr UTF8String] length:[tempStr length]];
 	_freeConnection = [[NSMutableArray alloc] init];
 	_usingConnection = [[NSMutableSet alloc] init];
 	_personalInfoRequest = [[NSMutableSet alloc] init];
@@ -128,23 +135,23 @@
 }
 
 #pragma  mark - tudou api
-- (void) requireUserPersonalInfo:(id<TuDouSDKDelegate>) delegate UserName:(NSString*)userName
+- (void) requireUserPersonalInfo:(id<TuDouSDKDelegate>) delegate
 {
 	TudouWeiRequest* request = [self getFreeRequest];	
 	request->operation = TUDOU_SDK_REQUEST_USER_PERSONAL_INFO; 
 	[request setDelegate:self];
 	[request setTudouSDKDeletage:delegate];
-	NSString* apiUrl = [[NSString alloc] initWithFormat:API4TUDOU2GETUSERPERSONALINFO, oauthAppKey, userName];
+	NSString* apiUrl = [[NSString alloc] initWithFormat:API4TUDOU2GETUSERPERSONALINFO, oauthAppKey, _userName];
 	[request postUrlRequest:apiUrl];
 }
 
-- (void) requireUserVideoInfo:(id<TuDouSDKDelegate>)delegate UserName:(NSString*)userName PageNo:(NSInteger)pageNo
+- (void) requireUserVideoInfo:(id<TuDouSDKDelegate>)delegate PageNo:(NSInteger)pageNo
 {
 	TudouWeiRequest* request = [self getFreeRequest];	
 	request->operation = TUDOU_SDK_REQUEST_USER_VIDEO_INFO; 
 	[request setDelegate:self];
 	[request setTudouSDKDeletage:delegate];
-	NSString* apiUrl = [[NSString alloc] initWithFormat:API4TUDOU2GETUSERVIDEOINFO, oauthAppKey, userName, pageNo];
+	NSString* apiUrl = [[NSString alloc] initWithFormat:API4TUDOU2GETUSERVIDEOINFO, oauthAppKey, _userName, pageNo];
 	[request postUrlRequest:apiUrl];
 
 }

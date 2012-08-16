@@ -98,6 +98,7 @@
 		[self finishLogin];
 		return;
 	}
+	
 }
 
 - (void) startLoginSina
@@ -116,7 +117,7 @@
 {
 	_sinaWeiboSDK = [[SinaWeiBoSDK alloc] initWithSinaWeiBoOauth:_sinaOauth];
 	_videoController.tudouUserName = _tudouUserName;
-	_tudouSDK = [[TuDouSDK alloc] initUserName:_tudouUserName];
+	_tudouSDK = [[TuDouSDK alloc] initUserName:_tudouUserName Pass:@""];
 	_videoController.tudouSDK = _tudouSDK;
 	_videoController.sinaWeiBoSDK = _sinaWeiboSDK;
 	self.navigationItem.title = nil;

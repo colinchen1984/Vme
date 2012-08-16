@@ -22,6 +22,7 @@
 @property (weak, nonatomic)
 IBOutlet UIImageTouchableView *bigPicImageView;
 @property (weak, nonatomic) IBOutlet UITableView *commentTableView;
+@property (weak, nonatomic) IBOutlet UIImageView *bigPicBack;
 @property (strong, nonatomic) VideoPageViewController* webView;
 @property (weak, nonatomic) SinaWeiBoData* weiBoData;
 @property (strong, nonatomic) CommentView* viewForCaculate;
@@ -31,6 +32,7 @@ IBOutlet UIImageTouchableView *bigPicImageView;
 @implementation VideoDetailViewController
 @synthesize bigPicImageView = _bigPicImageView;
 @synthesize commentTableView = _commentTableView;
+@synthesize bigPicBack = _bigPicBack;
 @synthesize webView = _webView;
 @synthesize weiBoData = _weiBoData;
 @synthesize viewForCaculate = _viewForCaculate;
@@ -77,6 +79,7 @@ IBOutlet UIImageTouchableView *bigPicImageView;
 	_videoInfo = nil;
     _commentTableView = nil;
     _viewForCaculate = nil;
+	[self setBigPicBack:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

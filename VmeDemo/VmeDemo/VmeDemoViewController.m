@@ -21,9 +21,11 @@
 @property (weak, nonatomic) IBOutlet UITableView *videoViewTable;
 @property (weak, nonatomic) IBOutlet UIView *backGround;
 
+@property (weak, nonatomic) IBOutlet UIButton *sendNewVideoButton;
 @property (strong, nonatomic) TuDouUserPersonalInfo* tudouPersonalInfo;
 @property (strong, nonatomic) SinaWeiBoUserPersonalInfo* sinaPersnalInfo;
 @property (weak, nonatomic) IBOutlet UITableView *table4FastScroll;
+@property (assign, nonatomic) BOOL isSideBarShowing;
 @end
 
 @implementation VmeDemoViewController
@@ -34,8 +36,10 @@
 @synthesize videoDetailInfoController = _videoDetailInfoController;
 @synthesize videoViewTable = _videoViewTable;
 @synthesize backGround = _backGround;
+@synthesize sendNewVideoButton = _sendNewVideoButton;
 @synthesize tudouPersonalInfo = _tudouPersonalInfo;
 @synthesize table4FastScroll = _table4FastScroll;
+@synthesize isSideBarShowing = _isSideBarShowing;
 @synthesize sinaWeiBoSDK = _sinaWeiBoSDK;
 @synthesize sinaPersnalInfo = _sinaPersnalInfo;
 
@@ -72,10 +76,12 @@ const static float videoViewHeigth = 292.5 + 25;
 	frame.origin.x = 279.0f;
 	_table4FastScroll.frame = frame;
 	_table4FastScroll.alpha = 0.7f;
-    [_tudouSDK requireUserPersonalInfo:self UserName:_tudouUserName];
+    [_tudouSDK requireUserPersonalInfo:self];
     [_sinaWeiBoSDK requireUserPersonalInfo:(id<SinaWeiBoSDKDelegate>)self];
 	
 	_backGround.backgroundColor = [UIColor colorWithRed:(237.0 / 256.0) green:(233.0 / 256.0) blue:(227.0 / 256.0) alpha:1.0f];
+	[self ShowNewVideoButton];
+	_isSideBarShowing = YES;
 }
 
 - (void)viewDidUnload
@@ -92,7 +98,9 @@ const static float videoViewHeigth = 292.5 + 25;
     _videoInfosArray = nil;
     _videoViewDic = nil;
     _videoViewTable = nil;
-	[self setBackGround:nil];
+	_backGround = nil;
+	_sendNewVideoButton = nil;
+	_isSideBarShowing = NO;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -109,14 +117,14 @@ const static float videoViewHeigth = 292.5 + 25;
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+	return NO;
 }
 
 - (void) requestMoreVideoInfo
 {
     if(self->totalPageCount > self->currentPageNo)
     {
-        [_tudouSDK requireUserVideoInfo:self UserName:_tudouUserName PageNo:(self->currentPageNo + 1)];
+        [_tudouSDK requireUserVideoInfo:self PageNo:(self->currentPageNo + 1)];
     }
 }
 
@@ -147,6 +155,17 @@ const static float videoViewHeigth = 292.5 + 25;
 	
 }
 
+- (void) HideNewVideoButton
+{
+	_isSideBarShowing = NO;
+	[UIView beginAnimations:nil context:nil];
+	CGRect frame = _sendNewVideoButton.frame;
+	frame.origin.x = 321.0f;
+	_sendNewVideoButton.frame = frame;
+	[UIView commitAnimations];
+	[self performSelector:@selector(HideFastVideoTableView) withObject:nil afterDelay:0.2f];
+	
+}
 
 - (void)HideFastVideoTableView
 {
@@ -154,18 +173,21 @@ const static float videoViewHeigth = 292.5 + 25;
 	CGRect frame = _table4FastScroll.frame;
 	frame.origin.x = 321.0f;
 	_table4FastScroll.frame = frame;
-	_table4FastScroll.alpha = 0.0f;
 	[UIView commitAnimations];	
 }
 
-- (void)ShowFastVideoTableView
+- (void)ShowNewVideoButton
 {
+	_isSideBarShowing = YES;
 	[UIView beginAnimations:nil context:nil];
-	CGRect frame = _table4FastScroll.frame;
-	frame.origin.x = 279.0f;
+	CGRect frame = _sendNewVideoButton.frame;
+	frame.origin.x = 271.0f;
+	_sendNewVideoButton.frame = frame;
+	
+	frame = _table4FastScroll.frame;
+	frame.origin.x = 271.0f;
 	_table4FastScroll.frame = frame;
-	_table4FastScroll.alpha = 0.7f;
-	[UIView commitAnimations];	
+	[UIView commitAnimations];
 }
 
 #pragma mark - sina weibo sdk delegat
@@ -225,13 +247,14 @@ const static float videoViewHeigth = 292.5 + 25;
 #pragma makr - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-	[self ShowFastVideoTableView];
-	[NSObject cancelPreviousPerformRequestsWithTarget:self];
+
+	[self ShowNewVideoButton];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-	[self performSelector:@selector(HideFastVideoTableView) withObject:nil afterDelay:3.0f];
+	if(_isSideBarShowing)
+		[self performSelector:@selector(HideNewVideoButton) withObject:nil afterDelay:3.0f];
 }
 
 #pragma mark - UITableViewDataSource
@@ -297,12 +320,9 @@ const static float videoViewHeigth = 292.5 + 25;
 	[NSObject cancelPreviousPerformRequestsWithTarget:self];
 	if (_videoViewTable == tableView) 
 	{
-		[self performSelector:@selector(HideFastVideoTableView) withObject:nil afterDelay:2.5f];
+		[self performSelector:@selector(HideNewVideoButton) withObject:nil afterDelay:2.5f];
 	}
-	else 
-	{
-		[NSObject cancelPreviousPerformRequestsWithTarget:self];
-	}
+	
 	
 }
 

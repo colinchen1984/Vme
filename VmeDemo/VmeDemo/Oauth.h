@@ -1,8 +1,7 @@
 
 
-#import <Foundation/Foundation.h>
 
-@protocol OauthDelegate
+@protocol OauthDelegate<NSObject>
 @required
 - (void) OnOauthLoginSucessce;
 - (void) OnOauthLoginFail;

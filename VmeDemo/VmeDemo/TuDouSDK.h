@@ -46,11 +46,11 @@ typedef enum
 
 @interface TuDouSDK : NSObject<WebRequestDelegate>
 
-- (id) initUserName:(NSString*) userName;
+- (id) initUserName:(NSString*) userName Pass:(NSString*)pass;
 
-- (void) requireUserPersonalInfo:(id<TuDouSDKDelegate>)delegate UserName:(NSString*)userName;
+- (void) requireUserPersonalInfo:(id<TuDouSDKDelegate>)delegate;
 
-- (void) requireUserVideoInfo:(id<TuDouSDKDelegate>)delegate UserName:(NSString*)userName PageNo:(NSInteger)pageNo;
+- (void) requireUserVideoInfo:(id<TuDouSDKDelegate>)delegate PageNo:(NSInteger)pageNo;
 
 @end
 
