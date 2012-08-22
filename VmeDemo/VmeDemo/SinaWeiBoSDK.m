@@ -363,8 +363,12 @@
 	NSString* str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 	if (NSNotFound != [str rangeOfString:@"error"].location) 
 	{
-		[self freeRequest:weiBoRequest];
 		NSLog(@"%@\n", str);
+		if ([weiBoRequest.weiBoSDKDelegate respondsToSelector:@selector(OnError:)])
+		{
+			[weiBoRequest.weiBoSDKDelegate OnError:str];
+		}
+		[self freeRequest:weiBoRequest];
 		return;
 	}
 	SBJSON *jsonParser = [[SBJSON alloc]init];

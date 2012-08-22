@@ -22,21 +22,20 @@
 @property (weak, nonatomic)
 IBOutlet UIImageTouchableView *bigPicImageView;
 @property (weak, nonatomic) IBOutlet UITableView *commentTableView;
-@property (weak, nonatomic) IBOutlet UIImageView *bigPicBack;
 @property (strong, nonatomic) VideoPageViewController* webView;
 @property (weak, nonatomic) SinaWeiBoData* weiBoData;
 @property (strong, nonatomic) CommentView* viewForCaculate;
+@property (assign, nonatomic) CGRect bigImageFrame;
 @end
 
 
 @implementation VideoDetailViewController
 @synthesize bigPicImageView = _bigPicImageView;
 @synthesize commentTableView = _commentTableView;
-@synthesize bigPicBack = _bigPicBack;
 @synthesize webView = _webView;
 @synthesize weiBoData = _weiBoData;
 @synthesize viewForCaculate = _viewForCaculate;
-
+@synthesize bigImageFrame = _bigImageFrame;
 @synthesize sinaWeiBoSDK = _sinaWeiBoSDK;
 @synthesize videoInfo = _videoInfo;
 
@@ -70,6 +69,7 @@ IBOutlet UIImageTouchableView *bigPicImageView;
     _commentTableView.delegate = (id<UITableViewDelegate>)self;
     
     _viewForCaculate = [[CommentView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 300, 50)];
+	_bigImageFrame = _bigPicImageView.frame;
 
 }
 
@@ -79,7 +79,6 @@ IBOutlet UIImageTouchableView *bigPicImageView;
 	_videoInfo = nil;
     _commentTableView = nil;
     _viewForCaculate = nil;
-	[self setBigPicBack:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -209,6 +208,7 @@ IBOutlet UIImageTouchableView *bigPicImageView;
 	{
 		_videoInfo.bigPic = image;
 		_bigPicImageView.image = _videoInfo.bigPic;
+		_bigPicImageView.frame = _bigImageFrame;
 	}
 
 }
@@ -239,6 +239,7 @@ IBOutlet UIImageTouchableView *bigPicImageView;
 	NSString* itemCode = [sendResult.annotation objectAtIndex:0];
 	if(nil != _videoInfo && [itemCode isEqualToString:_videoInfo.itemCode])
 	{
+        _weiBoData = sendResult;
         [_commentTableView reloadData];
     }
 }

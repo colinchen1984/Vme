@@ -75,7 +75,7 @@ const static float videoViewHeigth = 292.5 + 25;
 	CGRect frame = _table4FastScroll.frame;
 	frame.origin.x = 279.0f;
 	_table4FastScroll.frame = frame;
-	_table4FastScroll.alpha = 0.7f;
+	_table4FastScroll.alpha = 1.0f;
     [_tudouSDK requireUserPersonalInfo:self];
     [_sinaWeiBoSDK requireUserPersonalInfo:(id<SinaWeiBoSDKDelegate>)self];
 	
@@ -181,11 +181,11 @@ const static float videoViewHeigth = 292.5 + 25;
 	_isSideBarShowing = YES;
 	[UIView beginAnimations:nil context:nil];
 	CGRect frame = _sendNewVideoButton.frame;
-	frame.origin.x = 271.0f;
+	frame.origin.x = 265.0f;
 	_sendNewVideoButton.frame = frame;
 	
 	frame = _table4FastScroll.frame;
-	frame.origin.x = 271.0f;
+	frame.origin.x = 265.0f;
 	_table4FastScroll.frame = frame;
 	[UIView commitAnimations];
 }

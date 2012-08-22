@@ -133,8 +133,8 @@ static ImageManager* singleton = nil;
 
 - (UIImage*) getImageFromBundle:(NSString*) fileName
 {
-	UIImage* image = [_imageDic objectForKey:fileName];
-	if (nil == image) 
+	UIImage* image = nil;//[_imageDic objectForKey:fileName];
+	if (nil == image)
 	{
 		image = [UIImage imageNamed:fileName];
 		[_imageDic setObject:image forKey:fileName];

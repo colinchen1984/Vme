@@ -63,6 +63,7 @@ static const float avatarImageViewWidth = 47.5f;
 	_textLable.backgroundColor = [UIColor clearColor];
 	[self addSubview:_textLable];
 	vH += textHight;
+    _textLable.textColor = [UIColor colorWithHue:55.0f / 255.0f saturation:55.0f/ 255.0f brightness:55.0f / 255.0f alpha:1.0f];
 	
 	_avatarImageViewArray = [[NSMutableArray alloc] initWithCapacity:avatarImageViewCount];
 	vH += emptySize - 5.0f;

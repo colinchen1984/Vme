@@ -180,6 +180,14 @@
 	self->expiresAbsoluteTime = nil != expiresTime ? [expiresTime longLongValue] : -1;
 }
 
+- (void) cleanAccessToken
+{
+	_accessCode = nil;
+	_userID = nil;
+    [SFHFKeychainUtils deleteItemForUsername:ACCESS_TOKEN andServiceName:_serviceName error:nil];
+    [SFHFKeychainUtils deleteItemForUsername:USER_ID andServiceName:_serviceName error:nil];
+    [SFHFKeychainUtils deleteItemForUsername:EXPIRES_ABSOLUTE_IME andServiceName:_serviceName error:nil];
+}
 #pragma mark - WebRequest Delegate Methods
 - (void) OnReceiveData:(WebRequest*) request Data:(NSData*)data;
 {	

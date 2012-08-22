@@ -35,6 +35,7 @@ typedef enum
 - (void) OnReceiveCommentForWeiBo:(SinaWeiBoData*) weiBo Comments:(NSArray*)comments;
 - (void) OnReceiveCommentReplyResult:(SinaWeiBoComment*)result;
 - (void) OnRateLimitate;
+- (void) OnError:(NSString*)data;
 @end
 
 @interface SinaWeiBoUserPersonalInfo : NSObject

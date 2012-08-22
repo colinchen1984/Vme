@@ -210,7 +210,7 @@
 	
 	if (parseError)
     {
-        NSLog(@"%@", str);
+        NSLog(@"%@\t%s\t%d", str, __FILE__, __LINE__);
 		return;
 	}
 	
