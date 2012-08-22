@@ -92,17 +92,16 @@
 {
 	[super viewWillAppear:animated];
 	self.navigationController.navigationBarHidden = YES;
-    [self performSelector:@selector(removeloading) withObject:nil afterDelay:3.5f];
+    [self performSelector:@selector(removeloading) withObject:nil afterDelay:5.5f];
 	[_sinaOauth loadAccessToken];
 
-	[self loadTuDouUserName];
+	[self loadTuDouUserData];
 	
 	if (NO != [_sinaOauth expires])
 	{
 		[self startLoginSina];
 		return;
 	}
-	
 	
 	//檢查token是否有效
 	[_sinaWeiboSDK requireUserPersonalInfo:(id<SinaWeiBoSDKDelegate>)self];
@@ -124,7 +123,7 @@
     [UIView commitAnimations];
 }
 
-- (void) viewDidAppear:(BOOL)animated
+/*- (void) viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
 	if (NO == [_sinaOauth expires] && nil != _tudouUserName) 
@@ -133,7 +132,7 @@
 		return;
 	}
 	
-}
+}*/
 
 - (void) startLoginSina
 {
@@ -149,14 +148,19 @@
 	_inputTudoUserPassword.hidden = NO;
 }
 
-- (void) finishLogin
+- (void) CheckTudouUserData
 {
-	_videoController.tudouUserName = _tudouUserName;
+	//利用土豆的向土豆發起上傳視頻的請求來驗證用戶名和帳號的有效性
+	//
+	/*_videoController.tudouUserName = _tudouUserName;
 	_tudouSDK = [[TuDouSDK alloc] initUserName:_tudouUserName Pass:_tudouUserPass];
 	_videoController.tudouSDK = _tudouSDK;
 	_videoController.sinaWeiBoSDK = _sinaWeiboSDK;
 	self.navigationItem.title = nil;
-	[self.navigationController pushViewController:_videoController animated:YES];
+	[self.navigationController pushViewController:_videoController animated:YES];*/
+	_tudouSDK = [[TuDouSDK alloc] initUserName:@"beyond0924@sina.com" Pass:@"beyond0924"];
+	[_tudouSDK requireUploadVideo:nil Delegate:self];
+	
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -164,15 +168,16 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void) loadTuDouUserName
+- (void) loadTuDouUserData
 {
-	return;
-	_tudouUserName = [SFHFKeychainUtils getPasswordForUsername:@"TuDouUserName" andServiceName:@"TuDou" error:nil];	
+	_tudouUserName = [SFHFKeychainUtils getPasswordForUsername:@"TuDouUserName" andServiceName:@"TuDou" error:nil];
+	_tudouUserPass = [SFHFKeychainUtils getPasswordForUsername:@"TuDouUserPass" andServiceName:@"TuDou" error:nil];
 }
 
-- (void) saveTuDouUserName
+- (void) saveTuDouUserData
 {
 	[SFHFKeychainUtils storeUsername:@"TuDouUserName" andPassword:_tudouUserName forServiceName:@"TuDou" updateExisting:YES error:nil];
+	[SFHFKeychainUtils storeUsername:@"TuDouUserPass" andPassword:_tudouUserPass forServiceName:@"TuDou" updateExisting:YES error:nil];
 }
 
 - (IBAction)loginSina:(id)sender
@@ -184,7 +189,7 @@
 {
 	if (_tudouUserName) 
 	{
-		[self finishLogin];
+		[self CheckTudouUserData];
 	}
 	else
 	{
@@ -195,14 +200,16 @@
 
 - (void) OnOauthLoginFail
 {
-
+	//通知新浪微博登錄錯誤，請重試
+	
+	[self startLoginSina];
 }
 
 - (void) OnAlreadyLogin
 {
 	if (_tudouUserName) 
 	{
-		[self finishLogin];
+		[self CheckTudouUserData];
 	}
 	else
 	{
@@ -215,14 +222,8 @@
 	if (textField == _inputTudouUserName)
 	{
 		_tudouUserName = @"_79592344";
-		if(nil == _tudouUserPass)
-		{
-			[_inputTudoUserPassword becomeFirstResponder];
-		}
-		else
-		{
-			[self finishLogin];
-		}
+		_inputTudoUserPassword.text = nil;
+		[_inputTudoUserPassword becomeFirstResponder];
 
 	}
 	else if(textField == _inputTudoUserPassword)
@@ -235,7 +236,7 @@
 		}
 		else
 		{
-			[self finishLogin];
+			[self CheckTudouUserData];
 		}
 		
 	}
@@ -253,7 +254,7 @@
 	}
 	else
 	{
-		[self finishLogin];
+		[self CheckTudouUserData];
 	}
 	
 }
@@ -261,9 +262,6 @@
 - (void) OnError:(NSString*)data
 {
 	NSLog(@"%@", data);
-	//[self removeloading];
-	[self startLoginSina];
-	return;
 	[_sinaOauth cleanAccessToken];
 	[self startLoginSina];
 

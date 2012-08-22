@@ -22,7 +22,8 @@
 @synthesize debugStr = _debugStr;
 @synthesize httpMethod = _httpMethod;
 @synthesize httpBody = _httpBody;
-@synthesize httpHeader = _httpHeader;
+@synthesize httpHead = _httpParam;
+
 
 #pragma mark - lefe cycle
 - (id) init
@@ -85,7 +86,7 @@
 - (void) postUrlRequest:(NSString *)url
 {
 
-	_debugStr = [WebRequest serializeURL:url params:_httpHeader httpMethod:_httpMethod];
+	_debugStr = [WebRequest serializeURL:url params:_httpParam httpMethod:_httpMethod];
 	NSMutableURLRequest* urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:_debugStr]
 												cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
 											timeoutInterval:60.0];
@@ -94,7 +95,7 @@
 	{
 		[urlRequest setHTTPBody:[self postBody]];
 	}
-	
+
 	
 /*	for (NSString *key in [_httpHeader keyEnumerator])
     {
@@ -114,7 +115,7 @@
 	[_connection cancel];
 	self.connection = nil;
 	self.delegate = nil;
-	self.httpHeader = nil;
+	self.httpHead = nil;
 	self.httpBody = nil;
 	self.httpMethod = @"GET";
 	self.debugStr = nil;

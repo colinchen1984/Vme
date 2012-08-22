@@ -13,6 +13,7 @@ typedef enum
 {
 	TUDOU_SDK_REQUEST_USER_PERSONAL_INFO = 0,
 	TUDOU_SDK_REQUEST_USER_VIDEO_INFO  = 1,
+	TUDOU_SDK_REQUEST_UPLOAD_ADDRESS = 2,
 	
 } TUDOU_SDK_REQUEST_OPERATION_TYPE;
 
@@ -52,5 +53,8 @@ typedef enum
 
 - (void) requireUserVideoInfo:(id<TuDouSDKDelegate>)delegate PageNo:(NSInteger)pageNo;
 
+- (void) setUserName:(NSString*)userName Pass:(NSString*)pass;
+
+- (void) requireUploadVideo:(NSString*)filepath Delegate:(id<TuDouSDKDelegate>)delegate;
 @end
 

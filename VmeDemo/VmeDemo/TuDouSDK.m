@@ -107,7 +107,8 @@
 #define API4TUDOU2GETUSERPERSONALINFO @"http://api.tudou.com/v3/gw?method=user.info.get&appKey=%@&format=json&user=%@"
 //appKey%@ userName%@ pageNo%d
 #define API4TUDOU2GETUSERVIDEOINFO @"http://api.tudou.com/v3/gw?method=user.item.get&appKey=%@&format=&user=%@&pageNo=%d&pageSize=10"
-
+//requestuploadvideo
+#define API4TUDOU2REQUESTUPLOADADDRESS @"http://api.tudou.com/v3/gw?method=item.upload"
 @implementation TuDouSDK
 @synthesize freeConnection = _freeConnection;
 @synthesize usingConnection = _usingConnection;
@@ -124,9 +125,8 @@
 	{
 		return nil;
 	}
-	_userName = userName;
-	NSString* tempStr = [NSString stringWithFormat:@"%@:%@", userName, pass];
-	_athorize = [GTMBase64 stringByEncodingBytes:[tempStr UTF8String] length:[tempStr length]];
+	
+	[self setUserName:userName Pass:pass];
 	_freeConnection = [[NSMutableArray alloc] init];
 	_usingConnection = [[NSMutableSet alloc] init];
 	_personalInfoRequest = [[NSMutableSet alloc] init];
@@ -154,6 +154,36 @@
 	NSString* apiUrl = [[NSString alloc] initWithFormat:API4TUDOU2GETUSERVIDEOINFO, oauthAppKey, _userName, pageNo];
 	[request postUrlRequest:apiUrl];
 
+}
+
+- (void) setUserName:(NSString*)userName Pass:(NSString*)pass
+{
+	_userName = userName;
+	NSString* tempStr = [NSString stringWithFormat:@"%@:%@", userName, pass];
+	_athorize = [NSString stringWithFormat:@"Basic %@", [GTMBase64 stringByEncodingBytes:[tempStr UTF8String] length:[tempStr length]]];
+}
+
+- (void) requireUploadVideo:(NSString*)filepath Delegate:(id<TuDouSDKDelegate>)delegate
+{
+	
+	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+							oauthAppKey, @"appKey",
+							_athorize, @"Authorization",
+							@"test", @"title",
+							@"try", @"content",
+							@"test", @"tags",
+							@"1", @"channelId",
+							@"192.154.21.11", @"ipAddr",
+							nil];
+
+	
+	TudouWeiRequest* request = [self getFreeRequest];
+	request->operation = TUDOU_SDK_REQUEST_UPLOAD_ADDRESS;
+	request.delegate = (id<WebRequestDelegate>)self;
+	request.tudouSDKDeletage = delegate;
+	request.httpHead = params;
+	[request postUrlRequest:API4TUDOU2REQUESTUPLOADADDRESS];
+	
 }
 
 #pragma mark - private interface 

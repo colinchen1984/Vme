@@ -123,7 +123,7 @@
 	SinaWeiBoRequest* request = [self getFreeRequest];
 	request.delegate = (id<WebRequestDelegate>)self;
 	request.weiBoSDKDelegate = delegate;
-	request.httpHeader = params;
+	request.httpHead = params;
 	request->operation = SINA_WEIBO_GET_USER_ALL_WEIBO;
 	[request postUrlRequest:@"https://api.weibo.com/2/statuses/user_timeline.json"];	
 }
@@ -147,7 +147,7 @@
 	SinaWeiBoRequest* request = [self getFreeRequest];
 	request.delegate = (id<WebRequestDelegate>)self;
 	request.weiBoSDKDelegate = delegate;
-	request.httpHeader = params;
+	request.httpHead = params;
 	request->operation = SINA_WEIBO_REQUEST_USER_PERSONAL_INFO;
 	[request postUrlRequest:@"https://api.weibo.com/2/users/show.json"];
 }
@@ -218,7 +218,7 @@
 	SinaWeiBoRequest* request = [self getFreeRequest];
 	request.delegate = (id<WebRequestDelegate>)self;
 	request.weiBoSDKDelegate = delegate;
-	request.httpHeader = params;
+	request.httpHead = params;
 	request->operation = SINA_WEIBO_GET_WEIBO_COMMENT;
 	[request postUrlRequest:@"https://api.weibo.com/2/comments/show.json"];
 	
@@ -267,7 +267,7 @@
 			SinaWeiBoRequest* request = [self getFreeRequest];
 			request.delegate = (id<WebRequestDelegate>)self;
 			request.weiBoSDKDelegate = delegate;
-			request.httpHeader = params;
+			request.httpHead = params;
 			request->operation = SINA_WEIBO_GET_BATCH_WEIBO_COMMENT;
 			[request postUrlRequest:@"https://api.weibo.com/2/comments/show_batch.json"];
 			count = 0;
@@ -284,7 +284,7 @@
 		SinaWeiBoRequest* request = [self getFreeRequest];
 		request.delegate = (id<WebRequestDelegate>)self;
 		request.weiBoSDKDelegate = delegate;
-		request.httpHeader = params;
+		request.httpHead = params;
 		request->operation = SINA_WEIBO_GET_BATCH_WEIBO_COMMENT;
 		[request postUrlRequest:@"https://api.weibo.com/2/comments/show_batch.json"];
 	}	

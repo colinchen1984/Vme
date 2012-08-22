@@ -17,7 +17,8 @@
 @property (weak, nonatomic) id<WebRequestDelegate> delegate;
 @property (strong, nonatomic) NSString* httpMethod;
 @property (strong, nonatomic) NSDictionary* httpBody;
-@property (strong, nonatomic) NSDictionary* httpHeader;
+@property (strong, nonatomic) NSDictionary* httpHead;
+
 
 - (void) postUrlRequest:(NSString*) url;
 - (void) cancelRequest;
