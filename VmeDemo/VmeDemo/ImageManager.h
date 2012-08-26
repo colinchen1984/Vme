@@ -19,5 +19,7 @@
 
 - (UIImage*) getImageFromBundle:(NSString*) fileName;
 
+- (void) releaseAllImage;
+
 + (ImageManager*) sharedImageManager;
 @end

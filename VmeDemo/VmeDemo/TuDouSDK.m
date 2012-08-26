@@ -10,14 +10,15 @@
 #import "SBJSON.h"
 #import "ImageManager.h"
 #import "GTMBase64.h"
+
+
+
 @interface TuDouSDK()
 @property (strong, nonatomic) NSMutableSet* usingConnection;
 @property (strong, nonatomic) NSMutableArray* freeConnection;
-@property (strong, nonatomic) NSMutableSet* personalInfoRequest;
 @property (strong, nonatomic) NSMutableSet* videoRequest;
 @property (strong, nonatomic) NSString* userName;
 @property (strong, nonatomic) NSString* athorize;
-- (void) finishUserPersonalInfoRequest:(TuDouUserPersonalInfo*)userInfo;
 
 - (void) finishVideoInfoRequest:(TudouVideoInfo*)videoInfo;
 - (void) failToLoadVideoInfo:(TudouVideoInfo*) videoInfo URL:(NSString*) url;
@@ -55,8 +56,6 @@
 - (void) OnReceiveImage:(UIImage*)image ImageUrl:(NSString *)imageUrl
 {
 	_userAvatarImage = image;
-	[_delegate OnReceiveUserPersonalInfo:self];
-	[_sdk finishUserPersonalInfoRequest:self];
 }
 
 @end
@@ -112,10 +111,20 @@
 @implementation TuDouSDK
 @synthesize freeConnection = _freeConnection;
 @synthesize usingConnection = _usingConnection;
-@synthesize personalInfoRequest = _personalInfoRequest;
 @synthesize videoRequest = _videoRequest;
 @synthesize userName = _userName;
 @synthesize athorize = _athorize;
+
++ (NSString*) buildXXXFromUserName:(NSString*)name Pass:(NSString*) pass
+{
+	if(nil == name || nil == pass)
+	{
+		return nil;
+	}
+	NSString* tempStr = [NSString stringWithFormat:@"%@:%@", name, pass];
+	return [NSString stringWithFormat:@"Basic %@", [GTMBase64 stringByEncodingBytes:[tempStr UTF8String] length:[tempStr length]]];
+}
+
 
 #pragma mark - life cycle
 - (id) initUserName:(NSString*) userName Pass:(NSString*)pass
@@ -129,7 +138,6 @@
 	[self setUserName:userName Pass:pass];
 	_freeConnection = [[NSMutableArray alloc] init];
 	_usingConnection = [[NSMutableSet alloc] init];
-	_personalInfoRequest = [[NSMutableSet alloc] init];
 	_videoRequest = [[NSMutableSet alloc] init];
 	return self;
 }
@@ -159,8 +167,7 @@
 - (void) setUserName:(NSString*)userName Pass:(NSString*)pass
 {
 	_userName = userName;
-	NSString* tempStr = [NSString stringWithFormat:@"%@:%@", userName, pass];
-	_athorize = [NSString stringWithFormat:@"Basic %@", [GTMBase64 stringByEncodingBytes:[tempStr UTF8String] length:[tempStr length]]];
+	_athorize = [TuDouSDK buildXXXFromUserName:userName Pass:pass];
 }
 
 - (void) requireUploadVideo:(NSString*)filepath Delegate:(id<TuDouSDKDelegate>)delegate
@@ -186,12 +193,28 @@
 	
 }
 
-#pragma mark - private interface 
-- (void) finishUserPersonalInfoRequest:(TuDouUserPersonalInfo*)userInfo
+- (void) checkUserName:(NSString*)username Pass:(NSString*)pass Delegate:(id<TuDouSDKDelegate>)delegate
 {
-	[_personalInfoRequest removeObject:userInfo];
+	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+							oauthAppKey, @"appKey",
+							[TuDouSDK buildXXXFromUserName:username Pass:pass], @"Authorization",
+							@"check user name and pass", @"title",
+							@"try", @"content",
+							@"test", @"tags",
+							@"1", @"channelId",
+							@"192.154.21.11", @"ipAddr",
+							nil];
+	
+	
+	TudouWeiRequest* request = [self getFreeRequest];
+	request->operation = TUDOU_SDK_REQUEST_CHECK_USER_NAME_PASS;
+	request.delegate = (id<WebRequestDelegate>)self;
+	request.tudouSDKDeletage = delegate;
+	request.httpHead = params;
+	[request postUrlRequest:API4TUDOU2REQUESTUPLOADADDRESS];
 }
 
+#pragma mark - private interface 
 - (void) finishVideoInfoRequest:(TudouVideoInfo*)videoInfo
 {
 	[_videoRequest removeObject:videoInfo];
@@ -240,7 +263,17 @@
 	
 	if (parseError)
     {
-        NSLog(@"%@\t%s\t%d", str, __FILE__, __LINE__);
+		if (TUDOU_SDK_REQUEST_CHECK_USER_NAME_PASS == tudouRequest->operation)
+		{
+			if (NSNotFound != [str rangeOfString:@"4001"].location)
+			{
+				[tudouRequest.tudouSDKDeletage OnReceiveCheckUserNamePass:NO];
+			}
+		}
+		else
+		{
+			NSLog(@"%@\t%s\t%d", str, __FILE__, __LINE__);
+		}
 		return;
 	}
 	
@@ -254,7 +287,7 @@
 			NSString* userPicPath = [userInfo objectForKey:@"userpicurl"];
 			[personalInfo setDelegate:tudouRequest.tudouSDKDeletage];
 			[[ImageManager sharedImageManager] postURL2DownLoadImage:userPicPath Delegate:(id<URLImageDelegate>)personalInfo];
-			[_personalInfoRequest addObject:personalInfo];
+			[tudouRequest.tudouSDKDeletage OnReceiveUserPersonalInfo:personalInfo];
 		}
 		break;
 		case TUDOU_SDK_REQUEST_USER_VIDEO_INFO:
@@ -288,6 +321,11 @@
 				[[ImageManager sharedImageManager] postURL2DownLoadImage:video.bigPicURL Delegate:(id<URLImageDelegate>)video];
 				[_videoRequest addObject:video];
 			}
+		}
+		break;
+		case TUDOU_SDK_REQUEST_CHECK_USER_NAME_PASS:
+		{
+			[tudouRequest.tudouSDKDeletage OnReceiveCheckUserNamePass:YES];
 		}
 		break;
 	}

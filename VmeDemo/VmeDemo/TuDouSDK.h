@@ -9,22 +9,24 @@
 #import <Foundation/Foundation.h>
 #import "WebRequest.h"
 
-typedef enum  
+
+@class TuDouUserPersonalInfo;
+@class TudouVideoInfo;
+typedef enum
 {
 	TUDOU_SDK_REQUEST_USER_PERSONAL_INFO = 0,
 	TUDOU_SDK_REQUEST_USER_VIDEO_INFO  = 1,
 	TUDOU_SDK_REQUEST_UPLOAD_ADDRESS = 2,
+	TUDOU_SDK_REQUEST_CHECK_USER_NAME_PASS = 3,
 	
 } TUDOU_SDK_REQUEST_OPERATION_TYPE;
-
-@class TuDouUserPersonalInfo;
-@class TudouVideoInfo;
 @protocol TuDouSDKDelegate
 
 - (void) OnReceiveUserPersonalInfo:(TuDouUserPersonalInfo*) userPersonalInfo;
 - (void) OnReceiveUserVideoInfo:(int)pageNo PageSize:(int)PageSize PageCount:(int)pageCount VideoCount:(int)videoCount;
 - (void) OnReceiveVideoInfo:(TudouVideoInfo*) videoInfo;
 - (void) OnReceiveError:(TUDOU_SDK_REQUEST_OPERATION_TYPE)operationType;
+- (void) OnReceiveCheckUserNamePass:(BOOL)result;
 @end
 
 @interface TuDouUserPersonalInfo : NSObject
@@ -56,5 +58,7 @@ typedef enum
 - (void) setUserName:(NSString*)userName Pass:(NSString*)pass;
 
 - (void) requireUploadVideo:(NSString*)filepath Delegate:(id<TuDouSDKDelegate>)delegate;
+
+- (void) checkUserName:(NSString*)username Pass:(NSString*)pass Delegate:(id<TuDouSDKDelegate>)delegate;
 @end
 

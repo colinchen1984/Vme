@@ -93,9 +93,15 @@ static const float avatarImageViewWidth = 47.5f;
 	{
 		return;
 	}
-	
-	UIImage* image = nil == _videoInfo.bigPic ? _videoInfo.pic : _videoInfo.bigPic;
-	[_videoImageView setImage:image];
+	if(_videoInfo.bigPic)
+	{
+		_videoImageView.image = _videoInfo.bigPic;
+	}
+	else
+	{
+		_videoImageView.image = nil;
+		[[ImageManager sharedImageManager] postURL2DownLoadImage:_videoInfo.bigPicURL Delegate:(id<URLImageDelegate>)self];
+	}
 	_textLable.text = nil != _weiBoData ? _weiBoData.text : _videoInfo.title;
 	_share2WeiBo.hidden = nil != _weiBoData;
     for (UIImageView* v in _avatarImageViewArray)
@@ -153,13 +159,14 @@ static const float avatarImageViewWidth = 47.5f;
         [_videoViewDelegate OnShare2SinaWeiBoClick:self];
     }	
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+
+#pragma mark - image manager delegate
+- (void) OnReceiveImage:(UIImage*)image ImageUrl:(NSString*)imageUrl
 {
-    // Drawing code
+	if(_videoInfo && [imageUrl isEqualToString:_videoInfo.bigPicURL])
+	{
+		_videoImageView.image = _videoInfo.bigPic = image;
+	}
 }
-*/
 
 @end

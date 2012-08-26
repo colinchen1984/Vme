@@ -11,7 +11,7 @@
 
 @interface VmOauthWebViewController ()
 @property (strong, nonatomic) UIWebView* webView;
-@property (weak, nonatomic) SinaWeiBoOauth* engine;
+@property (strong, nonatomic) SinaWeiBoOauth* engine;
 @end
 
 @implementation VmOauthWebViewController
@@ -42,6 +42,7 @@
 		_webView.delegate = nil;
 	}
 	_webView = nil;
+	_engine = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

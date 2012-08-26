@@ -98,6 +98,11 @@ static ImageManager* singleton = nil;
 	[imageData writeToFile:[self pathInDocumentDirectory:fileName] atomically:YES];
 }
 
+- (void) releaseAllImage
+{
+	[_imageDic removeAllObjects];
+}
+
 #pragma mark - interface ImageManger
 - (void) postURL2DownLoadImage:(NSString*) urlPath Delegate:(id<URLImageDelegate>)delegate
 {

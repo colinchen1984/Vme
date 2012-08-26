@@ -13,7 +13,7 @@
 #import "TuDouSDK.h"
 #import "SinaWeiBoOauth.h"
 #import "SinaWeiBoSDK.h"
-
+#import "ImageManager.h"
 @class SinaWeiBoOauth;
 
 @interface VmeDemoAppDelegate()
@@ -48,4 +48,9 @@
     return YES;
 }
 
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
+{
+	[[ImageManager sharedImageManager] releaseAllImage];
+	return;
+}
 @end

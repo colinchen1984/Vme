@@ -28,13 +28,15 @@
 #pragma mark - lefe cycle
 - (id) init
 {
-  	if (nil == self) {
+  	if (nil == self)
+	{
 		return nil;
 	}
 	_connection = nil;
 	_delegate = nil;
-	_data = [[NSMutableData alloc] init];
+	_data = nil;
 	_httpMethod = @"GET";
+	_data = [[NSMutableData alloc] init];
 	return self;
 }
     

@@ -26,6 +26,7 @@
 @property (strong, nonatomic) TuDouSDK* tudouSDK;
 @property (strong, nonatomic) SinaWeiBoSDK* sinaWeiboSDK;
 @property (strong, nonatomic) UIImageView* loadingImage;
+@property (strong, nonatomic) UIActivityIndicatorView *indicator;
 
 @end
 
@@ -38,6 +39,7 @@
 @synthesize inputTudoUserPassword = _inputTudoUserPassword;
 @synthesize loginSina = _loginSina;
 @synthesize loadingImage = _loadingImage;
+@synthesize indicator = _indicator;
 @synthesize videoController = _videoController;
 @synthesize tudouSDK = _tudouSDK;
 @synthesize sinaWeiboSDK = _sinaWeiboSDK;
@@ -51,20 +53,7 @@
 		return nil;
     }
 	
-	_sinaOauth = [[SinaWeiBoOauth alloc] init];
-	_sinaWeiboSDK = [[SinaWeiBoSDK alloc] initWithSinaWeiBoOauth:_sinaOauth];
-	_sinaOauth.delegate = (id<OauthDelegate>)self;
-	_videoController = [[VmeDemoViewController alloc] initWithNibName:nil bundle:nil];
-    CGRect frame = self.view.frame;
-    frame.origin.y += 0.0f;
-    _loadingImage = [[UIImageView alloc] initWithFrame:frame];
-    [self.view addSubview:_loadingImage];
-    _loadingImage.image = [[ImageManager sharedImageManager] getImageFromBundle:@"load.png"];
-	_inputTudouUserName.delegate = (id<UITextFieldDelegate>)self;
-	_inputTudoUserPassword.delegate = (id<UITextFieldDelegate>)self;
-	_inputTudoUserPassword.hidden = YES;
-	_inputTudouUserName.hidden = YES;
-    //_tudouUserName = @"_79592344";
+	[self loadTuDouUserData];
 	return self;
 }
 
@@ -73,6 +62,26 @@
     [super viewDidLoad];
 
 	// Do any additional setup after loading the view.
+	_sinaOauth = [[SinaWeiBoOauth alloc] init];
+	_sinaWeiboSDK = [[SinaWeiBoSDK alloc] initWithSinaWeiBoOauth:_sinaOauth];
+	_tudouSDK = [[TuDouSDK alloc] initUserName:nil Pass:nil];
+	_sinaOauth.delegate = (id<OauthDelegate>)self;
+	_videoController = [[VmeDemoViewController alloc] initWithNibName:nil bundle:nil];
+	_indicator = [ [ UIActivityIndicatorView  alloc ]
+				  initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, 100.0f)];
+
+	_indicator.center = _inputTudouUserName.center;
+	_indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+   	[self.view addSubview:_indicator];
+	CGRect frame = self.view.frame;
+    frame.origin.y += 0.0f;
+    _loadingImage = [[UIImageView alloc] initWithFrame:frame];
+    [self.view addSubview:_loadingImage];
+    _loadingImage.image = [[ImageManager sharedImageManager] getImageFromBundle:@"load.png"];
+	_inputTudouUserName.delegate = (id<UITextFieldDelegate>)self;
+	_inputTudoUserPassword.delegate = (id<UITextFieldDelegate>)self;
+	_inputTudoUserPassword.hidden = YES;
+	_inputTudouUserName.hidden = YES;
 }
 
 - (void)viewDidUnload
@@ -84,6 +93,13 @@
     _loadingImage = nil;
 	_inputTudoUserPassword.delegate = nil;
 	_inputTudoUserPassword = nil;
+	_sinaOauth = nil;
+	_sinaWeiboSDK = nil;
+	_tudouUserName = nil;
+	_tudouUserPass = nil;
+	_tudouSDK = nil;
+	[_indicator removeFromSuperview];
+	_indicator = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -93,9 +109,13 @@
 	[super viewWillAppear:animated];
 	self.navigationController.navigationBarHidden = YES;
     [self performSelector:@selector(removeloading) withObject:nil afterDelay:5.5f];
+	_indicator.hidden = YES;
+	_indicator.hidesWhenStopped = YES;
+	CGPoint center = _indicator.center;
+	CGRect frame = CGRectMake(0.0f, 0.0f, 50.0f, 50.0f);
+	_indicator.frame = frame;
+	_indicator.center = center;
 	[_sinaOauth loadAccessToken];
-
-	[self loadTuDouUserData];
 	
 	if (NO != [_sinaOauth expires])
 	{
@@ -152,14 +172,8 @@
 {
 	//利用土豆的向土豆發起上傳視頻的請求來驗證用戶名和帳號的有效性
 	//
-	/*_videoController.tudouUserName = _tudouUserName;
-	_tudouSDK = [[TuDouSDK alloc] initUserName:_tudouUserName Pass:_tudouUserPass];
-	_videoController.tudouSDK = _tudouSDK;
-	_videoController.sinaWeiBoSDK = _sinaWeiboSDK;
-	self.navigationItem.title = nil;
-	[self.navigationController pushViewController:_videoController animated:YES];*/
-	_tudouSDK = [[TuDouSDK alloc] initUserName:@"beyond0924@sina.com" Pass:@"beyond0924"];
-	[_tudouSDK requireUploadVideo:nil Delegate:self];
+
+	[_tudouSDK checkUserName:_tudouUserName Pass:_tudouUserPass Delegate:(id<TuDouSDKDelegate>)self];
 	
 }
 
@@ -178,6 +192,12 @@
 {
 	[SFHFKeychainUtils storeUsername:@"TuDouUserName" andPassword:_tudouUserName forServiceName:@"TuDou" updateExisting:YES error:nil];
 	[SFHFKeychainUtils storeUsername:@"TuDouUserPass" andPassword:_tudouUserPass forServiceName:@"TuDou" updateExisting:YES error:nil];
+}
+
+- (void) cleanTuDouUserData
+{
+	[SFHFKeychainUtils deleteItemForUsername:@"TuDouUserName"  andServiceName:@"TuDou" error:nil];
+	[SFHFKeychainUtils deleteItemForUsername:@"TuDouUserPass"  andServiceName:@"TuDou" error:nil];
 }
 
 - (IBAction)loginSina:(id)sender
@@ -221,21 +241,32 @@
 {
 	if (textField == _inputTudouUserName)
 	{
-		_tudouUserName = @"_79592344";
+		_tudouUserName = _inputTudouUserName.text;
+		if([_tudouUserName isEqualToString:@""])
+		{
+			return NO;
+		}
 		_inputTudoUserPassword.text = nil;
 		[_inputTudoUserPassword becomeFirstResponder];
 
 	}
 	else if(textField == _inputTudoUserPassword)
 	{
-		_tudouUserName = @"_79592344";
-		_tudouUserPass = textField.text;
-		if (nil == _tudouUserName)
+		_tudouUserPass = _inputTudoUserPassword.text;
+		_tudouUserName = _inputTudouUserName.text;
+		if([_tudouUserPass isEqualToString:@""])
+		{
+			return NO;
+		}
+		else if(nil == _tudouUserName || [_tudouUserName isEqualToString:@""])
 		{
 			[_inputTudouUserName becomeFirstResponder];
 		}
+		
 		else
 		{
+			_indicator.hidden = NO;
+			[_indicator startAnimating];
 			[self CheckTudouUserData];
 		}
 		
@@ -243,11 +274,33 @@
 	
 	return NO;
 }
-
-#pragma make - sina sdk delegate
+#pragma mark - tudo sdk delegate
+- (void) OnReceiveCheckUserNamePass:(BOOL)result
+{
+	[_indicator stopAnimating];
+	if (result)
+	{
+		[self saveTuDouUserData];
+		_videoController.tudouUserName = _tudouUserName;
+		[_tudouSDK setUserName:_tudouUserName Pass:_tudouUserPass];
+		_videoController.tudouSDK = _tudouSDK;
+		_videoController.sinaWeiBoSDK = _sinaWeiboSDK;
+		//[self cleanTuDouUserData];
+		self.navigationItem.title = nil;
+		[self.navigationController pushViewController:_videoController animated:YES];
+	}
+	else
+	{
+		//提示用戶名密碼錯誤
+		
+		[self startloginTudou];
+	}
+}
+#pragma mark - sina sdk delegate
 - (void) OnRecevieWeiBoUserPersonalInfo:(SinaWeiBoUserPersonalInfo*) userInfo
 {
 	//[self removeloading];
+	
 	if(nil == _tudouUserName)
 	{
 		[self startloginTudou];

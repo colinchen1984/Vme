@@ -131,7 +131,8 @@ const static float videoViewHeigth = 292.5 + 25;
 #pragma mark - tudousdk delegate
 - (void) OnReceiveUserPersonalInfo:(TuDouUserPersonalInfo*) userPersonalInfo
 {
-    self->totalPageCount = 1000;
+    self->totalPageCount = 1;
+	self->currentPageNo = 0;
     [self requestMoreVideoInfo];
     _tudouPersonalInfo = userPersonalInfo;
 }
@@ -162,6 +163,7 @@ const static float videoViewHeigth = 292.5 + 25;
 	CGRect frame = _sendNewVideoButton.frame;
 	frame.origin.x = 321.0f;
 	_sendNewVideoButton.frame = frame;
+	_sendNewVideoButton.alpha = 0.0f;
 	[UIView commitAnimations];
 	[self performSelector:@selector(HideFastVideoTableView) withObject:nil afterDelay:0.2f];
 	
@@ -173,6 +175,7 @@ const static float videoViewHeigth = 292.5 + 25;
 	CGRect frame = _table4FastScroll.frame;
 	frame.origin.x = 321.0f;
 	_table4FastScroll.frame = frame;
+	_table4FastScroll.alpha = 0.0f;
 	[UIView commitAnimations];	
 }
 
@@ -183,10 +186,11 @@ const static float videoViewHeigth = 292.5 + 25;
 	CGRect frame = _sendNewVideoButton.frame;
 	frame.origin.x = 265.0f;
 	_sendNewVideoButton.frame = frame;
-	
+	_sendNewVideoButton.alpha = 0.7f;
 	frame = _table4FastScroll.frame;
 	frame.origin.x = 265.0f;
 	_table4FastScroll.frame = frame;
+	_table4FastScroll.alpha = 0.7f;
 	[UIView commitAnimations];
 }
 
@@ -196,6 +200,13 @@ const static float videoViewHeigth = 292.5 + 25;
 	for (SinaWeiBoData* w in weiBoArray) 
 	{
 		[_sinaWeiBoSDK requireWeiBoComment:w Delegate:(id<SinaWeiBoSDKDelegate>)self];
+		UIVideoView* v = [_videoViewDic objectForKey:[w.annotation objectAtIndex:0]];
+		if (nil != v)
+		{
+			v.weiBoData = w;
+			[v UpdateView];
+		}
+
 	}
 //    [_sinaWeiBoSDK requireBatchWeiBoComment:weiBoArray Delegate:(id<SinaWeiBoSDKDelegate>)self];
 	
