@@ -33,7 +33,7 @@
 	NSString* text = [dic objectForKey:@"text"];
 	NSRange range = [text rangeOfString:@"http://t.cn/"];
 	weiBo.text = NSNotFound != range.location ? [text substringToIndex:range.location] : text;
-	weiBo.userID = [[dic objectForKey:@"user"] objectForKey:@"idstr"];
+	weiBo.userID = [(NSDictionary*)[dic objectForKey:@"user"] objectForKey:@"idstr"];
 	weiBo.userInfo = [[VideoWeiBoDataManager sharedVideoWeiBoDataManager] getWeiBoUserPersonalInfo:weiBo.userID];
 	NSString* timeStr = [dic objectForKey:@"created_at"];
 	weiBo.createTime = [[self getDateFormatter] dateFromString:timeStr];

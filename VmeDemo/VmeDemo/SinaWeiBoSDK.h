@@ -66,7 +66,7 @@ typedef enum
 @interface SinaWeiBoSDK : NSObject
 
 - (id) initWithSinaWeiBoOauth:(SinaWeiBoOauth*)oauth;
-- (void) requireUserAllWeiBo:(BOOL)sendByThisApp Delegate:(id<SinaWeiBoSDKDelegate>)delegate;
+- (void) requireUserAllWeiBo:(BOOL)sendByThisApp UserInfo:(BOOL)userInfo Delegate:(id<SinaWeiBoSDKDelegate>)delegate;
 - (void) requireUserPersonalInfo:(id<SinaWeiBoSDKDelegate>)delegate;
 - (void) sendWeiBo:(NSString*) text VideoInfo:(TudouVideoInfo*)videoInfo Delegate:(id<SinaWeiBoSDKDelegate>)delegate;
 - (void) sendWeiBo:(NSString*) text Annotations:(NSString*)annotations Delegate:(id<SinaWeiBoSDKDelegate>)delegate;

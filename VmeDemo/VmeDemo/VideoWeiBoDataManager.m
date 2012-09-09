@@ -43,12 +43,11 @@ static VideoWeiBoDataManager* singleton = nil;
 - (void) addWeiBoUserPersonalInfo:(NSString*)weiboUserID UserPersonalInfo:(SinaWeiBoUserPersonalInfo*)userInfo
 {
 	SinaWeiBoUserPersonalInfo* weiBoUser = [self getWeiBoUserPersonalInfo:weiboUserID];
-	if (nil != weiBoUser) 
+	if (nil == weiBoUser)
 	{
-		return;
+		[_weiBoUserData setValue:userInfo forKey:weiboUserID];
 	}
 	
-	[_weiBoUserData setValue:userInfo forKey:weiboUserID];
 }
 
 - (SinaWeiBoUserPersonalInfo*) getWeiBoUserPersonalInfo:(NSString*)userID
@@ -60,12 +59,11 @@ static VideoWeiBoDataManager* singleton = nil;
 - (void) addVideoWeiBoData:(NSString*)videoID WeiBoData:(SinaWeiBoData*)weiBoData
 {
 	SinaWeiBoData* weiBo = [self getWeiBoDataByVideoID:videoID];
-	if (nil != weiBo) 
+	if (nil == weiBo)
 	{
-		return;
+		[_videoWeiBoData setValue:weiBoData forKey:videoID];
 	}
-	
-	[_videoWeiBoData setValue:weiBoData forKey:videoID];
+		
 }
 
 - (SinaWeiBoData*) getWeiBoDataByVideoID:(NSString*)videoID

@@ -292,7 +292,7 @@
 		break;
 		case TUDOU_SDK_REQUEST_USER_VIDEO_INFO:
 		{
-			NSDictionary* pageInfo = [[result objectForKey:@"multiPageResult"]  objectForKey:@"page"];
+			NSDictionary* pageInfo = [(NSDictionary*)[result objectForKey:@"multiPageResult"]  objectForKey:@"page"];
 			
 			NSDecimalNumber* pageNo= [pageInfo objectForKey:@"pageNo"];
 			NSDecimalNumber* pageSize = [pageInfo objectForKey:@"pageSize"];
@@ -303,7 +303,7 @@
 			PageCount:[pageCount doubleValue] 
 			VideoCount:[videoCount doubleValue]];
 			
-			NSArray* videoInfos = [[result objectForKey:@"multiPageResult"] objectForKey:@"results"];
+			NSArray* videoInfos = [(NSDictionary*)[result objectForKey:@"multiPageResult"] objectForKey:@"results"];
 			for (NSDictionary* v in videoInfos) 
 			{
 				TudouVideoInfo* video = [[TudouVideoInfo alloc] init];	

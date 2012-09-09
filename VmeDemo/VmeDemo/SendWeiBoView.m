@@ -84,7 +84,7 @@ static SendWeiBoView* singleton = nil;
 	_sendButton.frame = CGRectMake(250.0f, 0, 35, 35);
 	[_sendButton setTitle:NSLocalizedString(@"发送", nil)  forState:UIControlStateNormal];
 	_sendButton.contentMode = UIViewContentModeScaleToFill;
-	[_sendButton setImage:[[ImageManager sharedImageManager] getImageFromBundle:@"send.png"] forState:UIControlStateNormal];
+	[_sendButton setImage:[[ImageManager sharedImageManager] getImageFromBundle:@"envelop.png"] forState:UIControlStateNormal];
 	[_sendButton addTarget:self action:@selector(sendSinaWeiBo:) forControlEvents:UIControlEventTouchDown];
 	[self addSubview:_sendButton];
 	

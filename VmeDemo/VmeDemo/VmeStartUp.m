@@ -285,7 +285,7 @@
 		[_tudouSDK setUserName:_tudouUserName Pass:_tudouUserPass];
 		_videoController.tudouSDK = _tudouSDK;
 		_videoController.sinaWeiBoSDK = _sinaWeiboSDK;
-		//[self cleanTuDouUserData];
+		[_videoController initRelatedData];
 		self.navigationItem.title = nil;
 		[self.navigationController pushViewController:_videoController animated:YES];
 	}

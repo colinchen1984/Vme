@@ -19,8 +19,7 @@
 
 @interface VideoDetailViewController ()
 
-@property (weak, nonatomic)
-IBOutlet UIImageTouchableView *bigPicImageView;
+@property (weak, nonatomic) IBOutlet UIImageTouchableView *bigPicImageView;
 @property (weak, nonatomic) IBOutlet UITableView *commentTableView;
 @property (strong, nonatomic) VideoPageViewController* webView;
 @property (weak, nonatomic) SinaWeiBoData* weiBoData;
@@ -47,9 +46,12 @@ IBOutlet UIImageTouchableView *bigPicImageView;
     self = [super initWithNibName:@"VideoDetailViewController" bundle:nil];
     if (nil == self) 
 	{
-        // Custom initialization
 		return nil;
 	}
+	
+	_webView = [[VideoPageViewController alloc] init];
+    _viewForCaculate = [[CommentView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 300, 50)];
+
     return self;
 }
 
@@ -61,27 +63,19 @@ IBOutlet UIImageTouchableView *bigPicImageView;
 	//添加视频截图
 	[_bigPicImageView addTarget:self action:@selector(onBigImageClicked:) forControlEvents:UIControlEventTouchDown];
     _bigPicImageView.backgroundColor = [UIColor clearColor];
-	
-	_webView = [[VideoPageViewController alloc] init];
-    _commentTableView.backgroundColor = [UIColor clearColor];
+	_bigImageFrame = _bigPicImageView.frame;
+	_commentTableView.backgroundColor = [UIColor clearColor];
     _commentTableView.separatorStyle = NO;
     _commentTableView.dataSource = (id<UITableViewDataSource>)self;
     _commentTableView.delegate = (id<UITableViewDelegate>)self;
-    
-    _viewForCaculate = [[CommentView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 300, 50)];
-	_bigImageFrame = _bigPicImageView.frame;
 
 }
 
 - (void)viewDidUnload
 {
 	_bigPicImageView = nil;
-	_videoInfo = nil;
     _commentTableView = nil;
-    _viewForCaculate = nil;
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -198,13 +192,15 @@ IBOutlet UIImageTouchableView *bigPicImageView;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return nil != _weiBoData ? (nil != _weiBoData.comments ? [_weiBoData.comments count] + 1 : 1) : 1;
+	int reslut = nil != _weiBoData ? (nil != _weiBoData.comments ? [_weiBoData.comments count] + 1 : 1) : 1;
+	return reslut;
 }
 
 #pragma mark - url image request delegate
 - (void) OnReceiveImage:(UIImage*)image ImageUrl:(NSString *)imageUrl
 {
-	if ([_videoInfo.bigPicURL isEqualToString:imageUrl]) 
+	//poste請求的過程中並沒有產生新的字符串，所以優先使用指針的判斷
+	if (_videoInfo.bigPicURL == imageUrl || [_videoInfo.bigPicURL isEqualToString:imageUrl])
 	{
 		_videoInfo.bigPic = image;
 		_bigPicImageView.image = _videoInfo.bigPic;
@@ -237,7 +233,7 @@ IBOutlet UIImageTouchableView *bigPicImageView;
 {
 
 	NSString* itemCode = [sendResult.annotation objectAtIndex:0];
-	if(nil != _videoInfo && [itemCode isEqualToString:_videoInfo.itemCode])
+	if(nil != _videoInfo && (_videoInfo.itemCode == itemCode || [itemCode isEqualToString:_videoInfo.itemCode]))
 	{
         _weiBoData = sendResult;
         [_commentTableView reloadData];
@@ -247,7 +243,7 @@ IBOutlet UIImageTouchableView *bigPicImageView;
 - (void) OnReceiveCommentForWeiBo:(SinaWeiBoData*) weiBo Comments:(NSArray*)comments
 {
 	NSString* itemCode = [weiBo.annotation objectAtIndex:0];
-	if(nil != _videoInfo && [itemCode isEqualToString:_videoInfo.itemCode])
+	if(nil != _videoInfo && (_videoInfo.itemCode == itemCode || [itemCode isEqualToString:_videoInfo.itemCode]))
 	{
         [_commentTableView reloadData];
     }
@@ -256,7 +252,7 @@ IBOutlet UIImageTouchableView *bigPicImageView;
 - (void) OnReceiveCommentReplyResult:(SinaWeiBoComment*)result
 {
 	NSString* itemCode = [result.weiBoData.annotation objectAtIndex:0];
-	if(nil != _videoInfo && [itemCode isEqualToString:_videoInfo.itemCode])
+	if(nil != _videoInfo && (_videoInfo.itemCode == itemCode || [itemCode isEqualToString:_videoInfo.itemCode]))
 	{
         [_commentTableView reloadData];
     }

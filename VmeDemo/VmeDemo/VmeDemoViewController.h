@@ -19,4 +19,6 @@
 @property (weak, nonatomic) TuDouSDK* tudouSDK;
 @property (strong, nonatomic) NSString* tudouUserName;
 @property (strong, nonatomic) SinaWeiBoSDK* sinaWeiBoSDK;
+
+- (void) initRelatedData;
 @end

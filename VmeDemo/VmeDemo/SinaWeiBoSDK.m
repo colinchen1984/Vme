@@ -100,7 +100,7 @@
 
 #pragma mark - sdk interface
 
-- (void) requireUserAllWeiBo:(BOOL)sendByThisApp Delegate:(id<SinaWeiBoSDKDelegate>)delegate
+- (void) requireUserAllWeiBo:(BOOL)sendByThisApp UserInfo:(BOOL)userInfo Delegate:(id<SinaWeiBoSDKDelegate>)delegate
 {
 	if (YES != VALID_OAUTH) 
 	{
@@ -117,7 +117,7 @@
 							[_sinaWeiBoOauth userID], @"uid", 
 							@"200", @"count",
 							YES == sendByThisApp ? @"1" : @"0", @"base_app",
-							@"0", @"trim_user",
+							userInfo ? @"0" : @"1", @"trim_user",
 							nil];
 	
 	SinaWeiBoRequest* request = [self getFreeRequest];

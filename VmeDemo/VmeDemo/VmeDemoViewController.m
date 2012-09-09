@@ -48,20 +48,26 @@
 
 const static float videoViewWidth = 320.f;
 const static float videoViewHeigth = 292.5 + 25;
-- (void)viewDidLoad
+
+- (void) initRelatedData
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
 	_videoViewDic = [[NSMutableDictionary alloc] init];
 	_videoInfosArray = [[NSMutableArray alloc] init];
 	self->currentVideoIndex = 0;
 	self->currentPageNo = 1;
 	self->totalPageCount = 0;
 	self->totalVideoCount = 0;
+	[_sinaWeiBoSDK requireUserAllWeiBo:YES UserInfo:NO Delegate:(id<SinaWeiBoSDKDelegate>)self];
 	_videoDetailInfoController = [[VideoDetailViewController alloc] initWithNibName:nil bundle:nil];
+	[_tudouSDK requireUserPersonalInfo:self];
+    [_sinaWeiBoSDK requireUserPersonalInfo:(id<SinaWeiBoSDKDelegate>)self];
+}
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view, typically from a nib.
 
-	[_sinaWeiBoSDK requireUserAllWeiBo:YES Delegate:(id<SinaWeiBoSDKDelegate>)self];
 	_table4FastScroll.dataSource = (id<UITableViewDataSource>)self;
 	_table4FastScroll.delegate = (id<UITableViewDelegate>)self;
     _videoViewTable.dataSource = (id<UITableViewDataSource>)self;
@@ -76,8 +82,6 @@ const static float videoViewHeigth = 292.5 + 25;
 	frame.origin.x = 279.0f;
 	_table4FastScroll.frame = frame;
 	_table4FastScroll.alpha = 1.0f;
-    [_tudouSDK requireUserPersonalInfo:self];
-    [_sinaWeiBoSDK requireUserPersonalInfo:(id<SinaWeiBoSDKDelegate>)self];
 	
 	_backGround.backgroundColor = [UIColor colorWithRed:(237.0 / 256.0) green:(233.0 / 256.0) blue:(227.0 / 256.0) alpha:1.0f];
 	[self ShowNewVideoButton];
@@ -91,13 +95,7 @@ const static float videoViewHeigth = 292.5 + 25;
     _videoViewTable.dataSource = nil;
     _videoViewTable.delegate = nil;
 
-	_videoDetailInfoController = nil;
-	_tudouPersonalInfo = nil;
 	_table4FastScroll = nil;
-	_videoViewTable = nil;
-    _videoInfosArray = nil;
-    _videoViewDic = nil;
-    _videoViewTable = nil;
 	_backGround = nil;
 	_sendNewVideoButton = nil;
 	_isSideBarShowing = NO;
@@ -215,22 +213,22 @@ const static float videoViewHeigth = 292.5 + 25;
 - (void) OnReceiveSendWeiBoResult:(SinaWeiBoData*) sendResult
 {
 	UIVideoView* v = [_videoViewDic objectForKey:[sendResult.annotation objectAtIndex:0]];
-	if(nil == v)
+	if(nil != v)
 	{
-		return;
+		v.weiBoData = sendResult;
+		[v UpdateView];
 	}
-	v.weiBoData = sendResult;
-	[v UpdateView];
+	
 }
 
 - (void) OnReceiveCommentForWeiBo:(SinaWeiBoData*) weiBo Comments:(NSArray*)comments
 {
 	UIVideoView* v = [_videoViewDic objectForKey:[weiBo.annotation objectAtIndex:0]];
-	if (nil == v) 
+	if (nil != v)
 	{
-		return;
+		[v UpdateView];
 	}
-	[v UpdateView];
+	
 }
 
 - (void) OnRecevieWeiBoUserPersonalInfo:(SinaWeiBoUserPersonalInfo*) userInfo
@@ -265,7 +263,9 @@ const static float videoViewHeigth = 292.5 + 25;
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
 	if(_isSideBarShowing)
+	{
 		[self performSelector:@selector(HideNewVideoButton) withObject:nil afterDelay:3.0f];
+	}
 }
 
 #pragma mark - UITableViewDataSource
