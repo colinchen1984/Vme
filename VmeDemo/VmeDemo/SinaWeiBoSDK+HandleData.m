@@ -12,7 +12,7 @@
 
 @implementation SinaWeiBoSDK (HandleData)
 
-- (NSDateFormatter*) getDateFormatter
++ (NSDateFormatter*) getDateFormatter
 {
 	static NSDateFormatter* dateFormatter = nil;
 	if (nil == dateFormatter) 
@@ -33,10 +33,22 @@
 	NSString* text = [dic objectForKey:@"text"];
 	NSRange range = [text rangeOfString:@"http://t.cn/"];
 	weiBo.text = NSNotFound != range.location ? [text substringToIndex:range.location] : text;
-	weiBo.userID = [(NSDictionary*)[dic objectForKey:@"user"] objectForKey:@"idstr"];
+	id d = [dic objectForKey:@"user"];
+	if(nil == d)
+	{
+		d = [dic objectForKey:@"uid"];
+	}
+	if([d isKindOfClass:[NSDictionary class]])
+	{
+		weiBo.userID = [d objectForKey:@"idstr"];
+	}
+	else if([d isKindOfClass:[NSDecimalNumber class]])
+	{
+		weiBo.userID = [d stringValue];
+	}
 	weiBo.userInfo = [[VideoWeiBoDataManager sharedVideoWeiBoDataManager] getWeiBoUserPersonalInfo:weiBo.userID];
 	NSString* timeStr = [dic objectForKey:@"created_at"];
-	weiBo.createTime = [[self getDateFormatter] dateFromString:timeStr];
+	weiBo.createTime = [[self.class getDateFormatter] dateFromString:timeStr];
 	return weiBo;
 }
 
@@ -121,11 +133,7 @@
 - (void) handlerGetUserAllWeiBoData:(NSDictionary*) dataDic Delegate:(id<SinaWeiBoSDKDelegate>)delegate
 {
 	NSArray*	weiBoArray = [dataDic objectForKey:@"statuses"];
-	NSMutableArray* resultArray = nil;
-	if ([delegate respondsToSelector:@selector(OnReceiveUserAllWeiBo:)])
-    {
-        resultArray = [[NSMutableArray alloc] initWithCapacity:[weiBoArray count]];
-    }
+	NSMutableArray* resultArray = [[NSMutableArray alloc] initWithCapacity:[weiBoArray count]];
 	for (NSDictionary* dic in weiBoArray)
 	{
 		SinaWeiBoData* weiBo = [self getWeiBoDataFromDic:dic];
@@ -144,7 +152,7 @@
 	weiBoComment.weiBoCommentID = [dataDic objectForKey:@"idstr"];
 	weiBoComment.text = [dataDic objectForKey:@"text"];
 	NSString* timeStr = [dataDic objectForKey:@"created_at"];
-	weiBoComment.createTime = [[self getDateFormatter] dateFromString:timeStr];
+	weiBoComment.createTime = [[self.class getDateFormatter] dateFromString:timeStr];
 	NSDictionary* userDataDic = [dataDic objectForKey:@"user"];
 	NSString* userID = [userDataDic objectForKey:@"idstr"];
 	SinaWeiBoUserPersonalInfo* userInfo = [[VideoWeiBoDataManager sharedVideoWeiBoDataManager] getWeiBoUserPersonalInfo:userID];
@@ -155,7 +163,7 @@
 		userInfo.userID = userID;
 		[[VideoWeiBoDataManager sharedVideoWeiBoDataManager] addWeiBoUserPersonalInfo:userID UserPersonalInfo:userInfo];
 		NSString* timeStr = [userDataDic objectForKey:@"created_at"];
-		userInfo.createTime = [[self getDateFormatter] dateFromString:timeStr];
+		userInfo.createTime = [[self.class getDateFormatter] dateFromString:timeStr];
 		NSString* imageURL = [userDataDic objectForKey:@"profile_image_url"];
 		[[ImageManager sharedImageManager] postURL2DownLoadImage:imageURL Delegate:(id<URLImageDelegate>)userInfo];
 	}

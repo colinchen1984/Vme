@@ -86,7 +86,7 @@ const static float ShowAnimationTime = 0.3f;
 	{
 		envelopLayer = [[CALayer alloc] init];
 		envelopLayer.frame = self.layer.frame;
-		UIImage* image = [[ImageManager sharedImageManager]getImageFromBundle:@"envelop.png"];
+		UIImage* image = [[ImageManager sharedImageManager]getImageFromBundle:@"send.png"];
 		envelopLayer.contents = (__bridge_transfer id)image.CGImage;
 	}
 	[self.layer.superlayer addSublayer:envelopLayer];

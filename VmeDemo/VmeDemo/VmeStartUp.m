@@ -165,7 +165,9 @@
 {
 	_loginSina.hidden = YES;
 	_inputTudouUserName.hidden = NO;
+	_inputTudouUserName.text = nil;
 	_inputTudoUserPassword.hidden = NO;
+	_inputTudoUserPassword.text = nil;
 }
 
 - (void) CheckTudouUserData

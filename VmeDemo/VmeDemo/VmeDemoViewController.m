@@ -57,10 +57,10 @@ const static float videoViewHeigth = 292.5 + 25;
 	self->currentPageNo = 1;
 	self->totalPageCount = 0;
 	self->totalVideoCount = 0;
-	[_sinaWeiBoSDK requireUserAllWeiBo:YES UserInfo:NO Delegate:(id<SinaWeiBoSDKDelegate>)self];
 	_videoDetailInfoController = [[VideoDetailViewController alloc] initWithNibName:nil bundle:nil];
 	[_tudouSDK requireUserPersonalInfo:self];
     [_sinaWeiBoSDK requireUserPersonalInfo:(id<SinaWeiBoSDKDelegate>)self];
+	[_sinaWeiBoSDK requireUserAllWeiBo:YES UserInfo:NO Delegate:(id<SinaWeiBoSDKDelegate>)self];
 }
 
 - (void)viewDidLoad
@@ -289,7 +289,7 @@ const static float videoViewHeigth = 292.5 + 25;
         for (NSString* key in [_videoViewDic allKeys])
         {
             UIVideoView* o = [_videoViewDic objectForKey:key];
-            if([o.videoInfo.itemCode isEqualToString:video.itemCode])
+            if(video.itemCode == o.videoInfo.itemCode || [o.videoInfo.itemCode isEqualToString:video.itemCode])
             {
                 [_videoViewDic removeObjectForKey:key];
                 break;
